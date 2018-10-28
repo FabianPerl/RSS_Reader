@@ -4,9 +4,100 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RSS"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <Storyboard x:Key="MenuOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="40"></EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"></EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>        
+        <Storyboard x:Key="MenuClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="200"></EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="40"></EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>        
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"></BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"></BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
     <Grid>
-        
+        <Grid x:Name="GridMenu" Width="40" HorizontalAlignment="Left" Background="#FFDADAE0">
+            <StackPanel>
+                <Grid Height="80" Background="White">
+                    <Button x:Name="ButtonCloseMenu" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Visibility="Collapsed" Click="ButtonCloseMenu_Click">
+                        <materialDesign:PackIcon Kind="ArrowLeft"></materialDesign:PackIcon>
+                    </Button>
+                    <Button x:Name="ButtonOpenMenu" Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Visibility="Visible" Click="ButtonOpenMenu_Click">
+                        <materialDesign:PackIcon Kind="Menu"></materialDesign:PackIcon>
+                    </Button>
+                    <TextBlock Text="Hey" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30"></TextBlock>
+                </Grid>
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="Black" Background="#FFDADAE0" BorderBrush="{x:Null}">
+                    <ListViewItem Height="40">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ViewDashboard" Width="25" Height="25" VerticalAlignment="Center"></materialDesign:PackIcon>
+                            <TextBlock Text="All Feeds" VerticalAlignment="Center" Margin="20 10"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="40">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Newspaper" Width="25" Height="25" VerticalAlignment="Center"></materialDesign:PackIcon>
+                            <TextBlock Text="Heise-online" VerticalAlignment="Center" Margin="20 10"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="40">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Emoticon" Width="25" Height="25" VerticalAlignment="Center"></materialDesign:PackIcon>
+                            <TextBlock Text="golem.de" VerticalAlignment="Center" Margin="20 10"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="40">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Nature" Width="25" Height="25" VerticalAlignment="Center"></materialDesign:PackIcon>
+                            <TextBlock Text="reddit security" VerticalAlignment="Center" Margin="20 10"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="40">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Login" Width="25" Height="25" VerticalAlignment="Center"></materialDesign:PackIcon>
+                            <TextBlock Text="reddit tech-news" VerticalAlignment="Center" Margin="20 10"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="Black" Background="#FFDADAE0" BorderBrush="{x:Null}" Margin="0 100 0 100">
+                    <ListViewItem Height="40">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Add" Width="25" Height="25" VerticalAlignment="Center"></materialDesign:PackIcon>
+                            <TextBlock Text="Add new Feed" VerticalAlignment="Center" Margin="20 10"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="40">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Settings" Width="25" Height="25" VerticalAlignment="Center"></materialDesign:PackIcon>
+                            <TextBlock Text="Settings" VerticalAlignment="Center" Margin="20 10"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+        </Grid>
+        <Grid>
+            <DockPanel>
+                <Grid DockPanel.Dock="Top" HorizontalAlignment="Center">
+                    <TextBlock Text="Hey"></TextBlock>
+                </Grid>
+            </DockPanel>            
+        </Grid>
     </Grid>
 </Window>

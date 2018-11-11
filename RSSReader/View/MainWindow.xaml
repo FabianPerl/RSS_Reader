@@ -6,7 +6,7 @@
   xmlns:local="clr-namespace:RSSReader"
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  Title="MainWindow"
+  Title="RSS-Reader"
   MinWidth="800"
   MinHeight="600"
   mc:Ignorable="d">
@@ -30,7 +30,7 @@
             Foreground="Black"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <Separator />
-            <ListViewItem Height="60">
+            <ListViewItem Height="60" PreviewMouseLeftButtonUp="UIElement_PreviewMouseLeftButtonUp">
               <StackPanel MinWidth="212" Orientation="Horizontal">
                 <materialDesign:PackIcon
                   Width="25"

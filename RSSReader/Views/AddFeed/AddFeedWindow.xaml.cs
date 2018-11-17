@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace RSSReader.Views
+namespace RSSReader.Views.AddFeed
 {
     /// <summary>
     /// Interaction logic for AddFeedWindow.xaml

@@ -2,6 +2,7 @@
 using Prism.Ioc;
 using Prism.Modularity;
 using System.Windows;
+using RSSReader.Views.Shell;
 
 namespace RSSReader
 {

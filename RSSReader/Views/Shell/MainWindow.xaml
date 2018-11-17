@@ -1,18 +1,21 @@
 ﻿<Window
-  x:Class="RSSReader.Views.MainWindow"
+  x:Class="RSSReader.Views.Shell.MainWindow"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
   xmlns:prism="http://prismlibrary.com/"
-  Title="{Binding Title}"
+  xmlns:shell="clr-namespace:RSSReader.Views.Shell"
+  xmlns:views="clr-namespace:RSSReader.Views"
+  Title="RSS Reader"
   MinWidth="800"
   MinHeight="600"
-  prism:ViewModelLocator.AutoWireViewModel="True">
+  prism:ViewModelLocator.AutoWireViewModel="True"
+  WindowStartupLocation="CenterScreen">
 
   <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
     <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
       <materialDesign:DrawerHost.LeftDrawerContent>
-        <DockPanel MinWidth="212">
+        <DockPanel>
           <ToggleButton
             Margin="16"
             HorizontalAlignment="Right"
@@ -127,9 +130,7 @@
                   Text="reddit tech-news" />
               </StackPanel>
             </ListViewItem>
-
           </ListView>
-
         </DockPanel>
       </materialDesign:DrawerHost.LeftDrawerContent>
 
@@ -142,20 +143,17 @@
           <DockPanel>
             <ToggleButton
               x:Name="MenuToggleButton"
+              DockPanel.Dock="Left"
               IsChecked="False"
               Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
-            <materialDesign:PopupBox
+            <Button
+              x:Name="fetchFeedsButton"
+              materialDesign:ShadowAssist.ShadowDepth="Depth0"
+              BorderBrush="{x:Null}"
               DockPanel.Dock="Right"
-              PlacementMode="BottomAndAlignRightEdges"
-              StaysOpen="False">
-              <StackPanel>
-                <Button Content="Sources" />
-                <Button Content="Export" />
-                <Button Content="Import" />
-                <Separator />
-                <Button Content="Preferences" />
-              </StackPanel>
-            </materialDesign:PopupBox>
+              ToolTip="Update the feeds">
+              <materialDesign:PackIcon Kind="Update" />
+            </Button>
             <TextBlock
               HorizontalAlignment="Center"
               VerticalAlignment="Center"
@@ -164,64 +162,8 @@
             </TextBlock>
           </DockPanel>
         </materialDesign:ColorZone>
-        <StackPanel>
-          <Grid Margin="{StaticResource MarginAllSides12}">
-            <Grid.RowDefinitions>
-              <RowDefinition Height="Auto" />
-              <RowDefinition Height="*" />
-              <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="1*" />
-              <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
 
-            <Label
-              Margin="{StaticResource MarginBottom12}"
-              Content="Feed"
-              DockPanel.Dock="Top"
-              FontSize="{StaticResource FontSizeExtraLarge}" />
-
-            <ListBox
-              Name="ListBoxFeeds"
-              Grid.Row="1"
-              Grid.Column="0"
-              MinWidth="240"
-              Margin="{StaticResource MarginBottom12}"
-              BorderThickness="0,0,0,0"
-              DockPanel.Dock="Left"
-              Focusable="True"
-              IsSynchronizedWithCurrentItem="True"
-              ItemTemplate="{StaticResource DataTemplateContactListItem}"
-              ItemsSource="{Binding GroupedContactsView}">
-              <ListBox.GroupStyle>
-                <GroupStyle>
-                  <GroupStyle.HeaderTemplate>
-                    <DataTemplate>
-                      <Border Margin="4,12,0,4">
-                        <TextBlock
-                          FontSize="{StaticResource FontSizeExtraLarge}"
-                          FontWeight="SemiBold"
-                          Foreground="{DynamicResource AccentColorBrush}" />
-                        <!--  Text="{Binding Path=Name, Converter={StaticResource NameToInitialConverter}}" /  -->
-                      </Border>
-                    </DataTemplate>
-                  </GroupStyle.HeaderTemplate>
-                </GroupStyle>
-              </ListBox.GroupStyle>
-              <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                  <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                </Style>
-              </ListBox.ItemContainerStyle>
-            </ListBox>
-
-            <Border Grid.Row="1" Grid.Column="1">
-              <!--  views:ContactForm DataContext="{Binding SelectedContact}" /  -->
-            </Border>
-
-          </Grid>
-        </StackPanel>
+        <shell:FeedBoxUserControl />
       </DockPanel>
     </materialDesign:DrawerHost>
   </materialDesign:DialogHost>

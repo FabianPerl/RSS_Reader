@@ -1,7 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using RSSReader.Views.AddFeed;
 
-namespace RSSReader.Views
+namespace RSSReader.Views.Shell
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

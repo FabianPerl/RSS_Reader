@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
+using RSSReader.ViewModels;
 
 namespace RSSReader.Views.Shell
 {
@@ -10,6 +12,7 @@ namespace RSSReader.Views.Shell
         public FeedBoxUserControl()
         {
             InitializeComponent();
+            DataContext = new FeedBoxUserControlViewModel();
         }
     }
 }

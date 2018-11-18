@@ -5,7 +5,6 @@
   xmlns:addFeed="clr-namespace:RSSReader.Views.AddFeed"
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
   xmlns:prism="http://prismlibrary.com/"
-  xmlns:views="clr-namespace:RSSReader.Views"
   Title="Add new Feed"
   Width="500"
   Height="450"

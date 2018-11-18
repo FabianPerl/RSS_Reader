@@ -58,6 +58,7 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\AddFeedFormUserControlViewModel.cs" />
     <Compile Include="ViewModels\FeedBoxUserControlViewModel.cs" />
+    <Compile Include="ViewModels\FeedDataSource.cs" />
     <Compile Include="ViewModels\FeedViewModel.cs" />
     <Compile Include="Views\AddFeed\AddFeedFormUserControl.xaml.cs">
       <DependentUpon>AddFeedFormUserControl.xaml</DependentUpon>
@@ -123,6 +124,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CodeHollow.FeedReader">
+      <Version>1.1.5</Version>
+    </PackageReference>
     <PackageReference Include="MaterialDesignColors">
       <Version>1.1.3</Version>
     </PackageReference>

@@ -19,27 +19,5 @@
   <system:Double x:Key="FontSizeExtraLarge">24</system:Double>
   <system:Double x:Key="FontSizeNormal">12</system:Double>
 
-  <DataTemplate x:Key="DataTemplateContactListItem">
-    <!--  DataType="viewModels:ContactViewModel"  -->
-    <!--DockPanel>
-                    <Image
-                        Width="36"
-                        Height="36"
-                        Margin="{StaticResource MarginRight4}"
-                        DockPanel.Dock="Left"
-                        Source="{Binding Contact.PictureUri}" />
-                    <StackPanel Margin="{StaticResource MarginAllSides4}">
-                        <TextBlock FontSize="{StaticResource FontSizeLarge}">
-                            <Run Text="{Binding Contact.Name}" /><Run Text=", " /><Run Text="{Binding Contact.FirstName}" />
-                        </TextBlock>
-                        <TextBlock FontSize="{StaticResource FontSizeNormal}">
-                            <Run Text="{Binding Contact.Email}" />
-                        </TextBlock>
-                        <TextBlock FontSize="{StaticResource FontSizeNormal}" Text="{Binding Contact.Phone}" />
-                    </StackPanel>
-                </-->
-  </DataTemplate>
-
-
 
 </ResourceDictionary>

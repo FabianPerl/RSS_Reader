@@ -25,14 +25,15 @@
               </Grid.RowDefinitions>
               <TextBlock
                 Grid.Row="0"
-                Text="{Binding PublishedDate}"
+                Text="{Binding PublishedDateFormatted}"
                 TextWrapping="NoWrap" />
               <!--  Style="{StaticResource CaptionTextBlockStyle}"  -->
 
               <TextBlock
                 Grid.Row="1"
-                Margin="0,10,0,0"
+                Margin="{StaticResource MarginTop12}"
                 Text="{Binding Title}"
+                FontSize="{StaticResource FontSizeFeedTitle}"
                 TextTrimming="WordEllipsis"
                 TextWrapping="Wrap" />
 
@@ -46,6 +47,7 @@
                 Grid.Row="2"
                 Margin="0,4,0,12"
                 Text="{Binding ShortDescription}"
+                FontSize="{StaticResource FontSizeFeedDescription}"
                 TextTrimming="CharacterEllipsis"
                 TextWrapping="Wrap" />
               <!-->
@@ -64,13 +66,13 @@
             -->
           </StackPanel>
         </Grid>
-        <ToggleButton
+        <!--ToggleButton
           HorizontalAlignment="Right"
           IsChecked="{Binding IsWatched, Mode=TwoWay}"
           IsThreeState="False"
           Style="{StaticResource MaterialDesignActionToggleButton}">
           <materialDesign:PackIcon VerticalAlignment="Center" Kind="Favourite" />
-        </ToggleButton>
+        </-->
       </Grid>
     </DataTemplate>
   </UserControl.Resources>

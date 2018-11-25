@@ -31,7 +31,9 @@ namespace RSSReader.ViewModels
         /// <summary>
         /// Get and Set the article's Date when the article was published.
         /// </summary>
-        public string PublishedDate { get; set; }
+        public DateTime PublishedDate { get; set; }
+
+	    public String PublishedDateFormatted { get => PublishedDate.ToString("dd.MM.yyyy\th:mm tt").ToUpper(); }
 
 	    private bool _isWatched = false;
         /// <summary>

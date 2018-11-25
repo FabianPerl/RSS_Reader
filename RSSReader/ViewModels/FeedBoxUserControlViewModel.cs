@@ -12,7 +12,7 @@ namespace RSSReader.ViewModels
 	{
 	    public FeedBoxUserControlViewModel()
 	    {
-	        GetAllFeedsAsync("www.heise.de/ct/rss/artikel-atom.xml");
+	        GetAllFeedsAsync("www.heise.de/newsticker/heise-atom.xml");
         }
 
         private DebugLogger debugLogger = new DebugLogger();
@@ -39,7 +39,7 @@ namespace RSSReader.ViewModels
 	                feedViewModel.Title = item.Title?.Trim();
 	                feedViewModel.Author = item.Author?.Trim();
 	                feedViewModel.Link = new Uri(item.Link);
-	                feedViewModel.PublishedDate = item.PublishingDateString?.Trim();
+	                feedViewModel.PublishedDate = item.PublishingDate.HasValue ? item.PublishingDate.Value : new DateTime();
 	                feedViewModel.ShortDescription = item.Description?.Trim();
 	                allFeedsList.Add(feedViewModel);
 	            }

@@ -12,7 +12,6 @@ namespace RSSReader.Views.Shell
         public FeedBoxUserControl()
         {
             InitializeComponent();
-            DataContext = new FeedBoxUserControlViewModel();
         }
     }
 }

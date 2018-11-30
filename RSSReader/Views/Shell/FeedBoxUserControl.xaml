@@ -12,6 +12,9 @@
   d:DesignWidth="800"
   prism:ViewModelLocator.AutoWireViewModel="True"
   mc:Ignorable="d">
+  <UserControl.DataContext>
+      <viewModels:FeedBoxUserControlViewModel></viewModels:FeedBoxUserControlViewModel>
+  </UserControl.DataContext>
 
   <UserControl.Resources>
     <DataTemplate x:Key="DataTemplateFeedViewModel" DataType="viewModels:FeedViewModel">
@@ -129,7 +132,7 @@
         <cefsharp:ChromiumWebBrowser 
         Grid.Row="1" 
         Grid.Column="1" 
-        Address="https://www.heise.de/newsticker/meldung/Fuerstenfeldbruck-Malware-legt-Klinikums-IT-komplett-lahm-4223573.htm">
+        Address="https://www.heise.de/security/meldung/Marriott-Daten-von-500-Millionen-Hotelgaesten-abgegriffen-4236576.html">
         </cefsharp:ChromiumWebBrowser>
     </Grid>
 

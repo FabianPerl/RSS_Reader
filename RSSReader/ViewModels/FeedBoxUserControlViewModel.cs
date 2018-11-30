@@ -10,24 +10,25 @@ namespace RSSReader.ViewModels
 {
 	public class FeedBoxUserControlViewModel : BindableBase
 	{
-	    public FeedBoxUserControlViewModel()
-	    {
-	        GetAllFeedsAsync("www.heise.de/newsticker/heise-atom.xml");
-        }
-
-        private DebugLogger debugLogger = new DebugLogger();
-
 	    private List<FeedViewModel> _allFeeds;
+        private readonly DebugLogger _debugLogger = new DebugLogger();
+	    private Uri _currentUri;
 
 	    public List<FeedViewModel> AllFeeds
 	    {
-	        get { return _allFeeds; }
-	        set { SetProperty(ref _allFeeds, value); }
+	        get => _allFeeds; 
+	        set => SetProperty(ref _allFeeds, value); 
 	    }
 
-	    public async Task<List<FeedViewModel>> GetAllFeedsAsync(string feedUri)
+	    public Uri CurrentUri
 	    {
-            debugLogger.Log("Get all the Feeds for URI " + feedUri, Category.Info, Priority.Medium);
+	        get => _currentUri;
+	        set => SetProperty(ref _currentUri, value);
+	    }
+
+	    public async Task<List<FeedViewModel>> GetAllFeedsFromUrlAsync(string feedUri)
+	    {
+            _debugLogger.Log("Get all the Feeds for URI " + feedUri, Category.Info, Priority.Medium);
 
 	        var allFeedsList = new List<FeedViewModel>();
 	        try
@@ -54,4 +55,4 @@ namespace RSSReader.ViewModels
 	        return allFeedsList;
 	    }
     }
-}
+} 

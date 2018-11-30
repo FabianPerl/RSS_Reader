@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Feed.cs" />
     <Compile Include="ViewModels\AddFeedFormUserControlViewModel.cs" />
     <Compile Include="ViewModels\FeedBoxUserControlViewModel.cs" />
     <Compile Include="ViewModels\FeedDataSource.cs" />

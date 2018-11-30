@@ -126,13 +126,12 @@
       </ListBox.ItemContainerStyle>
     </ListBox>
 
-    <!--cefsharp:ChromiumWebBrowser 
+        <cefsharp:ChromiumWebBrowser 
         Grid.Row="1" 
         Grid.Column="1" 
         Address="https://www.heise.de/newsticker/meldung/Fuerstenfeldbruck-Malware-legt-Klinikums-IT-komplett-lahm-4223573.htm">
-
-    </-->
-  </Grid>
+        </cefsharp:ChromiumWebBrowser>
+    </Grid>
 
 
 </UserControl>

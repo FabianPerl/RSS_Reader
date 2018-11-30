@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace RSSReader.ViewModels
@@ -31,9 +32,17 @@ namespace RSSReader.ViewModels
         /// <summary>
         /// Get and Set the article's Date when the article was published.
         /// </summary>
-        public DateTime PublishedDate { get; set; }
+        public DateTimeOffset PublishedDate { get; set; }
 
-	    public String PublishedDateFormatted { get => PublishedDate.ToString("dd.MM.yyyy\th:mm tt").ToUpper(); }
+	    public String PublishedDateFormatted
+	    {
+	        get
+	        {
+	            CultureInfo myCultureInfo = new CultureInfo("de-DE");
+	            DateTime myDateTime = DateTime.Parse(PublishedDate.ToString(), myCultureInfo);
+	            return myDateTime.ToString("dd.MM.yyyy\thh:mm tt").ToUpper();
+	        }
+	    }
 
 	    private bool _isWatched = false;
         /// <summary>

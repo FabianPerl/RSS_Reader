@@ -11,5 +11,10 @@ namespace RSSReader.Views.AddFeed
         {
             InitializeComponent();
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -5,13 +5,17 @@
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
   xmlns:prism="http://prismlibrary.com/"
   xmlns:shell="clr-namespace:RSSReader.Views.Shell"
+  xmlns:viewModels="clr-namespace:RSSReader.ViewModels"
   Title="RSS Reader"
   MinWidth="800"
   MinHeight="600"
   prism:ViewModelLocator.AutoWireViewModel="True"
   WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewModels:FeedBoxUserControlViewModel></viewModels:FeedBoxUserControlViewModel>
+    </Window.DataContext>
 
-  <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding Path=MessageQueue}">
+    <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding Path=MessageQueue}">
     <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
       <materialDesign:DrawerHost.LeftDrawerContent>
         <DockPanel>
@@ -77,9 +81,9 @@
             </ListViewItem>
 
             <Separator />
-            <ListViewItem Height="60">
-              <StackPanel MinWidth="212" Orientation="Horizontal">
-                <materialDesign:PackIcon
+            <ListViewItem Height="60" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown">
+              <StackPanel MinWidth="212" Orientation="Horizontal" >
+                  <materialDesign:PackIcon
                   Width="25"
                   Height="25"
                   VerticalAlignment="Center"

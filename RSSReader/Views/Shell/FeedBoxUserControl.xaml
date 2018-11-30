@@ -132,7 +132,7 @@
         <cefsharp:ChromiumWebBrowser 
         Grid.Row="1" 
         Grid.Column="1" 
-        Address="https://www.heise.de/security/meldung/Marriott-Daten-von-500-Millionen-Hotelgaesten-abgegriffen-4236576.html">
+        Address="{ Binding CurrentUri }">
         </cefsharp:ChromiumWebBrowser>
     </Grid>
 

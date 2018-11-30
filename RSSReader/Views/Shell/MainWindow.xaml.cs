@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
+using RSSReader.ViewModels;
 using RSSReader.Views.AddFeed;
 
 namespace RSSReader.Views.Shell
@@ -17,6 +19,11 @@ namespace RSSReader.Views.Shell
         {
             AddFeedWindow addFeed = new AddFeedWindow();
             addFeed.Show();
+        }
+
+        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ((FeedBoxUserControlViewModel) DataContext).CurrentUri = new Uri("www.heise.de");
         }
     }
 }

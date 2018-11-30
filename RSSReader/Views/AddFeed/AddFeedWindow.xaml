@@ -39,6 +39,7 @@
         Content="Close"
         DockPanel.Dock="Left"
         Style="{StaticResource MaterialDesignRaisedButton}"
+        Click="ButtonBase_OnClick"
         ToolTip="Resource name: MaterialDesignRaisedAccentButton" />
 
       <Button

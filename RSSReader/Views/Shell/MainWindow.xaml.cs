@@ -20,10 +20,5 @@ namespace RSSReader.Views.Shell
             AddFeedWindow addFeed = new AddFeedWindow();
             addFeed.Show();
         }
-
-        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            ((FeedBoxUserControlViewModel) DataContext).CurrentUri = new Uri("www.heise.de");
-        }
     }
 }

@@ -6,6 +6,7 @@
   xmlns:prism="http://prismlibrary.com/"
   xmlns:shell="clr-namespace:RSSReader.Views.Shell"
   xmlns:viewModels="clr-namespace:RSSReader.ViewModels"
+  xmlns:models="clr-namespace:RSSReader.Models"
   Title="RSS Reader"
   MinWidth="800"
   MinHeight="600"
@@ -15,7 +16,24 @@
         <viewModels:FeedBoxUserControlViewModel></viewModels:FeedBoxUserControlViewModel>
     </Window.DataContext>
 
-    <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding Path=MessageQueue}">
+    <Window.Resources>
+    <!-- Eventuell hier auf ViewModel umsteigen!!! -->
+    <DataTemplate x:Key="DataTemplateSourcesViewModel" DataType="models:Source">
+      <StackPanel MinWidth="212" Orientation="Horizontal">
+        <materialDesign:PackIcon
+          Width="25"
+          Height="25"
+          VerticalAlignment="Center"
+          Kind="Label" />
+        <TextBlock
+          Margin="20,10"
+          VerticalAlignment="Center"
+          Text="{Binding Name}" />
+      </StackPanel>
+    </DataTemplate>
+    </Window.Resources>
+
+  <materialDesign:DialogHost Identifier="RootDialog">
     <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
       <materialDesign:DrawerHost.LeftDrawerContent>
         <DockPanel>
@@ -61,78 +79,33 @@
             </ListViewItem>
           </ListView>
 
-          <ListView
+                    <ListView
             Background="#FFDADAE0"
             BorderBrush="{x:Null}"
             Foreground="Black"
+            DockPanel.Dock="Top"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListViewItem Height="60">
-              <StackPanel MinWidth="212" Orientation="Horizontal">
-                <materialDesign:PackIcon
+                        <ListViewItem Height="60">
+                            <StackPanel MinWidth="212" Orientation="Horizontal">
+                                <materialDesign:PackIcon
                   Width="25"
                   Height="25"
                   VerticalAlignment="Center"
                   Kind="ViewDashboard" />
-                <TextBlock
+                                <TextBlock
                   Margin="20,10"
                   VerticalAlignment="Center"
                   Text="All Feeds" />
-              </StackPanel>
-            </ListViewItem>
-
-            <Separator />
-            <ListViewItem Height="60" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown">
-              <StackPanel MinWidth="212" Orientation="Horizontal" >
-                  <materialDesign:PackIcon
-                  Width="25"
-                  Height="25"
-                  VerticalAlignment="Center"
-                  Kind="Newspaper" />
-                <TextBlock
-                  Margin="20,10"
-                  VerticalAlignment="Center"
-                  Text="Heise-online" />
-              </StackPanel>
-            </ListViewItem>
-            <ListViewItem Height="60">
-              <StackPanel MinWidth="212" Orientation="Horizontal">
-                <materialDesign:PackIcon
-                  Width="25"
-                  Height="25"
-                  VerticalAlignment="Center"
-                  Kind="Emoticon" />
-                <TextBlock
-                  Margin="20,10"
-                  VerticalAlignment="Center"
-                  Text="golem.de" />
-              </StackPanel>
-            </ListViewItem>
-            <ListViewItem Height="60">
-              <StackPanel MinWidth="212" Orientation="Horizontal">
-                <materialDesign:PackIcon
-                  Width="25"
-                  Height="25"
-                  VerticalAlignment="Center"
-                  Kind="Nature" />
-                <TextBlock
-                  Margin="20,10"
-                  VerticalAlignment="Center"
-                  Text="reddit security" />
-              </StackPanel>
-            </ListViewItem>
-            <ListViewItem Height="60">
-              <StackPanel MinWidth="212" Orientation="Horizontal">
-                <materialDesign:PackIcon
-                  Width="25"
-                  Height="25"
-                  VerticalAlignment="Center"
-                  Kind="Login" />
-                <TextBlock
-                  Margin="20,10"
-                  VerticalAlignment="Center"
-                  Text="reddit tech-news" />
-              </StackPanel>
-            </ListViewItem>
+                            </StackPanel>
+                        </ListViewItem>
+                        <Separator />
+                    </ListView>
+          <ListView 
+              ItemTemplate="{StaticResource DataTemplateSourcesViewModel}" 
+              ItemsSource="{Binding AllSources}" 
+              Background="#FFDADAE0" BorderBrush="{x:Null}" 
+              Foreground="Black" 
+              ScrollViewer.HorizontalScrollBarVisibility="Disabled"> 
           </ListView>
         </DockPanel>
       </materialDesign:DrawerHost.LeftDrawerContent>

@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CodeHollow.FeedReader;
 using Prism.Logging;
@@ -14,27 +15,6 @@ namespace RSSReader.ViewModels
 	    private List<FeedViewModel> _allFeeds;
         private readonly DebugLogger _debugLogger = new DebugLogger();
 	    private Uri _currentUri = new Uri("https://www.heise.de");
-
-	    public FeedBoxUserControlViewModel()
-	    {
-	        Source a = new Source();
-	        a.Name = "Heise Online";
-	        a.Category = "IT";
-	        a.FeedUri = new Uri("https://www.heise.de");
-	        AllSources.Add(a);
-
-	        Source b = new Source();
-	        b.Name = "Golem";
-	        b.Category = "IT";
-	        b.FeedUri = new Uri("https://www.golem.de");
-	        AllSources.Add(b);
-
-	        Source c = new Source();
-	        c.Name = "Reddit";
-	        c.Category = "IT";
-	        c.FeedUri = new Uri("https://www.reddit.com");
-	        AllSources.Add(c);
-    }
 
 	    public List<FeedViewModel> AllFeeds
 	    {
@@ -84,8 +64,8 @@ namespace RSSReader.ViewModels
 
 	        return allFeedsList;
 	    }
-      
-        public List<Source> AllSources { get; } = new List<Source>();
+
+        public static ObservableCollection<Source> AllSources { get; } = new ObservableCollection<Source>();
 
         public void AddSource(Source source)
         {

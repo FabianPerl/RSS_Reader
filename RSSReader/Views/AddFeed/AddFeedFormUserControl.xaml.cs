@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using RSSReader.ViewModels;
 
 namespace RSSReader.Views.AddFeed
 {

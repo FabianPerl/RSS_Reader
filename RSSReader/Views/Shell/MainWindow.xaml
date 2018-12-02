@@ -12,10 +12,9 @@
   MinHeight="600"
   prism:ViewModelLocator.AutoWireViewModel="True"
   WindowStartupLocation="CenterScreen">
-    <Window.DataContext>
-        <viewModels:FeedBoxUserControlViewModel></viewModels:FeedBoxUserControlViewModel>
-    </Window.DataContext>
-
+  <Window.DataContext>
+    <viewModels:FeedBoxUserControlViewModel></viewModels:FeedBoxUserControlViewModel>
+  </Window.DataContext>
     <Window.Resources>
     <!-- Eventuell hier auf ViewModel umsteigen!!! -->
     <DataTemplate x:Key="DataTemplateSourcesViewModel" DataType="models:Source">

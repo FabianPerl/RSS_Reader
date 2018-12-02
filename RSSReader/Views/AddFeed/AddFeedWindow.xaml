@@ -2,10 +2,12 @@
   x:Class="RSSReader.Views.AddFeed.AddFeedWindow"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:addFeed="clr-namespace:RSSReader.Views.AddFeed"
+  xmlns:views.addFeed="clr-namespace:RSSReader.Views.AddFeed"
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-  xmlns:prism="http://prismlibrary.com/"
-  Title="Add new Feed"
+  xmlns:prism="http://prismlibrary.com/" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Add new Feed Source"
   Width="500"
   Height="450"
   prism:ViewModelLocator.AutoWireViewModel="True"
@@ -15,7 +17,7 @@
   WindowStartupLocation="CenterScreen"
   WindowStyle="None">
 
-  <DockPanel>
+    <DockPanel>
     <materialDesign:ColorZone
       Padding="5"
       materialDesign:ShadowAssist.ShadowDepth="Depth2"
@@ -30,26 +32,14 @@
         </TextBlock>
       </DockPanel>
     </materialDesign:ColorZone>
-    <DockPanel
-      Margin="20,0,20,10"
-      DockPanel.Dock="Bottom"
-      LastChildFill="False">
       <Button
-        Width="100"
+        Margin="20,0,20,10"
+        DockPanel.Dock="Bottom"
         Content="Close"
-        DockPanel.Dock="Left"
-        Style="{StaticResource MaterialDesignRaisedButton}"
+        Style="{StaticResource MaterialDesignRaisedDarkButton}"
         Click="ButtonBase_OnClick"
-        ToolTip="Resource name: MaterialDesignRaisedAccentButton" />
+        ToolTip="Close without adding a new Source" />
 
-      <Button
-        Width="100"
-        Content="Add"
-        DockPanel.Dock="Right"
-        Style="{StaticResource MaterialDesignRaisedButton}"
-        ToolTip="Resource name: MaterialDesignRaisedAccentButton" />
-
-    </DockPanel>
-    <addFeed:AddFeedFormUserControl Margin="20,20,20,0" />
+    <views.addFeed:AddFeedFormUserControl Margin="20,20,20,0" />
   </DockPanel>
 </Window>

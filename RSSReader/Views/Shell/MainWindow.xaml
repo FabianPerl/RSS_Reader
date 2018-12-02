@@ -3,20 +3,20 @@
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:models="clr-namespace:RSSReader.Models"
   xmlns:prism="http://prismlibrary.com/"
   xmlns:shell="clr-namespace:RSSReader.Views.Shell"
   xmlns:viewModels="clr-namespace:RSSReader.ViewModels"
-  xmlns:models="clr-namespace:RSSReader.Models"
   Title="RSS Reader"
   MinWidth="800"
   MinHeight="600"
   prism:ViewModelLocator.AutoWireViewModel="True"
   WindowStartupLocation="CenterScreen">
   <Window.DataContext>
-    <viewModels:FeedBoxUserControlViewModel></viewModels:FeedBoxUserControlViewModel>
+    <viewModels:FeedBoxUserControlViewModel />
   </Window.DataContext>
-    <Window.Resources>
-    <!-- Eventuell hier auf ViewModel umsteigen!!! -->
+  <Window.Resources>
+    <!--  Eventuell hier auf ViewModel umsteigen!!!  -->
     <DataTemplate x:Key="DataTemplateSourcesViewModel" DataType="models:Source">
       <StackPanel MinWidth="212" Orientation="Horizontal">
         <materialDesign:PackIcon
@@ -30,7 +30,7 @@
           Text="{Binding Name}" />
       </StackPanel>
     </DataTemplate>
-    </Window.Resources>
+  </Window.Resources>
 
   <materialDesign:DialogHost Identifier="RootDialog">
     <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
@@ -78,34 +78,34 @@
             </ListViewItem>
           </ListView>
 
-                    <ListView
+          <ListView
             Background="#FFDADAE0"
             BorderBrush="{x:Null}"
-            Foreground="Black"
             DockPanel.Dock="Top"
+            Foreground="Black"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListViewItem Height="60">
-                            <StackPanel MinWidth="212" Orientation="Horizontal">
-                                <materialDesign:PackIcon
+            <ListViewItem Height="60">
+              <StackPanel MinWidth="212" Orientation="Horizontal">
+                <materialDesign:PackIcon
                   Width="25"
                   Height="25"
                   VerticalAlignment="Center"
                   Kind="ViewDashboard" />
-                                <TextBlock
+                <TextBlock
                   Margin="20,10"
                   VerticalAlignment="Center"
                   Text="All Feeds" />
-                            </StackPanel>
-                        </ListViewItem>
-                        <Separator />
-                    </ListView>
-          <ListView 
-              ItemTemplate="{StaticResource DataTemplateSourcesViewModel}" 
-              ItemsSource="{Binding AllSources}" 
-              Background="#FFDADAE0" BorderBrush="{x:Null}" 
-              Foreground="Black" 
-              ScrollViewer.HorizontalScrollBarVisibility="Disabled"> 
+              </StackPanel>
+            </ListViewItem>
+            <Separator />
           </ListView>
+          <ListView
+            Background="#FFDADAE0"
+            BorderBrush="{x:Null}"
+            Foreground="Black"
+            ItemTemplate="{StaticResource DataTemplateSourcesViewModel}"
+            ItemsSource="{Binding AllSources}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
         </DockPanel>
       </materialDesign:DrawerHost.LeftDrawerContent>
 

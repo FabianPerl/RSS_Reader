@@ -20,5 +20,10 @@ namespace RSSReader.Views.Shell
             AddFeedWindow addFeed = new AddFeedWindow();
             addFeed.Show();
         }
+
+        private void UIElement_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

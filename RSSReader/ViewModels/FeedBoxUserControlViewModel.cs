@@ -10,44 +10,44 @@ using RSSReader.Models;
 
 namespace RSSReader.ViewModels
 {
-	public class FeedBoxUserControlViewModel : BindableBase
-	{
-	    private List<FeedViewModel> _allFeeds;
+    public class FeedBoxUserControlViewModel : BindableBase
+    {
+        private List<FeedViewModel> _allFeeds;
         private readonly DebugLogger _debugLogger = new DebugLogger();
-	    private Uri _currentUri = new Uri("https://www.heise.de");
+        private Uri _currentUri = new Uri("https://www.heise.de");
 
-	    public List<FeedViewModel> AllFeeds
-	    {
-	        get => _allFeeds; 
-	        set => SetProperty(ref _allFeeds, value); 
-	    }
+        public List<FeedViewModel> AllFeeds
+        {
+            get => _allFeeds;
+            set => SetProperty(ref _allFeeds, value);
+        }
 
-	    public Uri CurrentUri
-	    {
-	        get => _currentUri;
-	        set
-	        {
-	            SetProperty(ref _currentUri, value);
-	            var awaiter = GetTaskAllFeedsFromUrlAsyncInternal(value).GetAwaiter();
-	            awaiter.OnCompleted(() => SetProperty(ref _allFeeds, awaiter.GetResult()));
-	        }
-	    }
+        public Uri CurrentUri
+        {
+            get => _currentUri;
+            set
+            {
+                SetProperty(ref _currentUri, value);
+                var awaiter = GetTaskAllFeedsFromUrlAsyncInternal(value).GetAwaiter();
+                awaiter.OnCompleted(() => SetProperty(ref _allFeeds, awaiter.GetResult()));
+            }
+        }
 
-	    public Task<List<FeedViewModel>> GetTaskAllFeedsFromUrlAsyncInternal(Uri feedUri)
-	    {
-	        if (feedUri == null)
-	        {
-	            throw new ArgumentNullException("feedUri");
-	        }
+        public Task<List<FeedViewModel>> GetTaskAllFeedsFromUrlAsyncInternal(Uri feedUri)
+        {
+            if (feedUri == null)
+            {
+                throw new ArgumentNullException("feedUri");
+            }
 
-	        return GetTaskAllFeedsFromUrlAsync(feedUri);
-	    }
+            return GetTaskAllFeedsFromUrlAsync(feedUri);
+        }
 
-	    private async Task<List<FeedViewModel>> GetTaskAllFeedsFromUrlAsync(Uri feedUri)
-	    {
+        private async Task<List<FeedViewModel>> GetTaskAllFeedsFromUrlAsync(Uri feedUri)
+        {
             //TODO: Eventuell auf Syndication umsteigen..
             _debugLogger.Log("Get all the Feeds for URI " + feedUri, Category.Info, Priority.Medium);
-	        var allFeedsList = new List<FeedViewModel>();
+            var allFeedsList = new List<FeedViewModel>();
 
             var feed = await FeedReader.ReadAsync(feedUri.AbsolutePath);
             foreach (var item in feed.Items)
@@ -62,8 +62,8 @@ namespace RSSReader.ViewModels
             }
             AllFeeds = allFeedsList;
 
-	        return allFeedsList;
-	    }
+            return allFeedsList;
+        }
 
         public static ObservableCollection<Source> AllSources { get; } = new ObservableCollection<Source>();
 
@@ -71,9 +71,10 @@ namespace RSSReader.ViewModels
         {
             AllSources.Add(source);
         }
+
         public bool RemoveSource(Source source)
         {
             return AllSources.Remove(source);
         }
+    }
 }
-} 

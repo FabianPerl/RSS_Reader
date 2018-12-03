@@ -28,6 +28,12 @@
           Margin="20,10"
           VerticalAlignment="Center"
           Text="{Binding Name}" />
+          <StackPanel.Triggers>
+              <EventTrigger RoutedEvent="Mouse.PreviewMouseUp">
+              <EventTrigger.Actions>
+              </EventTrigger.Actions>
+              </EventTrigger>
+          </StackPanel.Triggers>
       </StackPanel>
     </DataTemplate>
   </Window.Resources>

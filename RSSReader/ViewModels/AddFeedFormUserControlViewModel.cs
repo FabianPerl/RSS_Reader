@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Prism.Logging;
 using RSSReader.Models;
@@ -10,11 +11,11 @@ namespace RSSReader.ViewModels
 {
     public class AddFeedFormUserControlViewModel : BindableBase
     {
-        private Source _newSource;
         private string _name;
         private Uri _uri;
         private string _category;
         private readonly DebugLogger _debugLogger = new DebugLogger();
+        private readonly SourceList _sourceList = SourceList.GetInstance();
 
         public DelegateCommand AddCommand { get; set; }
 
@@ -24,8 +25,6 @@ namespace RSSReader.ViewModels
                 ObservesProperty(() => Category).
                 ObservesProperty(() => Uri);
         }
-
-        public Source Source => _newSource;
 
         public string Name
         {
@@ -54,16 +53,16 @@ namespace RSSReader.ViewModels
 
         private void Execute()
         {
-            _newSource = new Source();
-            _newSource.Name = Name;
-            _newSource.Category = Category;
-            _newSource.FeedUri = Uri;
+            Source newSource = new Source();
+            newSource.Name = Name;
+            newSource.Category = Category;
+            newSource.FeedUri = Uri;
             _debugLogger.Log("Add new Source: " + 
-                             _newSource.Name + ", " + 
-                             _newSource.Category + ", " + 
-                             _newSource.FeedUri, Prism.Logging.Category.Info, Priority.Medium);
+                             newSource.Name + ", " + 
+                             newSource.Category + ", " + 
+                             newSource.FeedUri, Prism.Logging.Category.Info, Priority.Medium);
 
-            FeedBoxUserControlViewModel.AllSources.Add(_newSource);
+            _sourceList.AllSources.Add(newSource);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace RSSReader.ViewModels
         private List<FeedViewModel> _allFeeds;
         private readonly DebugLogger _debugLogger = new DebugLogger();
         private Uri _currentUri = new Uri("https://www.heise.de");
+        private readonly SourceList _sourceList = SourceList.GetInstance();
 
         public List<FeedViewModel> AllFeeds
         {
@@ -65,16 +66,6 @@ namespace RSSReader.ViewModels
             return allFeedsList;
         }
 
-        public static ObservableCollection<Source> AllSources { get; } = new ObservableCollection<Source>();
-
-        public void AddSource(Source source)
-        {
-            AllSources.Add(source);
-        }
-
-        public bool RemoveSource(Source source)
-        {
-            return AllSources.Remove(source);
-        }
+        public ObservableCollection<Source> AllSources => _sourceList.AllSources;
     }
 }

@@ -5,23 +5,24 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace RSSReader.Models
 {
-    //TODO: Umbauen zum Proxy bzw zu einer Liste mit Singleton source list
-    public class SourceList
+    /// <inheritdoc />
+    /// <summary>
+    /// Singleton SourceList. Can exist only 1 time
+    /// </summary>
+    public class SourceList : ObservableCollection<Source>
     {
-        public ObservableCollection<Source> AllSources { get; } = new ObservableCollection<Source>();
-
-        private static readonly SourceList Instance = new SourceList();
-
+        /// <inheritdoc />
+        /// <summary>
+        /// private ctor as singleton
+        /// </summary>
         private SourceList()
         {
         }
 
-        public static SourceList GetInstance()
-        {
-            return Instance;
-        }
+        public static SourceList GetInstance { get; } = new SourceList();
     }
 }

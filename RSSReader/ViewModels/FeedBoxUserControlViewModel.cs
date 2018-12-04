@@ -4,68 +4,68 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using CodeHollow.FeedReader;
 using Prism.Logging;
 using RSSReader.Models;
+using RSSReader.Services;
 
 namespace RSSReader.ViewModels
 {
     public class FeedBoxUserControlViewModel : BindableBase
     {
-        private List<FeedViewModel> _allFeeds;
+        private ObservableCollection<FeedViewModel> _allFeeds;
         private readonly DebugLogger _debugLogger = new DebugLogger();
-        private Uri _currentUri = new Uri("https://www.heise.de");
-        private readonly SourceList _sourceList = SourceList.GetInstance();
+        private Uri _currentUri;
+        private readonly IFeedService _feedService = new FeedServiceImpl();
+        private Source _currentSource;
+        private readonly SourceList _sourceList = SourceList.GetInstance;
 
-        public List<FeedViewModel> AllFeeds
+        public FeedBoxUserControlViewModel()
+        {
+            _currentUri = new Uri("https://www.heise.de");
+            var newSource = new Source
+            {
+                FeedUri = new Uri("https://www.heise.de/newsticker/heise-atom.xml"),
+                Name = "Heise online",
+                Category = "Technik"
+            };
+
+            CurrentSource = newSource;
+            _sourceList.Add(newSource);
+        }
+
+        /// <summary>
+        /// all feeds that will be shown from a source 
+        /// </summary>
+        public ObservableCollection<FeedViewModel> AllFeeds
         {
             get => _allFeeds;
             set => SetProperty(ref _allFeeds, value);
         }
 
+        public Source CurrentSource
+        {
+            get => _currentSource;
+            set
+            {
+                SetProperty(ref _currentSource, value);
+                var awaiter = _feedService.GetTaskAllFeedsFromUrlAsync(value.FeedUri).GetAwaiter();
+                awaiter.OnCompleted(() =>
+                {
+                    _debugLogger.Log("Set the feeds with the list", Category.Info, Priority.Medium);
+                    AllFeeds = awaiter.GetResult();
+                });
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Uri CurrentUri
         {
             get => _currentUri;
-            set
-            {
-                SetProperty(ref _currentUri, value);
-                var awaiter = GetTaskAllFeedsFromUrlAsyncInternal(value).GetAwaiter();
-                awaiter.OnCompleted(() => SetProperty(ref _allFeeds, awaiter.GetResult()));
-            }
+            set => SetProperty(ref _currentUri, value);
         }
-
-        public Task<List<FeedViewModel>> GetTaskAllFeedsFromUrlAsyncInternal(Uri feedUri)
-        {
-            if (feedUri == null)
-            {
-                throw new ArgumentNullException("feedUri");
-            }
-
-            return GetTaskAllFeedsFromUrlAsync(feedUri);
-        }
-
-        private async Task<List<FeedViewModel>> GetTaskAllFeedsFromUrlAsync(Uri feedUri)
-        {
-            //TODO: Eventuell auf Syndication umsteigen..
-            _debugLogger.Log("Get all the Feeds for URI " + feedUri, Category.Info, Priority.Medium);
-            var allFeedsList = new List<FeedViewModel>();
-
-            var feed = await FeedReader.ReadAsync(feedUri.AbsolutePath);
-            foreach (var item in feed.Items)
-            {
-                var feedViewModel = new FeedViewModel();
-                feedViewModel.Title = item.Title?.Trim();
-                feedViewModel.Author = item.Author?.Trim();
-                feedViewModel.Link = new Uri(item.Link);
-                feedViewModel.PublishedDate = item.PublishingDate.HasValue ? item.PublishingDate.Value : new DateTime();
-                feedViewModel.ShortDescription = item.Description?.Trim();
-                allFeedsList.Add(feedViewModel);
-            }
-            AllFeeds = allFeedsList;
-
-            return allFeedsList;
-        }
-
-        public ObservableCollection<Source> AllSources => _sourceList.AllSources;
     }
 }

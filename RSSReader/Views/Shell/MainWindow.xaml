@@ -13,7 +13,7 @@
   prism:ViewModelLocator.AutoWireViewModel="True"
   WindowStartupLocation="CenterScreen">
   <Window.DataContext>
-    <viewModels:FeedBoxUserControlViewModel />
+    <viewModels:MainWindowViewModel></viewModels:MainWindowViewModel>
   </Window.DataContext>
   <Window.Resources>
     <!--  Eventuell hier auf ViewModel umsteigen!!!  -->

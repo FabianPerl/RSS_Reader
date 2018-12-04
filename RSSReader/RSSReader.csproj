@@ -62,9 +62,12 @@
     </ApplicationDefinition>
     <Compile Include="Models\Source.cs" />
     <Compile Include="Models\SourceList.cs" />
+    <Compile Include="Services\FeedServiceImpl.cs" />
+    <Compile Include="Services\IFeedService.cs" />
     <Compile Include="ViewModels\AddFeedFormUserControlViewModel.cs" />
     <Compile Include="ViewModels\FeedBoxUserControlViewModel.cs" />
     <Compile Include="ViewModels\FeedViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\AddFeed\AddFeedFormUserControl.xaml.cs">
       <DependentUpon>AddFeedFormUserControl.xaml</DependentUpon>
     </Compile>

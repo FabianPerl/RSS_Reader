@@ -15,7 +15,7 @@ namespace RSSReader.ViewModels
         private Uri _uri;
         private string _category;
         private readonly DebugLogger _debugLogger = new DebugLogger();
-        private readonly SourceList _sourceList = SourceList.GetInstance();
+        private readonly SourceList _sourceList = SourceList.GetInstance;
 
         public DelegateCommand AddCommand { get; set; }
 
@@ -62,7 +62,7 @@ namespace RSSReader.ViewModels
                              newSource.Category + ", " + 
                              newSource.FeedUri, Prism.Logging.Category.Info, Priority.Medium);
 
-            _sourceList.AllSources.Add(newSource);
+            _sourceList.Add(newSource);
         }
     }
 }

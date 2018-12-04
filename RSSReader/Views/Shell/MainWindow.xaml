@@ -13,7 +13,7 @@
   prism:ViewModelLocator.AutoWireViewModel="True"
   WindowStartupLocation="CenterScreen">
   <Window.DataContext>
-    <viewModels:MainWindowViewModel></viewModels:MainWindowViewModel>
+    <viewModels:MainWindowViewModel />
   </Window.DataContext>
   <Window.Resources>
     <!--  Eventuell hier auf ViewModel umsteigen!!!  -->
@@ -28,12 +28,11 @@
           Margin="20,10"
           VerticalAlignment="Center"
           Text="{Binding Name}" />
-          <StackPanel.Triggers>
-              <EventTrigger RoutedEvent="Mouse.PreviewMouseUp">
-              <EventTrigger.Actions>
-              </EventTrigger.Actions>
-              </EventTrigger>
-          </StackPanel.Triggers>
+        <StackPanel.Triggers>
+          <EventTrigger RoutedEvent="Mouse.PreviewMouseUp">
+            <EventTrigger.Actions />
+          </EventTrigger>
+        </StackPanel.Triggers>
       </StackPanel>
     </DataTemplate>
   </Window.Resources>

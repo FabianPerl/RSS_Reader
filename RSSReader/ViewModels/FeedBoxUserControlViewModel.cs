@@ -1,6 +1,7 @@
 ﻿using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using Prism.Logging;
 using RSSReader.Models;
 using RSSReader.Services;
@@ -45,13 +46,23 @@ namespace RSSReader.ViewModels
             set
             {
                 SetProperty(ref _currentSource, value);
-                var awaiter = _feedService.GetTaskAllFeedsFromUrlAsync(value.FeedUri).GetAwaiter();
+                UpdateFeedList(value.FeedUri);
+            }
+        }
+
+        public void UpdateFeedList()
+        {
+            UpdateFeedList(_currentSource.FeedUri);
+        }
+
+        public void UpdateFeedList(Uri uri)
+        {
+                var awaiter = _feedService.GetTaskAllFeedsFromUrlAsync(uri).GetAwaiter();
                 awaiter.OnCompleted(() =>
                 {
-                    _debugLogger.Log("Set the feeds with the list", Category.Info, Priority.Medium);
+                    _debugLogger.Log("Update the feeds with the url " + uri.OriginalString, Category.Info, Priority.Medium);
                     AllFeeds = awaiter.GetResult();
                 });
-            }
         }
 
         /// <summary>

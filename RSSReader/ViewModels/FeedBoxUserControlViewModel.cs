@@ -1,11 +1,6 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using CodeHollow.FeedReader;
 using Prism.Logging;
 using RSSReader.Models;
 using RSSReader.Services;
@@ -60,7 +55,7 @@ namespace RSSReader.ViewModels
         }
 
         /// <summary>
-        /// 
+        /// set and get the current uri that is shown in the window
         /// </summary>
         public Uri CurrentUri
         {

@@ -18,7 +18,7 @@ namespace RSSReader.Services
         {
             if (feedUri == null)
             {
-                throw new ArgumentNullException("feedUri");
+                throw new ArgumentNullException(nameof(feedUri));
             }
 
             return GetTaskAllFeedsFromUrlAsyncInternal(feedUri);

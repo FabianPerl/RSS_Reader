@@ -2,6 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
+using Prism.Commands;
 using Prism.Logging;
 using RSSReader.Models;
 using RSSReader.Services;
@@ -10,58 +11,29 @@ namespace RSSReader.ViewModels
 {
     public class FeedBoxUserControlViewModel : BindableBase
     {
-        private ObservableCollection<FeedViewModel> _allFeeds;
         private readonly DebugLogger _debugLogger = new DebugLogger();
         private Uri _currentUri;
         private readonly IFeedService _feedService = new FeedServiceImpl();
-        private Source _currentSource;
-        private readonly SourceList _sourceList = SourceList.GetInstance;
-
+       
         public FeedBoxUserControlViewModel()
         {
             _currentUri = new Uri("https://www.heise.de");
-            var newSource = new Source
-            {
-                FeedUri = new Uri("https://www.heise.de/newsticker/heise-atom.xml"),
-                Name = "Heise online",
-                Category = "Technik"
-            };
-
-            CurrentSource = newSource;
-            _sourceList.Add(newSource);
+            UpdateFeedList(new Uri("https://www.heise.de/newsticker/heise-atom.xml"));
         }
 
         /// <summary>
         /// all feeds that will be shown from a source 
         /// </summary>
-        public ObservableCollection<FeedViewModel> AllFeeds
-        {
-            get => _allFeeds;
-            set => SetProperty(ref _allFeeds, value);
-        }
+        public ObservableCollection<FeedViewModel> AllFeeds { get; set; } = SingletonList<FeedViewModel>.GetInstance;
 
-        public Source CurrentSource
-        {
-            get => _currentSource;
-            set
-            {
-                SetProperty(ref _currentSource, value);
-                UpdateFeedList(value.FeedUri);
-            }
-        }
-
-        public void UpdateFeedList()
-        {
-            UpdateFeedList(_currentSource.FeedUri);
-        }
-
-        public void UpdateFeedList(Uri uri)
+        private void UpdateFeedList(Uri uri)
         {
                 var awaiter = _feedService.GetTaskAllFeedsFromUrlAsync(uri).GetAwaiter();
                 awaiter.OnCompleted(() =>
                 {
                     _debugLogger.Log("Update the feeds with the url " + uri.OriginalString, Category.Info, Priority.Medium);
-                    AllFeeds = awaiter.GetResult();
+                    AllFeeds.Clear();
+                    AllFeeds.AddRange(awaiter.GetResult());
                 });
         }
 
@@ -71,7 +43,11 @@ namespace RSSReader.ViewModels
         public Uri CurrentUri
         {
             get => _currentUri;
-            set => SetProperty(ref _currentUri, value);
+            set
+            {
+                SetProperty(ref _currentUri, value);
+                UpdateFeedList(value);
+            }
         }
     }
 }

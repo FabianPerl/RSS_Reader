@@ -61,7 +61,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Source.cs" />
-    <Compile Include="Models\SourceList.cs" />
+    <Compile Include="Models\SingletonList.cs" />
     <Compile Include="Services\FeedServiceImpl.cs" />
     <Compile Include="Services\IFeedService.cs" />
     <Compile Include="ViewModels\AddFeedFormUserControlViewModel.cs" />

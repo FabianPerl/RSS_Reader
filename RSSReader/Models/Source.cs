@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Prism.Mvvm;
 
 namespace RSSReader.Models
 {
-    public class Source
+    public class Source : BindableBase
     {
         private Uri _feedUri;
         // eventuell noch ein icon hinzufuegen

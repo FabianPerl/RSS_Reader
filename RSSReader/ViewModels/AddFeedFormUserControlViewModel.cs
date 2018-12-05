@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using System;
+using System.Collections.ObjectModel;
 using Prism.Logging;
 using RSSReader.Models;
 
@@ -12,7 +13,7 @@ namespace RSSReader.ViewModels
         private Uri _uri;
         private string _category;
         private readonly DebugLogger _debugLogger = new DebugLogger();
-        private readonly SourceList _sourceList = SourceList.GetInstance;
+        private readonly ObservableCollection<Source> _sourceList = SingletonList<Source>.GetInstance;
 
         public DelegateCommand AddCommand { get; set; }
 

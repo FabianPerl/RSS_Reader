@@ -7,22 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 
-namespace RSSReader.Models
+namespace RSSReader.Models 
 {
     /// <inheritdoc />
     /// <summary>
     /// Singleton SourceList. Can exist only 1 time
     /// </summary>
-    public class SourceList : ObservableCollection<Source>
+    public class SingletonList<T> : ObservableCollection<T>
     {
         /// <inheritdoc />
         /// <summary>
         /// private ctor as singleton
         /// </summary>
-        private SourceList()
+        private SingletonList()
         {
         }
 
-        public static SourceList GetInstance { get; } = new SourceList();
+        public static SingletonList<T> GetInstance { get; } = new SingletonList<T>();
     }
 }

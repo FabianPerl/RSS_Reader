@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Infrastructure.Models;
 using Prism.Commands;
 using Prism.Logging;
@@ -18,13 +19,14 @@ namespace ModuleAdd.ViewModels
 
         public DelegateCommand AddCommand { get; set; }
 
-        public AddFeedFormUserControlViewModel(ICollection<Source> sourceData)
+        public AddFeedFormUserControlViewModel()
         {
             AddCommand = new DelegateCommand(Execute, CanExecute).ObservesProperty(() => Name).
                 ObservesProperty(() => Category).
                 ObservesProperty(() => Uri);
 
-            _sourceList = sourceData;
+            //TODO: Muss auf die selbe Liste zugreifen wie MainWindowViewModel..
+            _sourceList = new ObservableCollection<Source>();
         }
 
         public string Name

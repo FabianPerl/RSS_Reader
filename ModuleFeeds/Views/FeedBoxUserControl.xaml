@@ -7,6 +7,8 @@
   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
   xmlns:viewModels1="clr-namespace:ModuleFeeds.ViewModels"
   xmlns:viewModels="clr-namespace:Infrastructure.ViewModels;assembly=Infrastructure"
+  xmlns:mvvm="http://prismlibrary.com/"
+  mvvm:ViewModelLocator.AutoWireViewModel="True"
   d:DesignHeight="500"
   d:DesignWidth="800"
   mc:Ignorable="d">
@@ -57,31 +59,27 @@
     </DataTemplate>
   </UserControl.Resources>
 
-  <Grid Margin="{StaticResource MarginAllSides12}">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="1*" />
-      <ColumnDefinition Width="2*" />
-    </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
     <Label
       Grid.Row="0"
-      Grid.Column="0"
       Margin="{StaticResource MarginBottom12}"
       Content="Feed"
       DockPanel.Dock="Top"
       FontSize="{StaticResource FontSizeExtraLarge}" />
 
     <ListBox
-      x:Name="ListBoxFeeds2"
       Grid.Row="1"
-      Grid.Column="0"
+      x:Name="ListBoxFeeds2"
       Margin="{StaticResource MarginBottom12}"
       BorderThickness="0,0,0,0"
-      DockPanel.Dock="Left"
       Focusable="True"
       IsSynchronizedWithCurrentItem="True"
       ItemTemplate="{StaticResource DataTemplateFeedViewModel}"
@@ -103,5 +101,6 @@
         </Style>
       </ListBox.ItemContainerStyle>
     </ListBox>
-  </Grid>
+
+    </Grid>
 </UserControl>

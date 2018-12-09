@@ -1,4 +1,5 @@
-﻿using ModuleFeeds.Views;
+﻿using Infrastructure.Constants;
+using ModuleFeeds.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
@@ -16,7 +17,7 @@ namespace ModuleFeeds
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-             _regionManager.RequestNavigate("ContentRegionLeft", nameof(FeedBoxUserControl)); 
+             _regionManager.RequestNavigate(RegionNames.ContentRegionLeft, nameof(FeedBoxUserControl)); 
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

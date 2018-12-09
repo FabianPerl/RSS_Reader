@@ -144,17 +144,17 @@
           </DockPanel>
         </materialDesign:ColorZone>
 
-          <Grid>
+          <!--Grid>
               <Grid.ColumnDefinitions>
-                  <ColumnDefinition />
-                  <ColumnDefinition />
-              </Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="1*"/>
+                  <ColumnDefinition Width="2*" />
+              </Grid.ColumnDefinitions-->
 
+                <!--TODO: Fenster soll ganaze Breite bekommen, BIS ein Fenster angeklickt wurde. Dann 30:70-->
               <ContentControl Background="Blue" Grid.Column="0" prism:RegionManager.RegionName="{x:Static constants:RegionNames.ContentRegionLeft}"></ContentControl>
 
-              <ContentControl Background="Green" Grid.Column="1" prism:RegionManager.RegionName="{x:Static constants:RegionNames.ContentRegionRight}"></ContentControl>
-          </Grid>
-        <!--views:FeedBoxUserControl /-->
+              <!--ContentControl Background="Green" Grid.Column="1" prism:RegionManager.RegionName="{x:Static constants:RegionNames.ContentRegionRight}"></-->
+          <!--/Grid-->
       </DockPanel>
     </materialDesign:DrawerHost>
   </materialDesign:DialogHost>

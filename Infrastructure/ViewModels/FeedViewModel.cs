@@ -1,11 +1,20 @@
 ﻿using System;
 using System.Globalization;
+using System.ServiceModel.Syndication;
+using System.Xml;
 using Prism.Mvvm;
 
 namespace Infrastructure.ViewModels
 {
 	public class FeedViewModel : BindableBase
 	{
+	    private const string LinkNoHttpDefined = "Please provide http:// or https://";
+	    private const string LinkInvalid = "The Link is invalid";
+
+        //TODO: ICON/SYMBOL
+	    private string _errorMessage = string.Empty;
+	    private bool _hasErrors = false;
+
 	    private string _author;
 	    private string _title;
 	    private string _shortDescription;
@@ -13,10 +22,25 @@ namespace Infrastructure.ViewModels
 	    private Uri _link;
 	    private DateTimeOffset _publishedDate;
 
-	    /// <summary>
-	    /// Get and Set the article's author(s).
-	    /// </summary>
-	    public string Author
+        #region errors
+	    public string ErrorMessage
+	    {
+	        get => _errorMessage;
+	        set => SetProperty(ref _errorMessage, value);
+	    }
+
+	    public bool HasErrors
+	    {
+	        get => _hasErrors;
+	        set => SetProperty(ref _hasErrors, value);
+	    }
+        #endregion
+
+        #region attributes
+        /// <summary>
+        /// Get and Set the article's author(s).
+        /// </summary>
+        public string Author
 	    {
 	        get => _author;
 	        set => SetProperty(ref _author, value);
@@ -46,7 +70,38 @@ namespace Infrastructure.ViewModels
 	    public Uri Link
 	    {
 	        get => _link;
-	        set => SetProperty(ref _link, value);
+	        set
+	        {
+	            if (SetProperty(ref _link, value))
+                   RaisePropertyChanged(LinkAsString);
+	        }
+	    }
+
+	    public string LinkAsString
+	    {
+	        get => Link?.OriginalString ?? string.Empty;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    return;
+
+                if (!value.Trim().StartsWith("https://") || !value.Trim().StartsWith("http://"))
+                {
+                    _errorMessage = LinkNoHttpDefined;
+                    return;
+                }
+
+                if (Uri.TryCreate(value, UriKind.Absolute, out var uri))
+                {
+                    if(IsValidFeed(uri))
+                        Link = uri;
+                }
+                else
+                {
+                    _errorMessage = LinkInvalid;
+                }
+
+            }
 	    }
 
 	    /// <summary>
@@ -67,6 +122,14 @@ namespace Infrastructure.ViewModels
 	            return myDateTime.ToString("dd.MM.yyyy\thh:mm tt").ToUpper();
 	        }
 	    }
+        #endregion
+
+        #region helper
+        private bool IsValidFeed(Uri url)
+	    {
+            //TODO: Better logic
+            return true;
+	    }
 
         /// <summary>
         /// Get or set if the user has watched the article.
@@ -76,5 +139,6 @@ namespace Infrastructure.ViewModels
             get => _isWatched; 
             set => SetProperty(ref _isWatched, value); 
         }
-	}
+        #endregion
+    }
 }

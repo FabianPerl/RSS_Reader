@@ -6,6 +6,7 @@ using Infrastructure.ViewModels;
 using Prism.Commands;
 using Prism.Logging;
 using Prism.Mvvm;
+using Prism.Regions;
 
 namespace ModuleFeeds.ViewModels
 {
@@ -24,7 +25,7 @@ namespace ModuleFeeds.ViewModels
         /// <summary>
         /// all feeds that will be shown from a source 
         /// </summary>
-        public ICollection<FeedViewModel> AllFeeds { get; set; } = new ObservableCollection<FeedViewModel>();
+        public ObservableCollection<FeedViewModel> AllFeeds { get; set; } = new ObservableCollection<FeedViewModel>();
 
         private void ClickedFeedView(FeedViewModel feedViewModel)
         {

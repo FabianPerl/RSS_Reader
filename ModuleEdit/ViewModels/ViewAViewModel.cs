@@ -14,7 +14,7 @@ namespace ModuleEdit.ViewModels
         public string Message
         {
             get { return _message; }
-            set { SetProperty(ref _message, value); }
+            set => SetProperty(ref _message, value);
         }
 
         public ViewAViewModel()

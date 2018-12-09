@@ -1,4 +1,5 @@
-﻿using ModuleEdit.Views;
+﻿using Infrastructure.Constants;
+using ModuleEdit.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
@@ -15,7 +16,7 @@ namespace ModuleEdit
         }
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            //_regionManager.RequestNavigate("ContentNewWindow", nameof(ViewA));
+            //_regionManager.RequestNavigate(RegionNames.ContentNewWindow, nameof(ViewA));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

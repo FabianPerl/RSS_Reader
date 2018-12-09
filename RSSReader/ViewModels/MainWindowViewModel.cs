@@ -1,18 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
+using Infrastructure.Models;
+using Infrastructure.Services;
 using Prism.Commands;
-using RSSReader.Models;
+using Prism.Regions;
 
 namespace RSSReader.ViewModels
 {
 	public class MainWindowViewModel : BindableBase
 	{
-	    private readonly ObservableCollection<Source> _sourceList = SingletonList<Source>.GetInstance;
-	    private readonly FeedBoxUserControlViewModel _feedBoxUserControlViewModel;
+	    private readonly IRegionManager _regionManager;
+	    private readonly ICollection<Source> _sourceList; 
         private Source _currentSource;
 
-	    public MainWindowViewModel()
+	    public MainWindowViewModel(IRegionManager regionManager)
 	    {
             var newSource = new Source
             {
@@ -21,30 +24,26 @@ namespace RSSReader.ViewModels
                 Category = "Technik"
             };
 
-            _feedBoxUserControlViewModel = new FeedBoxUserControlViewModel();
+	        _regionManager = regionManager;
+	        _sourceList = new ObservableCollection<Source>();
             _sourceList.Add(newSource);
-
-            SetSourceDelegateCommand = new DelegateCommand<Source>(SetCurrentSource);
+	        SetSourceDelegateCommand = new DelegateCommand<Source>(SetCurrentSource);
 	    }
 
         public DelegateCommand<Source> SetSourceDelegateCommand { get; }
 
-	    public Collection<Source> AllSources => _sourceList;
+	    public ICollection<Source> AllSources => _sourceList;
 
 	    private void SetCurrentSource(Source source)
 	    {
 	        CurrentSource = source;
-	        _feedBoxUserControlViewModel.CurrentUri = source.FeedUri;
+	     //   _feedBoxUserControlViewModel.CurrentUri = source.FeedUri;
 	    }
 
 	    public Source CurrentSource
         {
             get => _currentSource;
-            set
-            {
-                SetProperty(ref _currentSource, value);
-                //UpdateFeedList(value.FeedUri);
-            }
+            set => SetProperty(ref _currentSource, value);
         }
     }
 }

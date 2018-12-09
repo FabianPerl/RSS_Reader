@@ -4,21 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C91F3795-500C-415D-8750-D6562A152B84}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{0A7848EA-7ACC-4F20-8712-52E6B3ACFFAC}</ProjectGuid>
+    <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RSSReader</RootNamespace>
-    <AssemblyName>RSSReader</AssemblyName>
+    <RootNamespace>ModuleBrowser</RootNamespace>
+    <AssemblyName>ModuleBrowser</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <OutputPath>bin\x64\Debug\</OutputPath>
     <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationFramework">
@@ -27,8 +26,14 @@
     <Reference Include="Prism">
       <HintPath>..\..\..\..\.nuget\packages\prism.core\7.1.0.431\lib\net45\Prism.dll</HintPath>
     </Reference>
+    <Reference Include="Prism.Wpf">
+      <HintPath>..\..\..\..\.nuget\packages\prism.wpf\7.1.0.431\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Windows.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -42,32 +47,7 @@
     <Reference Include="PresentationCore" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Page Include="Views\AddFeedWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Views\AddFeedWindow.xaml.cs">
-      <DependentUpon>AddFeedWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="ModuleBrowserModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -81,6 +61,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\ViewAViewModel.cs" />
+    <Compile Include="Views\ViewA.xaml.cs">
+      <DependentUpon>ViewA.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -89,38 +73,26 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="MaterialDesignColors">
-      <Version>1.1.3</Version>
-    </PackageReference>
-    <PackageReference Include="MaterialDesignThemes">
-      <Version>2.5.1-ci1224</Version>
-    </PackageReference>
-    <PackageReference Include="Prism.Unity" Version="7.1.0.431&#xD;" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
-      <Project>{9090696F-C921-4882-AC20-BC4D62C74C18}</Project>
-      <Name>Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ModuleAdd\ModuleAdd.csproj">
-      <Project>{1B489250-EEF8-4DFE-97E5-FED951CB8955}</Project>
-      <Name>ModuleAdd</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ModuleBrowser\ModuleBrowser.csproj">
-      <Project>{0A7848EA-7ACC-4F20-8712-52E6B3ACFFAC}</Project>
-      <Name>ModuleBrowser</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ModuleEdit\ModuleEdit.csproj">
-      <Project>{10A5E691-9B19-4881-8763-6AAD42FD5142}</Project>
-      <Name>ModuleEdit</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ModuleFeeds\ModuleFeeds.csproj">
-      <Project>{31FAF6B6-DDE7-44AB-B23D-1E75601CB264}</Project>
-      <Name>ModuleFeeds</Name>
-    </ProjectReference>
+    <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Page Include="Views\ViewA.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CefSharp.Common">
+      <Version>69.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="CefSharp.Wpf">
+      <Version>69.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="MaterialDesignThemes">
+      <Version>2.5.0.1205</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.Wpf" Version="7.1.0.431&#xD;" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

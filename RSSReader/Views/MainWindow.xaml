@@ -1,0 +1,161 @@
+﻿<Window
+  x:Class="RSSReader.Views.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+  xmlns:prism="http://prismlibrary.com/"
+  xmlns:models="clr-namespace:Infrastructure.Models;assembly=Infrastructure"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:viewModels="clr-namespace:RSSReader.ViewModels"
+  xmlns:constants="clr-namespace:Infrastructure.Constants;assembly=Infrastructure"
+  Title="RSS Reader"
+  MinWidth="800"
+  MinHeight="600"
+  prism:ViewModelLocator.AutoWireViewModel="True"
+  WindowStartupLocation="CenterScreen">
+
+  <Window.Resources>
+    <DataTemplate x:Key="DataTemplateSourcesViewModel" DataType="models:Source">
+      <StackPanel Background="White" Orientation="Horizontal">
+          <i:Interaction.Triggers>
+              <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                  <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:MainWindowViewModel.SetSourceDelegateCommand)}" CommandParameter="{Binding}" />
+              </i:EventTrigger>
+          </i:Interaction.Triggers>
+                <materialDesign:PackIcon
+          Width="25"
+          Height="25"
+          VerticalAlignment="Center"
+          Kind="Label" />
+        <TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
+      </StackPanel>
+    </DataTemplate>
+  </Window.Resources>
+
+  <materialDesign:DialogHost Identifier="RootDialog">
+    <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+      <materialDesign:DrawerHost.LeftDrawerContent>
+        <DockPanel>
+          <ToggleButton
+            Margin="16"
+            HorizontalAlignment="Right"
+            DockPanel.Dock="Top"
+            IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
+            Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+
+          <ListView
+            Background="#FFDADAE0"
+            BorderBrush="{x:Null}"
+            DockPanel.Dock="Bottom"
+            Foreground="Black"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <Separator />
+            <ListViewItem Height="60" PreviewMouseLeftButtonUp="UIElement_PreviewMouseLeftButtonUp">
+              <StackPanel MinWidth="212" Orientation="Horizontal">
+                <materialDesign:PackIcon
+                  Width="25"
+                  Height="25"
+                  VerticalAlignment="Center"
+                  Kind="Add" />
+                <TextBlock
+                  Margin="20,10"
+                  VerticalAlignment="Center"
+                  Text="Add feed" />
+              </StackPanel>
+            </ListViewItem>
+            <ListViewItem Height="60">
+              <StackPanel MinWidth="212" Orientation="Horizontal">
+                <materialDesign:PackIcon
+                  Width="25"
+                  Height="25"
+                  VerticalAlignment="Center"
+                  Kind="Edit" />
+                <TextBlock
+                  Margin="20,10"
+                  VerticalAlignment="Center"
+                  Text="Edit feed" />
+              </StackPanel>
+            </ListViewItem>
+          </ListView>
+
+          <ListView
+            Background="#FFDADAE0"
+            BorderBrush="{x:Null}"
+            DockPanel.Dock="Top"
+            Foreground="Black"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListViewItem Height="60">
+              <StackPanel MinWidth="212" Orientation="Horizontal">
+                <materialDesign:PackIcon
+                  Width="25"
+                  Height="25"
+                  VerticalAlignment="Center"
+                  Kind="ViewDashboard" />
+                <TextBlock
+                  Margin="20,10"
+                  VerticalAlignment="Center"
+                  Text="All Feeds" />
+              </StackPanel>
+            </ListViewItem>
+            <Separator />
+          </ListView>
+          <ListView
+            Background="#FFDADAE0"
+            BorderBrush="{x:Null}"
+            Foreground="Black"
+            ItemTemplate="{StaticResource DataTemplateSourcesViewModel}"
+            ItemsSource="{Binding AllSources}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemContainerStyle>
+              <Style TargetType="ListViewItem">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+              </Style>
+            </ListView.ItemContainerStyle>
+          </ListView>
+        </DockPanel>
+      </materialDesign:DrawerHost.LeftDrawerContent>
+
+      <DockPanel>
+        <materialDesign:ColorZone
+          Padding="5"
+          materialDesign:ShadowAssist.ShadowDepth="Depth2"
+          DockPanel.Dock="Top"
+          Mode="PrimaryMid">
+          <DockPanel>
+            <ToggleButton
+              x:Name="MenuToggleButton"
+              DockPanel.Dock="Left"
+              IsChecked="False"
+              Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+            <Button
+              x:Name="FetchFeedsButton"
+              materialDesign:ShadowAssist.ShadowDepth="Depth0"
+              BorderBrush="{x:Null}"
+              DockPanel.Dock="Right"
+              ToolTip="Update the feeds">
+              <materialDesign:PackIcon Kind="Update" />
+            </Button>
+            <TextBlock
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              FontSize="15">
+              RSS Reader
+            </TextBlock>
+          </DockPanel>
+        </materialDesign:ColorZone>
+
+          <Grid>
+              <Grid.ColumnDefinitions>
+                  <ColumnDefinition />
+                  <ColumnDefinition />
+              </Grid.ColumnDefinitions>
+
+              <ContentControl Background="Blue" Grid.Column="0" prism:RegionManager.RegionName="{x:Static constants:RegionNames.ContentRegionLeft}"></ContentControl>
+
+              <ContentControl Background="Green" Grid.Column="1" prism:RegionManager.RegionName="{x:Static constants:RegionNames.ContentRegionRight}"></ContentControl>
+          </Grid>
+        <!--views:FeedBoxUserControl /-->
+      </DockPanel>
+    </materialDesign:DrawerHost>
+  </materialDesign:DialogHost>
+</Window>

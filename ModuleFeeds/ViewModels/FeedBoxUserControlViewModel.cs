@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Services;
 using Infrastructure.ViewModels;
@@ -14,7 +15,7 @@ namespace ModuleFeeds.ViewModels
 {
     public class FeedBoxUserControlViewModel : BindableBase
     {
-        private readonly DebugLogger _debugLogger = new DebugLogger();
+        private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private readonly IEventAggregator _eventAggregator;
         private Uri _lastFeedUri;
         private readonly IFeedService _feedService = new FeedServiceImpl();
@@ -37,8 +38,8 @@ namespace ModuleFeeds.ViewModels
 
         private void ClickedFeedView(FeedViewModel feedViewModel)
         {
-            //CurrentUri = feedViewModel.Link;
-            //Stoest den Browser an die URI zu wechseln
+
+            _eventAggregator.GetEvent<WantUriEvent>().Publish(feedViewModel.Link);
         }
 
         private void UpdateFeedList(bool flag)
@@ -52,7 +53,7 @@ namespace ModuleFeeds.ViewModels
                 var awaiter = _feedService.GetTaskAllFeedsFromUrlAsync(uri).GetAwaiter();
                 awaiter.OnCompleted(() =>
                 {
-                    _debugLogger.Log("Update the feeds with the url " + uri.OriginalString, Category.Info, Priority.Medium);
+                    _logger.Log("Update the feeds with the url " + uri.OriginalString, Category.Info, Priority.Medium);
                     AllFeeds.Clear();
                     _lastFeedUri = uri;
 

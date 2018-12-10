@@ -1,4 +1,5 @@
 ﻿using System;
+using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Models;
 using Prism.Commands;
@@ -13,7 +14,8 @@ namespace ModuleAdd.ViewModels
         private string _name;
         private Uri _uri;
         private string _category;
-        private readonly DebugLogger _debugLogger = new DebugLogger();
+        private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
+
 
         private readonly IEventAggregator _eventAggregator;
 
@@ -56,7 +58,7 @@ namespace ModuleAdd.ViewModels
         private void Execute()
         {
             var newSource = new Source {Name = Name, Category = Category, FeedUri = Uri};
-            _debugLogger.Log("Add new Source: " + 
+            _logger.Log("Add new Source: " + 
                              newSource.Name + ", " + 
                              newSource.Category + ", " + 
                              newSource.FeedUri, Prism.Logging.Category.Info, Priority.Medium);

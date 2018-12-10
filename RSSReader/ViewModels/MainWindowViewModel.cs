@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
+using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Models;
 using Infrastructure.Services;
 using ModuleAdd.Views;
 using Prism.Commands;
 using Prism.Events;
+using Prism.Logging;
 using Prism.Regions;
 
 namespace RSSReader.ViewModels
@@ -17,6 +19,7 @@ namespace RSSReader.ViewModels
 	    private readonly IRegionManager _regionManager;
 	    private readonly ICollection<Source> _sourceList;
 	    private readonly IEventAggregator _eventAggregator;
+        private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private Source _currentSource;
 
 	    public MainWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
@@ -36,6 +39,7 @@ namespace RSSReader.ViewModels
 	        SetSourceDelegateCommand = new DelegateCommand<Source>(SetCurrentSource);
             UpdateFeedsDelegateCommand = new DelegateCommand(UpdateFeeds);
             OpenAddFeedWindowDelegateCommand = new DelegateCommand(OpenAddFeedWindow);
+            OpenEditFeedWindowDelegateCommand = new DelegateCommand(OpenEditFeedWindow);
 
 	        eventAggregator.GetEvent<NewSourceEvent>().Subscribe(AddSource);
 	    }

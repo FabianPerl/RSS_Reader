@@ -19,7 +19,7 @@
       <StackPanel Background="White" Orientation="Horizontal">
         <i:Interaction.Triggers>
           <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:MainWindowViewModel.GetSourceDelegateCommand)}" CommandParameter="{Binding}" />
+            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:MainWindowViewModel.GetSourceDelegateCommand)}" CommandParameter="{Binding}" />
           </i:EventTrigger>
           <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
             <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />

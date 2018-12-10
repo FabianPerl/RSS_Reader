@@ -113,6 +113,22 @@ namespace RSSReader.ViewModels
             _logger.Log("Update feeds", Category.Info, Priority.Medium);
             _eventAggregator.GetEvent<FetchDataEvent>().Publish(true);
 	    }
+
+	    private void LoadSources()
+	    {
+
+	    }
+
+	    private void RemoveSource(Source source)
+	    {
+	        foreach (var oneSource in AllSources)
+	        {
+	            if (oneSource.Equals(source))
+	            {
+	                AllSources.Remove(source);
+	            }
+	        }
+	    }
         #endregion
 
         #region navigation management

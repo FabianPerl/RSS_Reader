@@ -5,8 +5,10 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:mvvm="http://prismlibrary.com/"
   d:DesignHeight="300"
   d:DesignWidth="300"
+  mvvm:ViewModelLocator.AutoWireViewModel="True"
   mc:Ignorable="d">
   <StackPanel>
     <TextBox

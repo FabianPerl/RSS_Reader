@@ -57,9 +57,13 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\ProjectLogger.cs" />
     <Compile Include="Constants\RegionNames.cs" />
     <Compile Include="Events\FetchDataEvent.cs" />
     <Compile Include="Events\NewSourceEvent.cs" />
+    <Compile Include="Events\WantAllFeedsEvent.cs" />
+    <Compile Include="Events\WantFeedEvent.cs" />
+    <Compile Include="Events\WantUriEvent.cs" />
     <Compile Include="Models\Source.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

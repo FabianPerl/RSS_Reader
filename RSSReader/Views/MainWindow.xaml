@@ -2,12 +2,12 @@
   x:Class="RSSReader.Views.MainWindow"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-  xmlns:prism="http://prismlibrary.com/"
-  xmlns:models="clr-namespace:Infrastructure.Models;assembly=Infrastructure"
-  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-  xmlns:viewModels="clr-namespace:RSSReader.ViewModels"
   xmlns:constants="clr-namespace:Infrastructure.Constants;assembly=Infrastructure"
+  xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:models="clr-namespace:Infrastructure.Models;assembly=Infrastructure"
+  xmlns:prism="http://prismlibrary.com/"
+  xmlns:viewModels="clr-namespace:RSSReader.ViewModels"
   Title="RSS Reader"
   MinWidth="800"
   MinHeight="600"
@@ -17,15 +17,15 @@
   <Window.Resources>
     <DataTemplate x:Key="DataTemplateSourcesViewModel" DataType="models:Source">
       <StackPanel Background="White" Orientation="Horizontal">
-          <i:Interaction.Triggers>
-              <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                  <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:MainWindowViewModel.SetSourceDelegateCommand)}" CommandParameter="{Binding}" />
-              </i:EventTrigger>
-              <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                  <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"></i:InvokeCommandAction>
-              </i:EventTrigger>
-          </i:Interaction.Triggers>
-                <materialDesign:PackIcon
+        <i:Interaction.Triggers>
+          <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:MainWindowViewModel.SetSourceDelegateCommand)}" CommandParameter="{Binding}" />
+          </i:EventTrigger>
+          <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+            <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
+          </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <materialDesign:PackIcon
           Width="25"
           Height="25"
           VerticalAlignment="Center"
@@ -55,14 +55,14 @@
             <Separator />
             <ListViewItem Height="60">
               <StackPanel MinWidth="212" Orientation="Horizontal">
-                  <i:Interaction.Triggers>
-                      <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                          <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"></i:InvokeCommandAction>
-                      </i:EventTrigger>
-                      <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                          <i:InvokeCommandAction Command="{Binding OpenAddFeedWindowDelegateCommand}" />
-                      </i:EventTrigger>
-                  </i:Interaction.Triggers>
+                <i:Interaction.Triggers>
+                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
+                  </i:EventTrigger>
+                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{Binding OpenAddFeedWindowDelegateCommand}" />
+                  </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <materialDesign:PackIcon
                   Width="25"
                   Height="25"
@@ -76,14 +76,14 @@
             </ListViewItem>
             <ListViewItem Height="60">
               <StackPanel MinWidth="212" Orientation="Horizontal">
-                  <i:Interaction.Triggers>
-                      <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                          <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"></i:InvokeCommandAction>
-                      </i:EventTrigger>
-                      <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                          <i:InvokeCommandAction Command="{Binding OpenEditFeedWindowDelegateCommand}" />
-                      </i:EventTrigger>
-                  </i:Interaction.Triggers>
+                <i:Interaction.Triggers>
+                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
+                  </i:EventTrigger>
+                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{Binding OpenEditFeedWindowDelegateCommand}" />
+                  </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <materialDesign:PackIcon
                   Width="25"
                   Height="25"
@@ -149,8 +149,8 @@
             <Button
               x:Name="FetchFeedsButton"
               materialDesign:ShadowAssist.ShadowDepth="Depth0"
-              Command="{Binding UpdateFeedsDelegateCommand}"
               BorderBrush="{x:Null}"
+              Command="{Binding UpdateFeedsDelegateCommand}"
               DockPanel.Dock="Right"
               ToolTip="Update the feeds">
               <materialDesign:PackIcon Kind="Update" />
@@ -164,17 +164,20 @@
           </DockPanel>
         </materialDesign:ColorZone>
 
-          <!--Grid>
+        <!--Grid>
               <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="1*"/>
                   <ColumnDefinition Width="2*" />
               </Grid.ColumnDefinitions-->
 
-                <!--TODO: Fenster soll ganaze Breite bekommen, BIS ein Fenster angeklickt wurde. Dann 30:70-->
-              <ContentControl Background="Blue" Grid.Column="0" prism:RegionManager.RegionName="{x:Static constants:RegionNames.ContentRegionLeft}"></ContentControl>
+        <!--  TODO: Fenster soll ganaze Breite bekommen, BIS ein Fenster angeklickt wurde. Dann 30:70  -->
+        <ContentControl
+          Grid.Column="0"
+          prism:RegionManager.RegionName="{x:Static constants:RegionNames.ContentRegionLeft}"
+          Background="Blue" />
 
-              <!--ContentControl Background="Green" Grid.Column="1" prism:RegionManager.RegionName="{x:Static constants:RegionNames.ContentRegionRight}"></-->
-          <!--/Grid-->
+        <!--ContentControl Background="Green" Grid.Column="1" prism:RegionManager.RegionName="{x:Static constants:RegionNames.ContentRegionRight}"></-->
+        <!--  /Grid  -->
       </DockPanel>
     </materialDesign:DrawerHost>
   </materialDesign:DialogHost>

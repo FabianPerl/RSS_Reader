@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using System.ServiceModel.Syndication;
-using System.Xml;
+using System.Windows.Controls;
 using Prism.Mvvm;
 
 namespace Infrastructure.ViewModels
@@ -15,6 +14,7 @@ namespace Infrastructure.ViewModels
 	    private string _errorMessage = string.Empty;
 	    private bool _hasErrors = false;
 
+	    private Image _symbol;
 	    private string _author;
 	    private string _title;
 	    private string _shortDescription;
@@ -102,6 +102,12 @@ namespace Infrastructure.ViewModels
                 }
 
             }
+	    }
+
+	    public Image Symbol
+	    {
+	        get => _symbol;
+	        set => SetProperty(ref _symbol, value);
 	    }
 
 	    /// <summary>

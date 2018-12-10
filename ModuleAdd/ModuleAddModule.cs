@@ -3,6 +3,7 @@ using ModuleAdd.ViewModels;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
+using RSSReader.Views.AddFeed;
 
 namespace ModuleAdd
 {
@@ -16,12 +17,12 @@ namespace ModuleAdd
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            _regionManager.RequestNavigate(RegionNames.ContentNewWindow, nameof(AddFeedFormUserControlViewModel));
+            _regionManager.RequestNavigate(RegionNames.ContentNewWindow, nameof(AddFeedFormUserControl));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<AddFeedFormUserControlViewModel>();
+            containerRegistry.RegisterForNavigation<AddFeedFormUserControl>();
         }
     }
 }

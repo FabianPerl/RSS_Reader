@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\RegionNames.cs" />
+    <Compile Include="Events\FetchDataEvent.cs" />
+    <Compile Include="Events\NewSourceEvent.cs" />
     <Compile Include="Models\Source.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

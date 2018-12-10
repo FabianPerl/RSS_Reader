@@ -18,9 +18,9 @@ namespace ModuleEdit.Views
     /// <summary>
     /// Interaction logic for ViewA.xaml
     /// </summary>
-    public partial class ViewA : UserControl
+    public partial class EditFeedFormUserControl : UserControl
     {
-        public ViewA()
+        public EditFeedFormUserControl()
         {
             InitializeComponent();
         }

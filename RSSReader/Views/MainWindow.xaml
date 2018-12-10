@@ -21,6 +21,9 @@
               <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
                   <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:MainWindowViewModel.SetSourceDelegateCommand)}" CommandParameter="{Binding}" />
               </i:EventTrigger>
+              <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                  <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"></i:InvokeCommandAction>
+              </i:EventTrigger>
           </i:Interaction.Triggers>
                 <materialDesign:PackIcon
           Width="25"
@@ -50,8 +53,16 @@
             Foreground="Black"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <Separator />
-            <ListViewItem Height="60" PreviewMouseLeftButtonUp="UIElement_PreviewMouseLeftButtonUp">
+            <ListViewItem Height="60">
               <StackPanel MinWidth="212" Orientation="Horizontal">
+                  <i:Interaction.Triggers>
+                      <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                          <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"></i:InvokeCommandAction>
+                      </i:EventTrigger>
+                      <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                          <i:InvokeCommandAction Command="{Binding OpenAddFeedWindowDelegateCommand}" />
+                      </i:EventTrigger>
+                  </i:Interaction.Triggers>
                 <materialDesign:PackIcon
                   Width="25"
                   Height="25"
@@ -60,11 +71,19 @@
                 <TextBlock
                   Margin="20,10"
                   VerticalAlignment="Center"
-                  Text="Add feed" />
+                  Text="Add Feedsource" />
               </StackPanel>
             </ListViewItem>
             <ListViewItem Height="60">
               <StackPanel MinWidth="212" Orientation="Horizontal">
+                  <i:Interaction.Triggers>
+                      <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                          <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"></i:InvokeCommandAction>
+                      </i:EventTrigger>
+                      <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                          <i:InvokeCommandAction Command="{Binding OpenEditFeedWindowDelegateCommand}" />
+                      </i:EventTrigger>
+                  </i:Interaction.Triggers>
                 <materialDesign:PackIcon
                   Width="25"
                   Height="25"
@@ -73,7 +92,7 @@
                 <TextBlock
                   Margin="20,10"
                   VerticalAlignment="Center"
-                  Text="Edit feed" />
+                  Text="Edit Feedsource" />
               </StackPanel>
             </ListViewItem>
           </ListView>
@@ -130,6 +149,7 @@
             <Button
               x:Name="FetchFeedsButton"
               materialDesign:ShadowAssist.ShadowDepth="Depth0"
+              Command="{Binding UpdateFeedsDelegateCommand}"
               BorderBrush="{x:Null}"
               DockPanel.Dock="Right"
               ToolTip="Update the feeds">

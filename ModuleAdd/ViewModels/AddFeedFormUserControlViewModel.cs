@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using Infrastructure.Events;
 using Infrastructure.Models;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Logging;
 using Prism.Mvvm;
 
@@ -14,19 +14,18 @@ namespace ModuleAdd.ViewModels
         private Uri _uri;
         private string _category;
         private readonly DebugLogger _debugLogger = new DebugLogger();
-        //private readonly ObservableCollection<Source> _sourceList = SingletonList<Source>.GetInstance;
-        private readonly ICollection<Source> _sourceList;
+
+        private readonly IEventAggregator _eventAggregator;
 
         public DelegateCommand AddCommand { get; set; }
 
-        public AddFeedFormUserControlViewModel()
+        public AddFeedFormUserControlViewModel(IEventAggregator eventAggregator)
         {
             AddCommand = new DelegateCommand(Execute, CanExecute).ObservesProperty(() => Name).
                 ObservesProperty(() => Category).
                 ObservesProperty(() => Uri);
 
-            //TODO: Muss auf die selbe Liste zugreifen wie MainWindowViewModel..
-            _sourceList = new ObservableCollection<Source>();
+            _eventAggregator = eventAggregator;
         }
 
         public string Name
@@ -62,7 +61,7 @@ namespace ModuleAdd.ViewModels
                              newSource.Category + ", " + 
                              newSource.FeedUri, Prism.Logging.Category.Info, Priority.Medium);
 
-            _sourceList.Add(newSource);
+            _eventAggregator.GetEvent<NewSourceEvent>().Publish(newSource);
         }
     }
 }

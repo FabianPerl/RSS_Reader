@@ -13,9 +13,5 @@ namespace RSSReader.Views
         {
             InitializeComponent();
         }
-        private void UIElement_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            new AddFeedWindow().Show();
-        }
     }
 }

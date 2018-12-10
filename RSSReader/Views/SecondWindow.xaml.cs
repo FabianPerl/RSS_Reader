@@ -5,9 +5,9 @@ namespace ModuleAdd.Views
     /// <summary>
     /// Interaction logic for AddFeedWindow.xaml
     /// </summary>
-    public partial class AddFeedWindow : Window
+    public partial class SecondWindow : Window
     {
-        public AddFeedWindow()
+        public SecondWindow()
         {
             InitializeComponent();
         }

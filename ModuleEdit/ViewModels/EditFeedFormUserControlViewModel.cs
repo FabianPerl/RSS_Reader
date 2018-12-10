@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ModuleEdit.ViewModels
 {
-    public class ViewAViewModel : BindableBase
+    public class EditFeedFormUserControlViewModel : BindableBase
     {
         private string _message;
         public string Message
@@ -17,7 +17,7 @@ namespace ModuleEdit.ViewModels
             set => SetProperty(ref _message, value);
         }
 
-        public ViewAViewModel()
+        public EditFeedFormUserControlViewModel()
         {
             Message = "View A from your Prism Module";
         }

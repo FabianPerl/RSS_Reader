@@ -46,8 +46,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\SecondWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Page Include="Views\AddFeedWindow.xaml">
+    <Page Include="Views\SecondWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -59,8 +60,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\AddFeedWindow.xaml.cs">
-      <DependentUpon>AddFeedWindow.xaml</DependentUpon>
+    <Compile Include="Views\SecondWindow.xaml.cs">
+      <DependentUpon>SecondWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

@@ -124,6 +124,27 @@
                   Text="All Feeds" />
               </StackPanel>
             </ListViewItem>
+            <ListViewItem Height="60">
+              <StackPanel MinWidth="212" Orientation="Horizontal">
+                <i:Interaction.Triggers>
+                  <!--i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{Binding GetAllSourcesDelegateCommand}" />
+                  </-->
+                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
+                  </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <materialDesign:PackIcon
+                  Width="25"
+                  Height="25"
+                  VerticalAlignment="Center"
+                  Kind="Heart" />
+                <TextBlock
+                  Margin="20,10"
+                  VerticalAlignment="Center"
+                  Text="Favourites" />
+              </StackPanel>
+            </ListViewItem>
             <Separator />
           </ListView>
           <ListView

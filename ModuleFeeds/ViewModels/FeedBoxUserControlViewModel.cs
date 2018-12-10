@@ -36,6 +36,9 @@ namespace ModuleFeeds.ViewModels
             eventAggregator.GetEvent<WantAllFeedsEvent>().Subscribe(UpdateFeedListWithClear);
         }
 
+        public ICollection<FeedViewModel> AllFavouriteFeeds { get; set; } = new ObservableCollection<FeedViewModel>();
+
+
         #region attributes
         /// <summary>
         /// all feeds that will be shown from a source 

@@ -17,12 +17,13 @@ namespace RSSReader.ViewModels
 	public class MainWindowViewModel : BindableBase
 	{
 	    private readonly IRegionManager _regionManager;
-	    private readonly ICollection<Source> _sourceList;
+	    private ICollection<Source> _sourceList;
 	    private readonly IEventAggregator _eventAggregator;
+	    private readonly ISourceStore _sourceStore;
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private Source _currentSource;
 
-	    public MainWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
+	    public MainWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, ISourceStore sourceStore)
 	    {
             var newSource = new Source
             {
@@ -38,11 +39,12 @@ namespace RSSReader.ViewModels
                 Category = "Technik"
             };
 
-
 	        _regionManager = regionManager;
 	        _eventAggregator = eventAggregator;
+	        _sourceStore = sourceStore;
 
 	        _sourceList = new ObservableCollection<Source> {newSource, newSource1};
+            //LoadSources();
 
 	        GetSourceDelegateCommand = new DelegateCommand<Source>(SetCurrentSource);
 	        GetAllSourcesDelegateCommand = new DelegateCommand(GetAllSources);
@@ -64,7 +66,12 @@ namespace RSSReader.ViewModels
         #endregion
 
         #region attributes
-        public ICollection<Source> AllSources => _sourceList;
+
+	    public ICollection<Source> AllSources
+	    {
+	        get => _sourceList;
+	        private set => SetProperty(ref _sourceList, value);
+	    }
 
 	    public Source CurrentSource
         {
@@ -116,18 +123,21 @@ namespace RSSReader.ViewModels
 
 	    private void LoadSources()
 	    {
-
+	        AllSources = _sourceStore.GetAllSources();
 	    }
 
-	    private void RemoveSource(Source source)
+	    private bool RemoveSource(Source source)
 	    {
 	        foreach (var oneSource in AllSources)
 	        {
 	            if (oneSource.Equals(source))
 	            {
-	                AllSources.Remove(source);
+                    _sourceStore.RemoveSource(source);
+	                return AllSources.Remove(source);
 	            }
 	        }
+
+	        return false;
 	    }
         #endregion
 

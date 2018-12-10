@@ -31,11 +31,14 @@ namespace ModuleFeeds.ViewModels
             eventAggregator.GetEvent<FetchDataEvent>().Subscribe(UpdateFeedList);
         }
 
+        #region attributes
         /// <summary>
         /// all feeds that will be shown from a source 
         /// </summary>
         public ObservableCollection<FeedViewModel> AllFeeds { get; set; } = new ObservableCollection<FeedViewModel>();
+        #endregion
 
+        #region helper
         private void ClickedFeedView(FeedViewModel feedViewModel)
         {
 
@@ -63,5 +66,6 @@ namespace ModuleFeeds.ViewModels
                     }
                 });
         }
+        #endregion
     }
 }

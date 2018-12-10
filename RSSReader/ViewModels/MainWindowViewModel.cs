@@ -51,6 +51,7 @@ namespace RSSReader.ViewModels
 	    public DelegateCommand OpenEditFeedWindowDelegateCommand { get; }
         #endregion
 
+        #region attributes
         public ICollection<Source> AllSources => _sourceList;
 
 	    public Source CurrentSource
@@ -58,24 +59,31 @@ namespace RSSReader.ViewModels
             get => _currentSource;
             set => SetProperty(ref _currentSource, value);
         }
+        #endregion
 
         #region helper
         private void SetCurrentSource(Source source)
 	    {
+            _logger.Log("Set the Current source to: " + source.Name + ", " + source.FeedUri + ", " + source.Category, Category.Info, Priority.Medium);
 	        CurrentSource = source;
 	    }
 
-	    private void AddSource(Source newSource)
+	    private void AddSource(Source source)
 	    {
-            _sourceList.Add(newSource);
+            _logger.Log("Add the source to: " + source.Name + ", " + source.FeedUri + ", " + source.Category, Category.Info, Priority.Medium);
+            _sourceList.Add(source);
 	    }
 
 	    private void UpdateFeeds()
 	    {
+            _logger.Log("Update feeds", Category.Info, Priority.Medium);
             _eventAggregator.GetEvent<FetchDataEvent>().Publish(true);
 	    }
 
-	    private void OpenAddFeedWindow()
+        #endregion
+
+        #region navigation management
+        private void OpenAddFeedWindow()
 	    {
 	        new SecondWindow().Show();
 	    }

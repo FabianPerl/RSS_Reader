@@ -15,11 +15,7 @@ namespace ModuleAdd.ViewModels
         private Uri _uri;
         private string _category;
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
-
-
         private readonly IEventAggregator _eventAggregator;
-
-        public DelegateCommand AddCommand { get; set; }
 
         public AddFeedFormUserControlViewModel(IEventAggregator eventAggregator)
         {
@@ -30,6 +26,11 @@ namespace ModuleAdd.ViewModels
             _eventAggregator = eventAggregator;
         }
 
+        #region delegates
+        public DelegateCommand AddCommand { get; set; }
+        #endregion
+
+        #region attributes
         public string Name
         {
             get => _name;
@@ -47,7 +48,9 @@ namespace ModuleAdd.ViewModels
             get => _uri;
             set => SetProperty(ref _uri, value);
         }
+        #endregion
 
+        #region helper
         private bool CanExecute()
         {
             return !string.IsNullOrWhiteSpace(Name) &&
@@ -65,5 +68,6 @@ namespace ModuleAdd.ViewModels
 
             _eventAggregator.GetEvent<NewSourceEvent>().Publish(newSource);
         }
+        #endregion
     }
 }

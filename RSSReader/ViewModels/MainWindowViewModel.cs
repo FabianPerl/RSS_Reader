@@ -31,15 +31,24 @@ namespace RSSReader.ViewModels
                 Category = "Technik"
             };
 
+            var newSource1 = new Source
+            {
+                FeedUri = new Uri("https://www.heise.de/developer/rss/news-atom.xml"),
+                Name = "Heise Developer",
+                Category = "Technik"
+            };
+
+
 	        _regionManager = regionManager;
 	        _eventAggregator = eventAggregator;
 
-	        _sourceList = new ObservableCollection<Source> {newSource};
+	        _sourceList = new ObservableCollection<Source> {newSource, newSource1};
 
 	        GetSourceDelegateCommand = new DelegateCommand<Source>(SetCurrentSource);
 	        GetAllSourcesDelegateCommand = new DelegateCommand(GetAllSources);
 
             UpdateFeedsDelegateCommand = new DelegateCommand(UpdateFeeds);
+
             OpenAddFeedWindowDelegateCommand = new DelegateCommand(OpenAddFeedWindow);
             OpenEditFeedWindowDelegateCommand = new DelegateCommand(OpenEditFeedWindow);
 

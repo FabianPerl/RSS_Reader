@@ -19,7 +19,7 @@
       <StackPanel Background="White" Orientation="Horizontal">
         <i:Interaction.Triggers>
           <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:MainWindowViewModel.SetSourceDelegateCommand)}" CommandParameter="{Binding}" />
+                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:MainWindowViewModel.GetSourceDelegateCommand)}" CommandParameter="{Binding}" />
           </i:EventTrigger>
           <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
             <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
@@ -105,6 +105,14 @@
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListViewItem Height="60">
               <StackPanel MinWidth="212" Orientation="Horizontal">
+                <i:Interaction.Triggers>
+                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{Binding GetAllSourcesDelegateCommand}" />
+                  </i:EventTrigger>
+                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
+                  </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <materialDesign:PackIcon
                   Width="25"
                   Height="25"

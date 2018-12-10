@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows.Controls;
+using Microsoft.SyndicationFeed;
 using Prism.Mvvm;
 
 namespace Infrastructure.ViewModels
@@ -10,17 +13,17 @@ namespace Infrastructure.ViewModels
 	    private const string LinkNoHttpDefined = "Please provide http:// or https://";
 	    private const string LinkInvalid = "The Link is invalid";
 
-        //TODO: ICON/SYMBOL
 	    private string _errorMessage = string.Empty;
 	    private bool _hasErrors = false;
 
-	    private Image _symbol;
-	    private string _author;
+	    private string _imageUrl;
+	    private ICollection<string> _authors;
 	    private string _title;
 	    private string _shortDescription;
 	    private bool _isWatched;
 	    private Uri _link;
 	    private DateTimeOffset _publishedDate;
+	    private DateTimeOffset _lastUpdatedTime;
 
         #region errors
 	    public string ErrorMessage
@@ -40,10 +43,10 @@ namespace Infrastructure.ViewModels
         /// <summary>
         /// Get and Set the article's author(s).
         /// </summary>
-        public string Author
+        public ICollection<string> Authors
 	    {
-	        get => _author;
-	        set => SetProperty(ref _author, value);
+	        get => _authors;
+	        set => SetProperty(ref _authors, value);
 	    }
 
 	    /// <summary>
@@ -104,10 +107,10 @@ namespace Infrastructure.ViewModels
             }
 	    }
 
-	    public Image Symbol
+	    public string ImageUrl
 	    {
-	        get => _symbol;
-	        set => SetProperty(ref _symbol, value);
+	        get => _imageUrl;
+	        set => SetProperty(ref _imageUrl, value);
 	    }
 
 	    /// <summary>
@@ -127,6 +130,12 @@ namespace Infrastructure.ViewModels
 	            var myDateTime = DateTime.Parse(PublishedDate.ToString(), myCultureInfo);
 	            return myDateTime.ToString("dd.MM.yyyy\thh:mm tt").ToUpper();
 	        }
+	    }
+
+	    public DateTimeOffset LastUpdateDate
+	    {
+	        get => _lastUpdatedTime;
+            set => SetProperty(ref _lastUpdatedTime, value);
 	    }
         #endregion
 

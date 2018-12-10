@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
+using System.Linq;
 using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Models;
@@ -30,15 +32,15 @@ namespace ModuleFeeds.ViewModels
             _eventAggregator = eventAggregator;
 
             eventAggregator.GetEvent<FetchDataEvent>().Subscribe(ShouldUpdateFeedList);
-            eventAggregator.GetEvent<WantFeedEvent>().Subscribe(UpdateFeedList);
-            eventAggregator.GetEvent<WantAllFeedsEvent>().Subscribe(UpdateFeedList);
+            eventAggregator.GetEvent<WantFeedEvent>().Subscribe(UpdateFeedListWithClear);
+            eventAggregator.GetEvent<WantAllFeedsEvent>().Subscribe(UpdateFeedListWithClear);
         }
 
         #region attributes
         /// <summary>
         /// all feeds that will be shown from a source 
         /// </summary>
-        public ObservableCollection<FeedViewModel> AllFeeds { get; set; } = new ObservableCollection<FeedViewModel>();
+        public ICollection<FeedViewModel> AllFeeds { get; set; } = new ObservableCollection<FeedViewModel>();
         #endregion
 
         #region helper
@@ -47,23 +49,28 @@ namespace ModuleFeeds.ViewModels
             _eventAggregator.GetEvent<WantUriEvent>().Publish(feedViewModel.Link);
          }
 
+        //TODO: Nicht letzte Source updaten sondern auch eventuell alle
         private void ShouldUpdateFeedList(bool flag)
         {
             if(flag)
                 UpdateFeedList(_lastFeedUri);
         }
         
-        private void UpdateFeedList(Source source)
+        private void UpdateFeedListWithClear(Source source)
         {
+            AllFeeds.Clear();
             UpdateFeedList(source.FeedUri);
         }
 
-        private void UpdateFeedList(ICollection<Source> sources)
+        private void UpdateFeedListWithClear(ICollection<Source> sources)
         {
+            AllFeeds.Clear();
             foreach (var source in sources)
             {
-               UpdateFeedList(source); 
+               UpdateFeedList(source.FeedUri); 
             }
+
+            OrderList();
         }
 
         private void UpdateFeedList(Uri uri)
@@ -72,8 +79,6 @@ namespace ModuleFeeds.ViewModels
                 awaiter.OnCompleted(() =>
                 {
                     _logger.Log("Update the feeds with the url " + uri.OriginalString, Category.Info, Priority.Medium);
-                    //TODO: nicht cleanen
-                    AllFeeds.Clear();
                     _lastFeedUri = uri;
 
                     foreach (var oneFeed in awaiter.GetResult())
@@ -81,6 +86,22 @@ namespace ModuleFeeds.ViewModels
                        AllFeeds.Add(oneFeed); 
                     }
                 });
+        }
+
+        private void OrderList()
+        {
+            /*
+            var feedsSortedByDate = from feed in AllFeeds
+                                    orderby feed.PublishedDate ascending
+                                    select feed;
+
+            AllFeeds.Clear();
+
+            foreach (var feed in feedsSortedByDate)
+            {
+               AllFeeds.Add(feed); 
+            }
+            */
         }
         #endregion
     }

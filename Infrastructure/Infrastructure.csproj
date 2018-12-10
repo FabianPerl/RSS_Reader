@@ -98,13 +98,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CodeHollow.FeedReader">
-      <Version>1.1.5</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter">
       <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="Prism.Wpf" Version="7.1.0.431&#xD;" />
+    <PackageReference Include="System.ServiceModel.Web">
+      <Version>1.0.0</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

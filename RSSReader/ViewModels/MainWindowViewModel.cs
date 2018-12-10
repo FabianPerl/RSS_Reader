@@ -43,7 +43,8 @@ namespace RSSReader.ViewModels
 	        _eventAggregator = eventAggregator;
 	        _sourceStore = sourceStore;
 
-	        _sourceList = new ObservableCollection<Source> {newSource, newSource1};
+            _sourceList = new ObservableCollection<Source> {newSource, newSource1};
+            _sourceStore.SafeAllSources(AllSources);
             //LoadSources();
 
 	        GetSourceDelegateCommand = new DelegateCommand<Source>(SetCurrentSource);
@@ -110,6 +111,8 @@ namespace RSSReader.ViewModels
 	    {
             _logger.Log("Add the source to: " + source.Name + ", " + source.FeedUri + ", " + source.Category, Category.Info, Priority.Medium);
             _sourceList.Add(source);
+            _sourceStore.DeleteAllSources();
+            _sourceStore.SafeAllSources(AllSources);
 	    }
 
         /// <summary>
@@ -132,7 +135,8 @@ namespace RSSReader.ViewModels
 	        {
 	            if (oneSource.Equals(source))
 	            {
-                    _sourceStore.RemoveSource(source);
+                    _sourceStore.DeleteAllSources();
+                    _sourceStore.SafeAllSources(AllSources);
 	                return AllSources.Remove(source);
 	            }
 	        }

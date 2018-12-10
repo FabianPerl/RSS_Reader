@@ -1,5 +1,6 @@
 ﻿using Prism.Ioc;
 using System.Windows;
+using Infrastructure.Services;
 using ModuleAdd;
 using ModuleBrowser;
 using ModuleEdit;
@@ -21,6 +22,7 @@ namespace RSSReader
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterInstance<ISourceStore>(new SourceStoreImpl());
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

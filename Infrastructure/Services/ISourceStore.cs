@@ -9,8 +9,8 @@ namespace Infrastructure.Services
 {
     public interface ISourceStore
     {
-        void SafeSource(Source source);
-        void RemoveSource(Source source);
         ICollection<Source> GetAllSources();
+        void DeleteAllSources();
+        void SafeAllSources(ICollection<Source> allSources);
     }
 }

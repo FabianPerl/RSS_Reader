@@ -24,33 +24,38 @@ namespace ModuleFeeds.ViewModels
         private readonly IFeedService _feedService = new FeedServiceImpl();
         public DelegateCommand<FeedViewModel> ChangeFeedCommand { get; }
 
-       
         public FeedBoxUserControlViewModel(IEventAggregator eventAggregator)
         {
             UpdateFeedList(new Uri("https://www.heise.de/newsticker/heise-atom.xml"));
             ChangeFeedCommand = new DelegateCommand<FeedViewModel>(ClickedFeedView);
             _eventAggregator = eventAggregator;
 
+            AddArchiveFeedDelegateCommand = new DelegateCommand<FeedViewModel>(AddArchiveFeed);
+
             eventAggregator.GetEvent<FetchDataEvent>().Subscribe(ShouldUpdateFeedList);
             eventAggregator.GetEvent<WantFeedEvent>().Subscribe(UpdateFeedListWithClear);
             eventAggregator.GetEvent<WantAllFeedsEvent>().Subscribe(UpdateFeedListWithClear);
         }
 
-        public ICollection<FeedViewModel> AllFavouriteFeeds { get; set; } = new ObservableCollection<FeedViewModel>();
-
+	    public DelegateCommand<FeedViewModel> AddArchiveFeedDelegateCommand { get; }
 
         #region attributes
         /// <summary>
         /// all feeds that will be shown from a source 
         /// </summary>
-        public ICollection<FeedViewModel> AllFeeds { get; set; } = new ObservableCollection<FeedViewModel>();
+        public ICollection<FeedViewModel> AllFeeds { get; } = new ObservableCollection<FeedViewModel>();
         #endregion
 
         #region helper
-         private void ClickedFeedView(FeedViewModel feedViewModel)
-         {
+        private void AddArchiveFeed(FeedViewModel feedViewModel)
+        {
+            _eventAggregator.GetEvent<NewArchiveFeedEvent>().Publish(feedViewModel);
+        }
+
+        private void ClickedFeedView(FeedViewModel feedViewModel)
+        {
             _eventAggregator.GetEvent<WantUriEvent>().Publish(feedViewModel.Link);
-         }
+        }
 
         //TODO: Nicht letzte Source updaten sondern auch eventuell alle
         private void ShouldUpdateFeedList(bool flag)

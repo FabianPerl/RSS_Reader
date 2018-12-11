@@ -6,7 +6,10 @@ using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Models;
 using Infrastructure.Services;
+using Infrastructure.ViewModels;
 using ModuleAdd.Views;
+using ModuleArchiveFeeds.Views;
+using ModuleFeeds.Views;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Logging;
@@ -55,6 +58,10 @@ namespace RSSReader.ViewModels
             OpenAddFeedWindowDelegateCommand = new DelegateCommand(OpenAddFeedWindow);
             OpenEditFeedWindowDelegateCommand = new DelegateCommand(OpenEditFeedWindow);
 
+	        ShowArchiveFeedsDelegateCommand = new DelegateCommand(ShowArchiveFeeds);
+	        ShowFeedsDelegateCommand = new DelegateCommand(ShowFeeds);
+
+
 	        eventAggregator.GetEvent<NewSourceEvent>().Subscribe(AddSource);
 	    }
 
@@ -64,10 +71,11 @@ namespace RSSReader.ViewModels
 	    public DelegateCommand OpenAddFeedWindowDelegateCommand { get; }
 	    public DelegateCommand OpenEditFeedWindowDelegateCommand { get; }
 	    public DelegateCommand GetAllSourcesDelegateCommand { get; }
+        public DelegateCommand ShowFeedsDelegateCommand { get; }
+        public DelegateCommand ShowArchiveFeedsDelegateCommand { get; }
         #endregion
 
         #region attributes
-
 	    public ICollection<Source> AllSources
 	    {
 	        get => _sourceList;
@@ -87,7 +95,8 @@ namespace RSSReader.ViewModels
         /// </summary>
         /// <param name="source"></param>
         private void SetCurrentSource(Source source)
-	    {
+        {
+            ShowFeeds();
             _logger.Log("Set the Current source to: " + source.Name + ", " + source.FeedUri + ", " + source.Category, Category.Info, Priority.Medium);
 	        CurrentSource = source;
             _eventAggregator.GetEvent<WantFeedEvent>().Publish(source);
@@ -98,6 +107,7 @@ namespace RSSReader.ViewModels
         /// </summary>
         private void GetAllSources()
 	    {
+            ShowFeeds();
             _logger.Log("Get feeds from all sources", Category.Info, Priority.Medium);
 	        CurrentSource = null;
             _eventAggregator.GetEvent<WantAllFeedsEvent>().Publish(_sourceList);
@@ -124,6 +134,7 @@ namespace RSSReader.ViewModels
             _eventAggregator.GetEvent<FetchDataEvent>().Publish(true);
 	    }
 
+        //TODO: Auslagern
 	    private void LoadSources()
 	    {
 	        AllSources = _sourceStore.GetAllSources();
@@ -146,6 +157,17 @@ namespace RSSReader.ViewModels
         #endregion
 
         #region navigation management
+
+	    private void ShowFeeds()
+	    {
+            _regionManager.RequestNavigate(RegionNames.ContentRegionLeft, nameof(FeedBoxUserControl));
+	    }
+
+	    private void ShowArchiveFeeds()
+	    {
+            _regionManager.RequestNavigate(RegionNames.ContentRegionLeft, nameof(ArchiveFeedBoxUserControl));
+	    }
+
         private void OpenAddFeedWindow()
 	    {
 	        new SecondWindow().Show();

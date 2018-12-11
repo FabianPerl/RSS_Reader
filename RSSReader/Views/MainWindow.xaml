@@ -127,9 +127,9 @@
             <ListViewItem Height="60">
               <StackPanel MinWidth="212" Orientation="Horizontal">
                 <i:Interaction.Triggers>
-                  <!--i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                    <i:InvokeCommandAction Command="{Binding GetAllSourcesDelegateCommand}" />
-                  </-->
+                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                    <i:InvokeCommandAction Command="{Binding ShowArchiveFeedsDelegateCommand}" />
+                  </i:EventTrigger>
                   <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
                     <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
                   </i:EventTrigger>
@@ -138,11 +138,11 @@
                   Width="25"
                   Height="25"
                   VerticalAlignment="Center"
-                  Kind="Heart" />
+                  Kind="Archive" />
                 <TextBlock
                   Margin="20,10"
                   VerticalAlignment="Center"
-                  Text="Favourites" />
+                  Text="Archive" />
               </StackPanel>
             </ListViewItem>
             <Separator />

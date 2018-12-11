@@ -40,7 +40,10 @@ namespace Infrastructure.ViewModels
         #endregion
 
         #region attributes
-        /// <summary>
+
+	    public string Id { get; } = Guid.NewGuid().ToString();
+
+	    /// <summary>
         /// Get and Set the article's author(s).
         /// </summary>
         public ICollection<string> Authors
@@ -140,7 +143,23 @@ namespace Infrastructure.ViewModels
         #endregion
 
         #region helper
-        private bool IsValidFeed(Uri url)
+
+	    public override bool Equals(object feedViewModel)
+	    {
+	        if (!(feedViewModel is FeedViewModel secondFeedViewModel))
+	        {
+	            return false;
+	        }
+
+	        return this.Id.Equals(secondFeedViewModel.Id);
+	    }
+
+	    public override int GetHashCode()
+	    {
+	        return this.Id.GetHashCode();
+	    }
+
+	    private bool IsValidFeed(Uri url)
 	    {
             //TODO: Better logic
             return true;

@@ -2,6 +2,7 @@
 using System.Windows;
 using Infrastructure.Services;
 using ModuleAdd;
+using ModuleArchiveFeeds;
 using ModuleBrowser;
 using ModuleEdit;
 using ModuleFeeds;
@@ -29,6 +30,7 @@ namespace RSSReader
         {
             //for the first window
             moduleCatalog.AddModule(typeof(ModuleFeedsModule), InitializationMode.WhenAvailable);
+            moduleCatalog.AddModule(typeof(ModuleArchiveFeedsModule), InitializationMode.WhenAvailable);
             moduleCatalog.AddModule(typeof(ModuleBrowserModule), InitializationMode.WhenAvailable);
 
             //for the secondary window

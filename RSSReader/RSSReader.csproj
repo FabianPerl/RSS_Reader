@@ -109,6 +109,10 @@
       <Project>{1B489250-EEF8-4DFE-97E5-FED951CB8955}</Project>
       <Name>ModuleAdd</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ModuleArchiveFeeds\ModuleArchiveFeeds.csproj">
+      <Project>{6B55D561-544E-4B56-8804-2CCCB7E12E5B}</Project>
+      <Name>ModuleArchiveFeeds</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModuleBrowser\ModuleBrowser.csproj">
       <Project>{0A7848EA-7ACC-4F20-8712-52E6B3ACFFAC}</Project>
       <Name>ModuleBrowser</Name>

@@ -4,45 +4,46 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9090696F-C921-4882-AC20-BC4D62C74C18}</ProjectGuid>
+    <ProjectGuid>{6B55D561-544E-4B56-8804-2CCCB7E12E5B}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Infrastructure</RootNamespace>
-    <AssemblyName>Infrastructure</AssemblyName>
+    <RootNamespace>ModuleArchiveFeeds</RootNamespace>
+    <AssemblyName>ModuleArchiveFeeds</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CodeHollow.FeedReader">
-      <HintPath>..\..\..\..\.nuget\packages\codehollow.feedreader\1.1.5\lib\net452\CodeHollow.FeedReader.dll</HintPath>
-    </Reference>
     <Reference Include="Prism">
       <HintPath>..\..\..\..\.nuget\packages\prism.core\7.1.0.431\lib\net45\Prism.dll</HintPath>
     </Reference>
+    <Reference Include="Prism.Wpf">
+      <HintPath>..\..\..\..\.nuget\packages\prism.wpf\7.1.0.431\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>..\..\..\..\.nuget\packages\prism.wpf\7.1.0.431\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -57,17 +58,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\ProjectLogger.cs" />
-    <Compile Include="Constants\RegionNames.cs" />
-    <Compile Include="Constants\StorePaths.cs" />
-    <Compile Include="Events\FetchDataEvent.cs" />
-    <Compile Include="Events\NewArchiveFeedEvent.cs" />
-    <Compile Include="Events\NewSourceEvent.cs" />
-    <Compile Include="Events\RemoveArchiveFeedEvent.cs" />
-    <Compile Include="Events\WantAllFeedsEvent.cs" />
-    <Compile Include="Events\WantFeedEvent.cs" />
-    <Compile Include="Events\WantUriEvent.cs" />
-    <Compile Include="Models\Source.cs" />
+    <Compile Include="ModuleArchiveFeedsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -81,11 +72,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Services\FeedServiceImpl.cs" />
-    <Compile Include="Services\IFeedService.cs" />
-    <Compile Include="Services\ISourceStore.cs" />
-    <Compile Include="Services\SourceStoreImpl.cs" />
-    <Compile Include="ViewModels\FeedViewModel.cs" />
+    <Compile Include="ViewModels\ArchiveFeedBoxUserControlViewModel.cs" />
+    <Compile Include="Views\ArchiveFeedBoxUserControl.xaml.cs">
+      <DependentUpon>ArchiveFeedBoxUserControl.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -97,25 +87,19 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Styles\Styles.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{9090696F-C921-4882-AC20-BC4D62C74C18}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\ArchiveFeedBoxUserControl.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="EntityFramework">
-      <Version>6.2.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter">
-      <Version>1.0.2</Version>
-    </PackageReference>
     <PackageReference Include="Prism.Wpf" Version="7.1.0.431&#xD;" />
-    <PackageReference Include="System.ServiceModel.Web">
-      <Version>1.0.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

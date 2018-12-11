@@ -5,11 +5,12 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Infrastructure.Constants;
 using Infrastructure.Models;
+using Infrastructure.ViewModels;
 using Prism.Logging;
 
 namespace Infrastructure.Services
 {
-    public class SourceStoreImpl : ISourceStore
+    public class RssStoreImpl : IRssStore
     {
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
 
@@ -62,5 +63,25 @@ namespace Infrastructure.Services
             }
         }
 
+        public void SafeAllArchives(ICollection<FeedViewModel> allFeedViewModels)
+        {
+            if (!(File.Exists(StorePaths.ArchivedFeedsStorePath)))
+                return;
+
+            try
+            {
+                using (var fileStream = File.Create(StorePaths.ArchivedFeedsStorePath))
+                {
+                    fileStream.Seek(0, SeekOrigin.Begin);
+                    BinaryFormatter serializer = new BinaryFormatter();
+                    serializer.Serialize(fileStream, allFeedViewModels);
+                    fileStream.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Log(e.StackTrace, Category.Exception, Priority.High);
+            }
+        }
     }
 }

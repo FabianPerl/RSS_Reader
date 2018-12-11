@@ -83,8 +83,8 @@
     </Compile>
     <Compile Include="Services\FeedServiceImpl.cs" />
     <Compile Include="Services\IFeedService.cs" />
-    <Compile Include="Services\ISourceStore.cs" />
-    <Compile Include="Services\SourceStoreImpl.cs" />
+    <Compile Include="Services\IRssStore.cs" />
+    <Compile Include="Services\RssStoreImpl.cs" />
     <Compile Include="ViewModels\FeedViewModel.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

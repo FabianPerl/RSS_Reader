@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Infrastructure.Constants;
 using Infrastructure.Events;
+using Infrastructure.Services;
 using Infrastructure.ViewModels;
 using Prism.Events;
 using Prism.Logging;
@@ -14,10 +15,12 @@ namespace ModuleArchiveFeeds.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
+        private readonly IRssStore _rssStore;
 
-        public ArchiveFeedBoxUserControlViewModel(IEventAggregator eventAggregator)
+        public ArchiveFeedBoxUserControlViewModel(IEventAggregator eventAggregator, IRssStore rssStore)
         {
             _eventAggregator = eventAggregator;
+            _rssStore = rssStore;
             ChangeFeedCommand = new DelegateCommand<FeedViewModel>(ClickedArchiveFeed);
             eventAggregator.GetEvent<NewArchiveFeedEvent>().Subscribe(AddNewArchiveFeed);
             eventAggregator.GetEvent<RemoveArchiveFeedEvent>().Subscribe(RemoveFromArchiveFeed);

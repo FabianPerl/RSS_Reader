@@ -23,7 +23,7 @@ namespace RSSReader
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance<ISourceStore>(new SourceStoreImpl());
+            containerRegistry.RegisterInstance<IRssStore>(new RssStoreImpl());
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

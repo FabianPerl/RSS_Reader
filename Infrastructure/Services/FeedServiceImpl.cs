@@ -20,10 +20,10 @@ namespace Infrastructure.Services
                 throw new ArgumentNullException(nameof(feedUri));
             }
 
-            return await GetTaskAllFeedsFromUrlAsyncInternal2(feedUri);
+            return await GetTaskAllFeedsFromUrlAsyncInternal(feedUri);
         }
 
-        private Task<ICollection<FeedViewModel>> GetTaskAllFeedsFromUrlAsyncInternal2(Uri feedUri)
+        private Task<ICollection<FeedViewModel>> GetTaskAllFeedsFromUrlAsyncInternal(Uri feedUri)
         {
             return Task.Run(() =>
             {
@@ -39,13 +39,11 @@ namespace Infrastructure.Services
                             {
                                 authors.Add(element.Name);    
                             }
-                        Uri newUri = new Uri(item.Links[0].Uri.ToString().Split('?')[0]);
-                        _debugLogger.Log(newUri.ToString() + "", Category.Debug, Priority.High);
                        
                         var newFeedViewModel = new FeedViewModel
                             {
                                 PublishedDate = item.PublishDate,
-                                Link = newUri,
+                                Link = item.Links.Count > 0 ? item.Links[0]?.Uri : null,
                                 Title = item.Title?.Text.Trim(),
                                 ShortDescription = item.Summary?.Text.Trim(),
                                 ImageUrl = readSyndicationFeed.ImageUrl?.OriginalString.Trim(),

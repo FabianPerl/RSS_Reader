@@ -24,6 +24,9 @@
                     <system:Double x:Key="FontSizeExtraLarge">24</system:Double>
                     <system:Double x:Key="FontSizeNormal">12</system:Double>
 
+                    <system:Double x:Key="HeightListViewItemControl">50</system:Double>
+                    <system:Double x:Key="HeightListViewItemSource">40</system:Double>
+
                     <system:Double x:Key="FontSizeFeedPublishedDate">15</system:Double>
                     <system:Double x:Key="FontSizeFeedTitle">15</system:Double>
                     <system:Double x:Key="FontSizeFeedDescription">12</system:Double>

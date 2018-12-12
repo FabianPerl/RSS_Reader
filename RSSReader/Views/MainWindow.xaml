@@ -50,7 +50,6 @@
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
 
                     <ListView
-                        Background="#FFDADAE0"
                         BorderBrush="{x:Null}"
                         DockPanel.Dock="Bottom"
                         Foreground="Black"
@@ -58,13 +57,14 @@
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="VerticalContentAlignment" Value="Stretch" />
                             </Style>
                         </ListView.ItemContainerStyle>
                         <Separator />
-                        <ListViewItem Height="60">
+                        <ListViewItem Height="{StaticResource HeightListViewItemControl}">
                             <StackPanel
                                 MinWidth="212"
-                                Background="White"
+                                Background="#00000000"
                                 Orientation="Horizontal">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
@@ -85,10 +85,10 @@
                                     Text="Add Feedsource" />
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem Height="60">
+                        <ListViewItem Height="{StaticResource HeightListViewItemControl}">
                             <StackPanel
                                 MinWidth="212"
-                                Background="White"
+                                Background="#00000000"
                                 Orientation="Horizontal">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
@@ -112,7 +112,6 @@
                     </ListView>
 
                     <ListView
-                        Background="#FFDADAE0"
                         BorderBrush="{x:Null}"
                         DockPanel.Dock="Top"
                         Foreground="Black"
@@ -120,16 +119,17 @@
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="VerticalContentAlignment" Value="Stretch" />
                             </Style>
                         </ListView.ItemContainerStyle>
-                        <ListViewItem Height="60">
-                            <StackPanel MinWidth="212" Orientation="Horizontal">
+                        <ListViewItem Height="{StaticResource HeightListViewItemControl}">
+                            <StackPanel Background="#00000000" MinWidth="212" Orientation="Horizontal">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                                        <i:InvokeCommandAction Command="{Binding GetAllSourcesDelegateCommand}" />
+                                        <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
                                     </i:EventTrigger>
                                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                                        <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
+                                        <i:InvokeCommandAction Command="{Binding GetAllSourcesDelegateCommand}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                                 <materialDesign:PackIcon
@@ -143,14 +143,14 @@
                                     Text="All Feeds" />
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem Height="60">
-                            <StackPanel MinWidth="212" Orientation="Horizontal">
+                        <ListViewItem Height="{StaticResource HeightListViewItemControl}">
+                            <StackPanel Background="#00000000" MinWidth="212" Orientation="Horizontal">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                                        <i:InvokeCommandAction Command="{Binding ShowArchiveFeedsDelegateCommand}" />
+                                        <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
                                     </i:EventTrigger>
                                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                                        <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
+                                        <i:InvokeCommandAction Command="{Binding ShowArchiveFeedsDelegateCommand}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                                 <materialDesign:PackIcon
@@ -175,6 +175,7 @@
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
+                                <Setter Property="Height" Value="{StaticResource HeightListViewItemSource}" />
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                 <Setter Property="VerticalContentAlignment" Value="Stretch" />
                             </Style>

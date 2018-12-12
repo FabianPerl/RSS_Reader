@@ -25,6 +25,7 @@ namespace ModuleBrowser.ViewModels
         {
             try
             {
+               _currentUri = new Uri("https://www.heise.de");
 
                 //CurrentUri = uri;
             } catch(Exception e)

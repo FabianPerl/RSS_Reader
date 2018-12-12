@@ -12,7 +12,7 @@ namespace ModuleBrowser.ViewModels
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IRegionManager _regionManager;
-        private Uri _currentUri = new Uri("https://www.heise.de");
+        private Uri _currentUri;
 
         public ViewAViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
         {
@@ -25,7 +25,8 @@ namespace ModuleBrowser.ViewModels
         {
             try
             {
-               _currentUri = new Uri("https://www.heise.de");
+               //CurrentUri = new Uri("https://www.heise.de");
+                CurrentUri = uri;
 
                 //CurrentUri = uri;
             } catch(Exception e)

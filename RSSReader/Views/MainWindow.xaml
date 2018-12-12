@@ -232,7 +232,6 @@
                         Background="Green" />
 
                 </Grid>
-                <!--  /Grid  -->
             </DockPanel>
         </materialDesign:DrawerHost>
     </materialDesign:DialogHost>

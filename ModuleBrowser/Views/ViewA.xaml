@@ -11,11 +11,17 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
-    <Grid>
-        <wpf:ChromiumWebBrowser
-            Grid.Row="0"
-            Grid.Column="0"
-            Address="{Binding CurrentUri}" />
-    </Grid>
+    <!--StackPanel  MinWidth="1200">
+        <ToolBarTray>
+            <ToolBar
+                Style="{DynamicResource MaterialDesignToolBar}"
+                ClipToBounds="False">
+                <Button
+                    >Close</Button>
+                </ToolBar>
+            </ToolBarTray>
+    </-->
+    <wpf:ChromiumWebBrowser MinWidth="1200"
+        Address="{Binding CurrentUri}" />
 
 </UserControl>

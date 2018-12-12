@@ -23,12 +23,6 @@
     <Reference Include="PresentationFramework">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Prism">
-      <HintPath>..\..\..\..\.nuget\packages\prism.core\7.1.0.431\lib\net45\Prism.dll</HintPath>
-    </Reference>
-    <Reference Include="Prism.Wpf">
-      <HintPath>..\..\..\..\.nuget\packages\prism.wpf\7.1.0.431\lib\net45\Prism.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms">
@@ -97,7 +91,6 @@
     <PackageReference Include="MaterialDesignThemes">
       <Version>2.5.0.1205</Version>
     </PackageReference>
-    <PackageReference Include="Prism.Wpf" Version="7.1.0.431&#xD;" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

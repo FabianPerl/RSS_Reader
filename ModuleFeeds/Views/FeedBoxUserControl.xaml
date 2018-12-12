@@ -1,119 +1,119 @@
 ﻿<UserControl
-  x:Class="ModuleFeeds.Views.FeedBoxUserControl"
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:mvvm="http://prismlibrary.com/"
-  xmlns:viewModels="clr-namespace:Infrastructure.ViewModels;assembly=Infrastructure"
-  xmlns:viewModels1="clr-namespace:ModuleFeeds.ViewModels"
-  d:DesignHeight="500"
-  d:DesignWidth="800"
-  mvvm:ViewModelLocator.AutoWireViewModel="True"
-  mc:Ignorable="d">
+    x:Class="ModuleFeeds.Views.FeedBoxUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mvvm="http://prismlibrary.com/"
+    xmlns:viewModels="clr-namespace:Infrastructure.ViewModels;assembly=Infrastructure"
+    xmlns:viewModels1="clr-namespace:ModuleFeeds.ViewModels"
+    d:DesignHeight="500"
+    d:DesignWidth="800"
+    mvvm:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
 
-  <UserControl.Resources>
-    <DataTemplate x:Key="DataTemplateFeedViewModel" DataType="viewModels:FeedViewModel">
-      <Grid>
-        <Grid>
-          <StackPanel Background="white">
-            <i:Interaction.Triggers>
-              <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.(viewModels1:FeedBoxUserControlViewModel.ChangeFeedCommand)}" CommandParameter="{Binding}" />
-              </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <Grid Margin="12,12,12,0">
-              <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-              </Grid.RowDefinitions>
-              <TextBlock
-                Grid.Row="0"
-                Text="{Binding PublishedDateFormatted}"
-                TextWrapping="NoWrap" />
-              <TextBlock
-                Grid.Row="1"
-                Margin="{StaticResource MarginTop12}"
-                FontSize="{StaticResource FontSizeFeedTitle}"
-                Text="{Binding Title}"
-                TextTrimming="WordEllipsis"
-                TextWrapping="Wrap" />
-              <TextBlock
-                Grid.Row="2"
-                Margin="0,4,0,12"
-                FontSize="{StaticResource FontSizeFeedDescription}"
-                Text="{Binding ShortDescription}"
-                TextTrimming="CharacterEllipsis"
-                TextWrapping="Wrap" />
+    <UserControl.Resources>
+        <DataTemplate x:Key="DataTemplateFeedViewModel" DataType="viewModels:FeedViewModel">
+            <Grid>
+                <Grid>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.(viewModels1:FeedBoxUserControlViewModel.ChangeFeedCommand)}" CommandParameter="{Binding}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <StackPanel Background="white">
+                        <Grid Margin="12,12,12,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock
+                                Grid.Row="0"
+                                Text="{Binding PublishedDateFormatted}"
+                                TextWrapping="NoWrap" />
+                            <TextBlock
+                                Grid.Row="1"
+                                Margin="{StaticResource MarginTop12}"
+                                FontSize="{StaticResource FontSizeFeedTitle}"
+                                Text="{Binding Title}"
+                                TextTrimming="WordEllipsis"
+                                TextWrapping="Wrap" />
+                            <TextBlock
+                                Grid.Row="2"
+                                Margin="0,4,0,12"
+                                FontSize="{StaticResource FontSizeFeedDescription}"
+                                Text="{Binding ShortDescription}"
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="Wrap" />
+                        </Grid>
+                        <!--
+                            Rectangle
+                            x:Name="BorderBottom"
+                            Height="1"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Bottom" /
+                        -->
+                    </StackPanel>
+                </Grid>
+                <Button
+                    Width="100"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.(viewModels1:FeedBoxUserControlViewModel.AddArchiveFeedDelegateCommand)}"
+                    CommandParameter="{Binding}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    ToolTip="Add this feed to the archive to read it later!">
+                    + Archive
+                </Button>
             </Grid>
-            <!--
-              Rectangle
-              x:Name="BorderBottom"
-              Height="1"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Bottom" /
-            -->
-          </StackPanel>
-        </Grid>
-        <Button
-          Width="100"
-          HorizontalAlignment="Right"
-          VerticalAlignment="Top"
-          Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.(viewModels1:FeedBoxUserControlViewModel.AddArchiveFeedDelegateCommand)}"
-          CommandParameter="{Binding}"
-          Style="{StaticResource MaterialDesignFlatButton}"
-          ToolTip="Add this feed to the archive to read it later!">
-          + Archive
-        </Button>
-      </Grid>
-    </DataTemplate>
-  </UserControl.Resources>
+        </DataTemplate>
+    </UserControl.Resources>
 
-  <Grid>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-    <Label
-      Grid.Row="0"
-      Margin="{StaticResource MarginBottom12}"
-      Content="Feed"
-      DockPanel.Dock="Top"
-      FontSize="{StaticResource FontSizeExtraLarge}" />
+        <Label
+            Grid.Row="0"
+            Margin="{StaticResource MarginBottom12}"
+            Content="Feed"
+            DockPanel.Dock="Top"
+            FontSize="{StaticResource FontSizeExtraLarge}" />
 
-    <ListBox
-      x:Name="ListBoxFeeds2"
-      Grid.Row="1"
-      Margin="{StaticResource MarginBottom12}"
-      BorderThickness="0,0,0,0"
-      Focusable="True"
-      IsSynchronizedWithCurrentItem="True"
-      ItemTemplate="{StaticResource DataTemplateFeedViewModel}"
-      ItemsSource="{Binding AllFeeds}">
-      <ListBox.GroupStyle>
-        <GroupStyle>
-          <GroupStyle.HeaderTemplate>
-            <DataTemplate>
-              <Border Margin="4,12,0,4">
-                <TextBlock FontSize="{StaticResource FontSizeExtraLarge}" FontWeight="SemiBold" />
-              </Border>
-            </DataTemplate>
-          </GroupStyle.HeaderTemplate>
-        </GroupStyle>
-      </ListBox.GroupStyle>
-      <ListBox.ItemContainerStyle>
-        <Style TargetType="{x:Type ListBoxItem}">
-          <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        </Style>
-      </ListBox.ItemContainerStyle>
-    </ListBox>
+        <ListBox
+            x:Name="ListBoxFeeds2"
+            Grid.Row="1"
+            Margin="{StaticResource MarginBottom12}"
+            BorderThickness="0,0,0,0"
+            Focusable="True"
+            IsSynchronizedWithCurrentItem="True"
+            ItemTemplate="{StaticResource DataTemplateFeedViewModel}"
+            ItemsSource="{Binding AllFeeds}">
+            <ListBox.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <Border Margin="4,12,0,4">
+                                <TextBlock FontSize="{StaticResource FontSizeExtraLarge}" FontWeight="SemiBold" />
+                            </Border>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListBox.GroupStyle>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
 
-  </Grid>
+    </Grid>
 </UserControl>

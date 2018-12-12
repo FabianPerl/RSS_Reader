@@ -14,6 +14,7 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Logging;
 using Prism.Regions;
+using ModuleBrowser.Views;
 
 namespace RSSReader.ViewModels
 {
@@ -22,11 +23,11 @@ namespace RSSReader.ViewModels
 	    private readonly IRegionManager _regionManager;
 	    private ICollection<Source> _sourceList;
 	    private readonly IEventAggregator _eventAggregator;
-	    private readonly ISourceStore _sourceStore;
+	    private readonly IRssStore _sourceStore;
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private Source _currentSource;
 
-	    public MainWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, ISourceStore sourceStore)
+	    public MainWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRssStore sourceStore)
 	    {
             var newSource = new Source
             {
@@ -61,8 +62,10 @@ namespace RSSReader.ViewModels
 	        ShowArchiveFeedsDelegateCommand = new DelegateCommand(ShowArchiveFeeds);
 	        ShowFeedsDelegateCommand = new DelegateCommand(ShowFeeds);
 
+            eventAggregator.GetEvent<WantUriEvent>().Subscribe(SetTheUri);
 
-	        eventAggregator.GetEvent<NewSourceEvent>().Subscribe(AddSource);
+
+            eventAggregator.GetEvent<NewSourceEvent>().Subscribe(AddSource);
 	    }
 
         #region delegates
@@ -90,6 +93,11 @@ namespace RSSReader.ViewModels
         #endregion
 
         #region helper
+        private void SetTheUri(Uri uri)
+        {
+            _regionManager.RequestNavigate(RegionNames.ContentRegionRight, nameof(ViewA));
+        }
+
         /// <summary>
         /// Sets the source that will be handled
         /// </summary>

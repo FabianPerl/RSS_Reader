@@ -39,11 +39,13 @@ namespace Infrastructure.Services
                             {
                                 authors.Add(element.Name);    
                             }
-
-                            var newFeedViewModel = new FeedViewModel
+                        Uri newUri = new Uri(item.Links[0].Uri.ToString().Split('?')[0]);
+                        _debugLogger.Log(newUri.ToString() + "", Category.Debug, Priority.High);
+                       
+                        var newFeedViewModel = new FeedViewModel
                             {
                                 PublishedDate = item.PublishDate,
-                                Link = item.Links.Count > 0 ? item.Links[0].Uri : null,
+                                Link = newUri,
                                 Title = item.Title?.Text.Trim(),
                                 ShortDescription = item.Summary?.Text.Trim(),
                                 ImageUrl = readSyndicationFeed.ImageUrl?.OriginalString.Trim(),

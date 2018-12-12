@@ -1,24 +1,37 @@
 ﻿using System;
+using Infrastructure.Constants;
 using Infrastructure.Events;
+using ModuleBrowser.Views;
 using Prism.Events;
 using Prism.Mvvm;
+using Prism.Regions;
 
 namespace ModuleBrowser.ViewModels
 {
     public class ViewAViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
-        private Uri _currentUri;
+        private readonly IRegionManager _regionManager;
+        private Uri _currentUri = new Uri("https://www.heise.de");
 
-        public ViewAViewModel(IEventAggregator eventAggregator)
+        public ViewAViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
         {
-            CurrentUri = new Uri("https://www.heise.de");
+            _regionManager = regionManager;
+            
             eventAggregator.GetEvent<WantUriEvent>().Subscribe(SetTheUri);
         }
 
         private void SetTheUri(Uri uri)
         {
-            CurrentUri = uri;
+            try
+            {
+
+                //CurrentUri = uri;
+            } catch(Exception e)
+            {
+                
+            }
+        
         }
 
         /// <summary>

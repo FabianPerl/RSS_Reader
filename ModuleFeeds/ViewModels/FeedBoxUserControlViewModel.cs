@@ -37,6 +37,8 @@ namespace ModuleFeeds.ViewModels
             eventAggregator.GetEvent<WantAllFeedsEvent>().Subscribe(UpdateFeedListWithClear);
         }
 
+        public DelegateCommand<FeedViewModel> WantFeedUriDelegateCommand { get; }
+
 	    public DelegateCommand<FeedViewModel> AddArchiveFeedDelegateCommand { get; }
 
         #region attributes

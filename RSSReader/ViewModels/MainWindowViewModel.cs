@@ -23,6 +23,7 @@ namespace RSSReader.ViewModels
 	    private readonly IRegionManager _regionManager;
 	    private ICollection<Source> _sourceList;
 	    private readonly IEventAggregator _eventAggregator;
+	    private bool _showBrowserFlag;
 	    private readonly IRssStore _sourceStore;
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private Source _currentSource;
@@ -62,9 +63,8 @@ namespace RSSReader.ViewModels
 	        ShowArchiveFeedsDelegateCommand = new DelegateCommand(ShowArchiveFeeds);
 	        ShowFeedsDelegateCommand = new DelegateCommand(ShowFeeds);
 
-            eventAggregator.GetEvent<WantUriEvent>().Subscribe(SetTheUri);
-
-
+            eventAggregator.GetEvent<WantUriEvent>().Subscribe(OpenBrowser);
+            eventAggregator.GetEvent<WantCloseUriEvent>().Subscribe(CloseBrowser);
             eventAggregator.GetEvent<NewSourceEvent>().Subscribe(AddSource);
 	    }
 
@@ -79,6 +79,13 @@ namespace RSSReader.ViewModels
         #endregion
 
         #region attributes
+
+	    public bool BrowserFlag
+	    {
+	        get => _showBrowserFlag;
+	        set => SetProperty(ref _showBrowserFlag, value);
+	    }
+
 	    public ICollection<Source> AllSources
 	    {
 	        get => _sourceList;
@@ -93,9 +100,14 @@ namespace RSSReader.ViewModels
         #endregion
 
         #region helper
-        private void SetTheUri(Uri uri)
+        private void OpenBrowser(Uri uri)
         {
-            _regionManager.RequestNavigate(RegionNames.ContentRegionRight, nameof(ViewA));
+            BrowserFlag = true;
+        }
+
+        private void CloseBrowser()
+        {
+            BrowserFlag = false;
         }
 
         /// <summary>
@@ -168,11 +180,13 @@ namespace RSSReader.ViewModels
 
 	    private void ShowFeeds()
 	    {
+	        BrowserFlag = false;
             _regionManager.RequestNavigate(RegionNames.ContentRegionLeft, nameof(FeedBoxUserControl));
 	    }
 
 	    private void ShowArchiveFeeds()
 	    {
+	        BrowserFlag = false;
             _regionManager.RequestNavigate(RegionNames.ContentRegionLeft, nameof(ArchiveFeedBoxUserControl));
 	    }
 

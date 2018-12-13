@@ -2,6 +2,7 @@
 using Infrastructure.Constants;
 using Infrastructure.Events;
 using ModuleBrowser.Views;
+using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -14,26 +15,25 @@ namespace ModuleBrowser.ViewModels
         private readonly IRegionManager _regionManager;
         private Uri _currentUri;
 
+        public DelegateCommand CloseBrowserDelegateCommand { get; set; }
+
         public ViewAViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
         {
             _regionManager = regionManager;
+            _eventAggregator = eventAggregator;
+            CloseBrowserDelegateCommand = new DelegateCommand(CloseBrowser);
             
-            eventAggregator.GetEvent<WantUriEvent>().Subscribe(SetTheUri);
+            _eventAggregator.GetEvent<WantUriEvent>().Subscribe(SetTheUri);
+        }
+
+        private void CloseBrowser()
+        {
+            _eventAggregator.GetEvent<WantCloseUriEvent>().Publish();
         }
 
         private void SetTheUri(Uri uri)
         {
-            try
-            {
-               //CurrentUri = new Uri("https://www.heise.de");
-                CurrentUri = uri;
-
-                //CurrentUri = uri;
-            } catch(Exception e)
-            {
-                
-            }
-        
+           CurrentUri = uri;
         }
 
         /// <summary>

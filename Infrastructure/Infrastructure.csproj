@@ -65,6 +65,7 @@
     <Compile Include="Events\NewSourceEvent.cs" />
     <Compile Include="Events\RemoveArchiveFeedEvent.cs" />
     <Compile Include="Events\WantAllFeedsEvent.cs" />
+    <Compile Include="Events\WantCloseUriEvent.cs" />
     <Compile Include="Events\WantFeedEvent.cs" />
     <Compile Include="Events\WantUriEvent.cs" />
     <Compile Include="Models\Source.cs" />

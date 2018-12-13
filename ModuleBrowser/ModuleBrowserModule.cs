@@ -1,4 +1,5 @@
-﻿using ModuleBrowser.Views;
+﻿using Infrastructure.Constants;
+using ModuleBrowser.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
@@ -16,7 +17,7 @@ namespace ModuleBrowser
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
- 
+            _regionManager.RequestNavigate(RegionNames.ContentRegionRight, nameof(ViewA));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

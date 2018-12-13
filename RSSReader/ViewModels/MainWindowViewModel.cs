@@ -6,7 +6,6 @@ using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Models;
 using Infrastructure.Services;
-using Infrastructure.ViewModels;
 using ModuleAdd.Views;
 using ModuleArchiveFeeds.Views;
 using ModuleFeeds.Views;
@@ -14,7 +13,6 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Logging;
 using Prism.Regions;
-using ModuleBrowser.Views;
 
 namespace RSSReader.ViewModels
 {

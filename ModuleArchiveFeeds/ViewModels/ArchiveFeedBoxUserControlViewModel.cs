@@ -21,13 +21,17 @@ namespace ModuleArchiveFeeds.ViewModels
         {
             _eventAggregator = eventAggregator;
             _rssStore = rssStore;
+
             ChangeFeedCommand = new DelegateCommand<FeedViewModel>(ClickedArchiveFeed);
+            RemoveFromArchiveCommand = new DelegateCommand<FeedViewModel>(RemoveFromArchiveFeed);
+
             eventAggregator.GetEvent<NewArchiveFeedEvent>().Subscribe(AddNewArchiveFeed);
             eventAggregator.GetEvent<RemoveArchiveFeedEvent>().Subscribe(RemoveFromArchiveFeed);
         }
 
         #region delegates
         public DelegateCommand<FeedViewModel> ChangeFeedCommand { get; }
+        public DelegateCommand<FeedViewModel> RemoveFromArchiveCommand { get; }
         #endregion
 
         #region attributes
@@ -50,13 +54,7 @@ namespace ModuleArchiveFeeds.ViewModels
         private void RemoveFromArchiveFeed(FeedViewModel feedViewModel)
         {
             _logger.Log("Remove Feed " + feedViewModel.Title + " from the Archive", Category.Info, Priority.Medium);
-            foreach (var archiveFeed in AllArchivedFeeds)
-            {
-                if (archiveFeed.Equals(feedViewModel))
-                {
-                   AllArchivedFeeds.Remove(feedViewModel);
-                }
-            }
+            AllArchivedFeeds.Remove(feedViewModel);
         }
         #endregion
     }

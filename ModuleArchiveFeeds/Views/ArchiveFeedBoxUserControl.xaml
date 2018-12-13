@@ -55,7 +55,17 @@
               VerticalAlignment="Bottom" />
           </StackPanel>
         </Grid>
-      </Grid>
+          <Button
+              Width="100"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Top"
+              Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.(viewModels1:ArchiveFeedBoxUserControlViewModel.RemoveFromArchiveCommand)}"
+              CommandParameter="{Binding}"
+              Style="{StaticResource MaterialDesignFlatButton}"
+              ToolTip="Add this feed to the archive to read it later!">
+              - Archive
+          </Button>
+         </Grid>
     </DataTemplate>
   </UserControl.Resources>
 

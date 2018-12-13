@@ -49,13 +49,6 @@
                 TextTrimming="CharacterEllipsis"
                 TextWrapping="Wrap" />
             </Grid>
-            <!--
-              Rectangle
-              x:Name="BorderBottom"
-              Height="1"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Bottom" /
-            -->
           </StackPanel>
         </Grid>
         <Button

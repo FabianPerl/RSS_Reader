@@ -12,17 +12,13 @@
   mc:Ignorable="d">
 
   <DockPanel>
-        <ToolBarTray DockPanel.Dock="Top">
-            <ToolBar
-                Style="{DynamicResource MaterialDesignToolBar}"
-                ClipToBounds="False">
-                <Button
-                Command="{Binding CloseBrowserDelegateCommand}"
-                    >Close</Button>
-                </ToolBar>
-            </ToolBarTray>
+    <ToolBarTray DockPanel.Dock="Top">
+      <ToolBar ClipToBounds="False" Style="{DynamicResource MaterialDesignToolBar}">
+        <Button Command="{Binding CloseBrowserDelegateCommand}">Close</Button>
+      </ToolBar>
+    </ToolBarTray>
 
-  <wpf:ChromiumWebBrowser Address="{Binding CurrentUri}" />
-            </DockPanel>
+    <wpf:ChromiumWebBrowser Address="{Binding CurrentUri}" />
+  </DockPanel>
 
 </UserControl>

@@ -2,6 +2,7 @@
 using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Models;
+using ModuleAdd.Views;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Logging;
@@ -51,6 +52,7 @@ namespace ModuleAdd.ViewModels
         #endregion
 
         #region helper
+
         private bool CanExecute()
         {
             return !string.IsNullOrWhiteSpace(Name) &&

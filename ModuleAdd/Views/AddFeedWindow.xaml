@@ -6,6 +6,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:cb="clr-namespace:ModuleAdd.Views"
   xmlns:prism="http://prismlibrary.com/"
   xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
   Title="Add new Feed Source"
@@ -37,6 +38,7 @@
         <Button
       Margin="20,0,20,10"
       Content="Close"
+      Click="CloseWindow"
       DockPanel.Dock="Bottom"
       Style="{StaticResource MaterialDesignRaisedDarkButton}"
       ToolTip="Close without adding a new Source" />
@@ -70,7 +72,5 @@
           ToolTip="Add a new Feed source" />
             </StackPanel>
         </Grid>
-
-        <!--  addFeed:AddFeedFormUserControl Margin="20,20,20,0" /  -->
     </DockPanel>
 </Window>

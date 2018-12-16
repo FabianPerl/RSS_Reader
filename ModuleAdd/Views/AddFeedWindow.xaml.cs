@@ -9,17 +9,14 @@ namespace ModuleAdd.Views
     /// </summary>
     public partial class AddFeedWindow : Window
     {
-        private Source _sourceToChange;
-
         public AddFeedWindow()
         {
             InitializeComponent();
         }
 
-        public AddFeedWindow(Source source)
+        private void CloseWindow(object sender, RoutedEventArgs e)
         {
-            _sourceToChange = source;
-            InitializeComponent();
+            Close();
         }
     }
 }

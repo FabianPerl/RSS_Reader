@@ -6,8 +6,10 @@ using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Models;
 using Infrastructure.Services;
+using ModuleAdd.ViewModels;
 using ModuleAdd.Views;
 using ModuleArchiveFeeds.Views;
+using ModuleEdit.Views;
 using ModuleFeeds.Views;
 using Prism.Commands;
 using Prism.Events;
@@ -67,6 +69,7 @@ namespace RSSReader.ViewModels
             eventAggregator.GetEvent<WantUriEvent>().Subscribe(OpenBrowser);
             eventAggregator.GetEvent<WantCloseUriEvent>().Subscribe(CloseBrowser);
             eventAggregator.GetEvent<NewSourceEvent>().Subscribe(AddSource);
+            eventAggregator.GetEvent<RemoveSourceEvent>().Subscribe(RemoveSource);
 	    }
 
         #region delegates
@@ -161,19 +164,10 @@ namespace RSSReader.ViewModels
 	        AllSources = _sourceStore.GetAllSources();
 	    }
 
-	    private bool RemoveSource(Source source)
+	    private void RemoveSource(Source source)
 	    {
-	        foreach (var oneSource in AllSources)
-	        {
-	            if (oneSource.Equals(source))
-	            {
-                    _sourceStore.DeleteAllSources();
-                    _sourceStore.SafeAllSources(AllSources);
-	                return AllSources.Remove(source);
-	            }
-	        }
-
-	        return false;
+           AllSources.Remove(source);
+           _sourceStore.SafeAllSources(AllSources);
 	    }
         #endregion
 
@@ -198,7 +192,7 @@ namespace RSSReader.ViewModels
 
 	    private void OpenEditFeedWindow()
 	    {
-	        new AddFeedWindow().Show();
+	        new EditFeedFormWindow().Show();
 	    }
         #endregion
     }

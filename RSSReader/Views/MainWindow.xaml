@@ -34,7 +34,7 @@
           Margin="20,10"
           VerticalAlignment="Center"
           Text="{Binding Name}" />
-      </StackPanel>
+       </StackPanel>
     </DataTemplate>
   </Window.Resources>
 

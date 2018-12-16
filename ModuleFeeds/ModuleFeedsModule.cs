@@ -17,7 +17,7 @@ namespace ModuleFeeds
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-             _regionManager.RequestNavigate(RegionNames.ContentRegionLeft, nameof(FeedBoxUserControl)); 
+            // _regionManager.RequestNavigate(RegionNames.ContentRegionLeft, nameof(FeedBoxUserControl)); 
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

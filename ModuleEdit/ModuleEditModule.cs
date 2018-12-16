@@ -16,7 +16,6 @@ namespace ModuleEdit
         }
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            //_regionManager.RequestNavigate(RegionNames.ContentNewWindow, nameof(ViewA));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

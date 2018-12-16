@@ -1,28 +1,34 @@
 ﻿using System;
+using Newtonsoft.Json;
 using Prism.Mvvm;
 
 namespace Infrastructure.Models
 {
+    [JsonObject]
     public class Source : BindableBase
     {
         private Uri _feedUri;
         private string _name;
         private string _category;
 
+        [JsonProperty]
         public string Id { get; } = Guid.NewGuid().ToString();
 
+        [JsonProperty]
         public Uri FeedUri
         {
             get => _feedUri;
             set => SetProperty(ref _feedUri, value);
         }
 
+        [JsonProperty]
         public string Name
         {
             get => _name;
             set => SetProperty(ref _name, value);
         }
 
+        [JsonProperty]
         public string Category
         {
             get => _category;

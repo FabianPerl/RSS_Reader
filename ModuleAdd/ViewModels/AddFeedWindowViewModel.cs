@@ -9,7 +9,7 @@ using Prism.Mvvm;
 
 namespace ModuleAdd.ViewModels
 {
-    public class AddFeedFormUserControlViewModel : BindableBase
+    public class AddFeedWindowViewModel : BindableBase
     {
         private string _name;
         private Uri _uri;
@@ -17,7 +17,7 @@ namespace ModuleAdd.ViewModels
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private readonly IEventAggregator _eventAggregator;
 
-        public AddFeedFormUserControlViewModel(IEventAggregator eventAggregator)
+        public AddFeedWindowViewModel(IEventAggregator eventAggregator)
         {
             AddCommand = new DelegateCommand(Execute, CanExecute).ObservesProperty(() => Name).
                 ObservesProperty(() => Category).

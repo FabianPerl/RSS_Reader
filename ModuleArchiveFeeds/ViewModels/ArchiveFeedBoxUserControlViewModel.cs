@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using System;
+using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,6 +28,8 @@ namespace ModuleArchiveFeeds.ViewModels
 
             eventAggregator.GetEvent<NewArchiveFeedEvent>().Subscribe(AddNewArchiveFeed);
             eventAggregator.GetEvent<RemoveArchiveFeedEvent>().Subscribe(RemoveFromArchiveFeed);
+
+            AllArchivedFeeds = rssStore.LoadAllArchiveFeeds();
         }
 
         #region delegates
@@ -35,7 +38,7 @@ namespace ModuleArchiveFeeds.ViewModels
         #endregion
 
         #region attributes
-        public ICollection<FeedViewModel> AllArchivedFeeds { get; } = new ObservableCollection<FeedViewModel>();
+        public ICollection<FeedViewModel> AllArchivedFeeds { get; }
         #endregion
 
         #region helper
@@ -47,14 +50,19 @@ namespace ModuleArchiveFeeds.ViewModels
         private void AddNewArchiveFeed(FeedViewModel feedViewModel)
         {
             _logger.Log("Add Feed " + feedViewModel.Title + " to the Archive", Category.Info, Priority.Medium);
-            if(!AllArchivedFeeds.Contains(feedViewModel))
+
+            if (!AllArchivedFeeds.Contains(feedViewModel))
+            {
                 AllArchivedFeeds.Add(feedViewModel);
+                _rssStore.SafeAllArchiveFeeds(AllArchivedFeeds);
+            }
         }
 
         private void RemoveFromArchiveFeed(FeedViewModel feedViewModel)
         {
             _logger.Log("Remove Feed " + feedViewModel.Title + " from the Archive", Category.Info, Priority.Medium);
             AllArchivedFeeds.Remove(feedViewModel);
+            _rssStore.SafeAllArchiveFeeds(AllArchivedFeeds);
         }
         #endregion
     }

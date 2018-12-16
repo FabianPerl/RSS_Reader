@@ -1,4 +1,5 @@
-﻿using ModuleArchiveFeeds.Views;
+﻿using Infrastructure.Constants;
+using ModuleArchiveFeeds.Views;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
@@ -16,7 +17,7 @@ namespace ModuleArchiveFeeds
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
- 
+            _regionManager.RequestNavigate(RegionNames.ContentRegionLeft, nameof(ArchiveFeedBoxUserControl));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

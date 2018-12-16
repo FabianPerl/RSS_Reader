@@ -4,10 +4,13 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows.Controls;
 using Microsoft.SyndicationFeed;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Prism.Mvvm;
 
 namespace Infrastructure.ViewModels
 {
+    [JsonObject]
 	public class FeedViewModel : BindableBase
 	{
 	    private const string LinkNoHttpDefined = "Please provide http:// or https://";
@@ -20,18 +23,24 @@ namespace Infrastructure.ViewModels
 	    private ICollection<string> _authors;
 	    private string _title;
 	    private string _shortDescription;
+
 	    private bool _isWatched;
+
 	    private Uri _link;
+
 	    private DateTimeOffset _publishedDate;
 	    private DateTimeOffset _lastUpdatedTime;
 
         #region errors
+
+        [JsonIgnore]
 	    public string ErrorMessage
 	    {
 	        get => _errorMessage;
 	        set => SetProperty(ref _errorMessage, value);
 	    }
 
+        [JsonIgnore]
 	    public bool HasErrors
 	    {
 	        get => _hasErrors;
@@ -41,11 +50,13 @@ namespace Infrastructure.ViewModels
 
         #region attributes
 
+        [JsonProperty]
 	    public string Id { get; } = Guid.NewGuid().ToString();
 
 	    /// <summary>
         /// Get and Set the article's author(s).
         /// </summary>
+        [JsonProperty]
         public ICollection<string> Authors
 	    {
 	        get => _authors;
@@ -55,6 +66,7 @@ namespace Infrastructure.ViewModels
 	    /// <summary>
 	    /// Get and Set the article's Title.
 	    /// </summary>
+        [JsonProperty]
 	    public string Title
 	    {
 	        get => _title;
@@ -64,6 +76,7 @@ namespace Infrastructure.ViewModels
 	    /// <summary>
 	    /// Get and Set the article's Description. It's a short summary for the article.
 	    /// </summary>
+        [JsonProperty]
 	    public string ShortDescription
 	    {
 	        get => _shortDescription;
@@ -73,6 +86,7 @@ namespace Infrastructure.ViewModels
 	    /// <summary>
 	    /// Get and Set the article's Link to access the feed itself.
 	    /// </summary>
+        [JsonProperty]
 	    public Uri Link
 	    {
 	        get => _link;
@@ -83,6 +97,7 @@ namespace Infrastructure.ViewModels
 	        }
 	    }
 
+        [JsonIgnore]
 	    public string LinkAsString
 	    {
 	        get => Link?.OriginalString ?? string.Empty;
@@ -110,6 +125,7 @@ namespace Infrastructure.ViewModels
             }
 	    }
 
+        [JsonProperty]
 	    public string ImageUrl
 	    {
 	        get => _imageUrl;
@@ -119,12 +135,15 @@ namespace Infrastructure.ViewModels
 	    /// <summary>
 	    /// Get and Set the article's Date when the article was published.
 	    /// </summary>
+        [JsonProperty]
+        [JsonConverter(typeof(JavaScriptDateTimeConverter))]
 	    public DateTimeOffset PublishedDate
 	    {
 	        get => _publishedDate;
 	        set => SetProperty(ref _publishedDate, value);
 	    }
 
+        [JsonIgnore]
 	    public string PublishedDateFormatted
 	    {
 	        get
@@ -135,6 +154,8 @@ namespace Infrastructure.ViewModels
 	        }
 	    }
 
+        [JsonProperty]
+        [JsonConverter(typeof(JavaScriptDateTimeConverter))]
 	    public DateTimeOffset LastUpdateDate
 	    {
 	        get => _lastUpdatedTime;
@@ -168,6 +189,7 @@ namespace Infrastructure.ViewModels
         /// <summary>
         /// Get or set if the user has watched the article.
         /// </summary>
+        [JsonIgnore]
         public bool IsWatched
         {
             get => _isWatched; 

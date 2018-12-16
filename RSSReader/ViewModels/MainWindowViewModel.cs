@@ -28,6 +28,7 @@ namespace RSSReader.ViewModels
 
 	    public MainWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRssStore sourceStore)
 	    {
+            /*
             var newSource = new Source
             {
                 FeedUri = new Uri("https://www.heise.de/newsticker/heise-atom.xml"),
@@ -42,13 +43,15 @@ namespace RSSReader.ViewModels
                 Category = "Technik"
             };
 
+            _sourceList = new ObservableCollection<Source> {newSource, newSource1};
+            _sourceStore.SafeAllSources(AllSources);
+            */
+
 	        _regionManager = regionManager;
 	        _eventAggregator = eventAggregator;
 	        _sourceStore = sourceStore;
 
-            _sourceList = new ObservableCollection<Source> {newSource, newSource1};
-            _sourceStore.SafeAllSources(AllSources);
-            //LoadSources();
+            LoadSources();
 
 	        GetSourceDelegateCommand = new DelegateCommand<Source>(SetCurrentSource);
 	        GetAllSourcesDelegateCommand = new DelegateCommand(GetAllSources);
@@ -190,12 +193,12 @@ namespace RSSReader.ViewModels
 
         private void OpenAddFeedWindow()
 	    {
-	        new SecondWindow().Show();
+	        new AddFeedWindow().Show();
 	    }
 
 	    private void OpenEditFeedWindow()
 	    {
-	        new SecondWindow().Show();
+	        new AddFeedWindow().Show();
 	    }
         #endregion
     }

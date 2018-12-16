@@ -6,7 +6,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Infrastructure.Constants;
 using Infrastructure.Models;
 using Infrastructure.ViewModels;
+using Newtonsoft.Json;
 using Prism.Logging;
+using FeedViewModel = Infrastructure.ViewModels.FeedViewModel;
 
 namespace Infrastructure.Services
 {
@@ -14,24 +16,22 @@ namespace Infrastructure.Services
     {
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
 
+        #region Sources
         public ICollection<Source> GetAllSources()
         {
             _logger.Log("Get all sources", Category.Info, Priority.Medium);
             try
             {
-                FileStream fileStream;
-                using (fileStream = File.Open(StorePaths.SourceStorePath, FileMode.Open, FileAccess.Read))
+                var jsonSerializer = new JsonSerializer();
+                using (var streamReader = new StreamReader(StorePaths.SourceStorePath))
+                using (var jsonReader = new JsonTextReader(streamReader))
                 {
-                    fileStream.Seek(0, SeekOrigin.Begin);
-                    BinaryFormatter serializer = new BinaryFormatter();
-                    var sourceList = (ICollection<Source>)serializer.Deserialize(fileStream);
-                    fileStream.Close();
-                    return sourceList;
+                    return jsonSerializer.Deserialize<ObservableCollection<Source>>(jsonReader);
                 }
             }
             catch (Exception e)
             {
-                _logger.Log(e.StackTrace + ", return empty sourcelist", Category.Exception, Priority.High);
+                _logger.Log(e.StackTrace, Category.Exception, Priority.High);
                 return new ObservableCollection<Source>();
             }
         }
@@ -44,17 +44,15 @@ namespace Infrastructure.Services
 
         public void SafeAllSources(ICollection<Source> allSources)
         {
-            if (!(File.Exists(StorePaths.SourceStorePath)))
-                return;
-
+            _logger.Log("Safe all Sources", Category.Info, Priority.Medium);
             try
             {
-                using (var fileStream = File.Create(StorePaths.SourceStorePath))
+                var jsonSerializer = new JsonSerializer {Formatting = Formatting.Indented};
+
+                using (var streamWriter = new StreamWriter(StorePaths.SourceStorePath))
+                using (var jsonWriter = new JsonTextWriter(streamWriter))
                 {
-                    fileStream.Seek(0, SeekOrigin.Begin);
-                    BinaryFormatter serializer = new BinaryFormatter();
-                    serializer.Serialize(fileStream, allSources);
-                    fileStream.Close();
+                    jsonSerializer.Serialize(jsonWriter, allSources);
                 }
             }
             catch (Exception e)
@@ -62,20 +60,20 @@ namespace Infrastructure.Services
                 _logger.Log(e.StackTrace, Category.Exception, Priority.High);
             }
         }
+        #endregion
 
-        public void SafeAllArchives(ICollection<FeedViewModel> allFeedViewModels)
+        #region ArchiveFeeds
+        public void SafeAllArchiveFeeds(ICollection<FeedViewModel> allFeedViewModels)
         {
-            if (!(File.Exists(StorePaths.ArchivedFeedsStorePath)))
-                return;
-
+            _logger.Log("Safe all Archive Feeds", Category.Info, Priority.Medium);
             try
             {
-                using (var fileStream = File.Create(StorePaths.ArchivedFeedsStorePath))
+                var jsonSerializer = new JsonSerializer {Formatting = Formatting.Indented};
+
+                using (var streamWriter = new StreamWriter(StorePaths.ArchivedFeedsStorePath))
+                using (var jsonWriter = new JsonTextWriter(streamWriter))
                 {
-                    fileStream.Seek(0, SeekOrigin.Begin);
-                    BinaryFormatter serializer = new BinaryFormatter();
-                    serializer.Serialize(fileStream, allFeedViewModels);
-                    fileStream.Close();
+                    jsonSerializer.Serialize(jsonWriter, allFeedViewModels);
                 }
             }
             catch (Exception e)
@@ -83,5 +81,25 @@ namespace Infrastructure.Services
                 _logger.Log(e.StackTrace, Category.Exception, Priority.High);
             }
         }
+
+        public ICollection<FeedViewModel> LoadAllArchiveFeeds()
+        {
+            _logger.Log("Load all Archive Feeds", Category.Info, Priority.Medium);
+            try
+            {
+                var jsonSerializer = new JsonSerializer();
+                using (var streamReader = new StreamReader(StorePaths.ArchivedFeedsStorePath))
+                using (var jsonReader = new JsonTextReader(streamReader))
+                {
+                    return jsonSerializer.Deserialize<ObservableCollection<FeedViewModel>>(jsonReader);
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Log(e.StackTrace, Category.Exception, Priority.High);
+                return new ObservableCollection<FeedViewModel>();
+            }
+        }
+        #endregion
     }
 }

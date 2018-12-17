@@ -28,7 +28,7 @@ namespace ModuleAdd.ViewModels
         }
 
         #region delegates
-        public DelegateCommand AddCommand { get; set; }
+        public DelegateCommand AddCommand { get; }
         #endregion
 
         #region attributes

@@ -19,23 +19,37 @@ namespace ModuleEdit.ViewModels
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private readonly IEventAggregator _eventAggregator;
         private readonly IRssStore _rssStore;
+        private Source _soureToEdit;
 
         public EditFeedFormWindowViewModel(IEventAggregator eventAggregator, IRssStore rssStore)
         {
             _eventAggregator = eventAggregator;
             _rssStore = rssStore;
             AllSources = _rssStore.GetAllSources();
-            RemoveSource = new DelegateCommand<Source>(RemoveOneSource);
+            RemoveSourceCommand = new DelegateCommand<Source>(RemoveOneSource);
+            EditSourceCommand = new DelegateCommand<Source>(EditOneSource);
         }
 
-
         public ICollection<Source> AllSources { get; }
+        public DelegateCommand<Source> RemoveSourceCommand;
+        public DelegateCommand<Source> EditSourceCommand;
 
-        public DelegateCommand<Source> RemoveSource;
+        public Source SourceToEdit
+        {
+            get => _soureToEdit;
+            set => SetProperty(ref _soureToEdit, value);
+        }
+
+        #region helper
+        private void EditOneSource(Source source)
+        {
+
+        }
 
         private void RemoveOneSource(Source source)
         {
             _eventAggregator.GetEvent<RemoveSourceEvent>().Publish(source);
         }
+        #endregion
     }
 }

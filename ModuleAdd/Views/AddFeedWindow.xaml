@@ -43,8 +43,7 @@
       Style="{StaticResource MaterialDesignRaisedDarkButton}"
       ToolTip="Close without adding a new Source" />
 
-    <Grid>
-      <StackPanel>
+      <StackPanel Margin="20,0,20,10" >
         <TextBox
           Margin="0,0,0,10"
           wpf:HintAssist.Hint="Title"
@@ -72,6 +71,5 @@
           Style="{StaticResource MaterialDesignRaisedButton}"
           ToolTip="Add a new Feed source" />
       </StackPanel>
-    </Grid>
   </DockPanel>
 </Window>

@@ -43,33 +43,33 @@
       Style="{StaticResource MaterialDesignRaisedDarkButton}"
       ToolTip="Close without adding a new Source" />
 
-      <StackPanel Margin="20,0,20,10" >
-        <TextBox
-          Margin="0,0,0,10"
-          wpf:HintAssist.Hint="Title"
-          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-          Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox
-          Margin="0,0,0,10"
-          wpf:HintAssist.Hint="URL"
-          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-          Text="{Binding Uri, UpdateSourceTrigger=PropertyChanged}" />
-        <ComboBox
-          wpf:HintAssist.Hint="Category"
-          Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-          Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}">
-          <ComboBoxItem Content="Sport" />
-          <ComboBoxItem Content="Technik" />
-          <ComboBoxItem Content="News" />
-          <ComboBoxItem Content="Allgemeines" />
-        </ComboBox>
-        <Button
-          Margin="0,10,0,0"
-          Command="{Binding AddCommand}"
-          Click="CloseWindow"
-          Content="Add"
-          Style="{StaticResource MaterialDesignRaisedButton}"
-          ToolTip="Add a new Feed source" />
-      </StackPanel>
+    <StackPanel Margin="20,0,20,10">
+      <TextBox
+        Margin="0,0,0,10"
+        wpf:HintAssist.Hint="Title"
+        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+        Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+      <TextBox
+        Margin="0,0,0,10"
+        wpf:HintAssist.Hint="URL"
+        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+        Text="{Binding Uri, UpdateSourceTrigger=PropertyChanged}" />
+      <ComboBox
+        wpf:HintAssist.Hint="Category"
+        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+        Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}">
+        <ComboBoxItem Content="Sport" />
+        <ComboBoxItem Content="Technik" />
+        <ComboBoxItem Content="News" />
+        <ComboBoxItem Content="Allgemeines" />
+      </ComboBox>
+      <Button
+        Margin="0,10,0,0"
+        Click="CloseWindow"
+        Command="{Binding AddCommand}"
+        Content="Add"
+        Style="{StaticResource MaterialDesignRaisedButton}"
+        ToolTip="Add a new Feed source" />
+    </StackPanel>
   </DockPanel>
 </Window>

@@ -1,255 +1,234 @@
 ﻿<Window
-  x:Class="RSSReader.Views.MainWindow"
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:constants="clr-namespace:Infrastructure.Constants;assembly=Infrastructure"
-  xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-  xmlns:models="clr-namespace:Infrastructure.Models;assembly=Infrastructure"
-  xmlns:prism="http://prismlibrary.com/"
-  xmlns:viewModels="clr-namespace:RSSReader.ViewModels"
-  Title="RSS Reader"
-  MinWidth="800"
-  MinHeight="600"
-  prism:ViewModelLocator.AutoWireViewModel="True"
-  WindowStartupLocation="CenterScreen">
+    x:Class="RSSReader.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:constants="clr-namespace:Infrastructure.Constants;assembly=Infrastructure"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:models="clr-namespace:Infrastructure.Models;assembly=Infrastructure"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:viewModels="clr-namespace:RSSReader.ViewModels"
+    Title="RSS Reader"
+    MinWidth="800"
+    MinHeight="600"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    Background="#FF404040"
+    WindowStartupLocation="CenterScreen">
 
-  <Window.Resources>
-    <DataTemplate x:Key="DataTemplateSourcesViewModel" DataType="models:Source">
-      <StackPanel Background="#00000000" Orientation="Horizontal">
-        <i:Interaction.Triggers>
-          <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:MainWindowViewModel.GetSourceDelegateCommand)}" CommandParameter="{Binding}" />
-          </i:EventTrigger>
-          <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-            <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
-          </i:EventTrigger>
-        </i:Interaction.Triggers>
-        <materialDesign:PackIcon
-          Width="25"
-          Height="25"
-          VerticalAlignment="Center"
-          Kind="Label" />
-        <TextBlock
-          Margin="20,10"
-          VerticalAlignment="Center"
-          Text="{Binding Name}" />
-      </StackPanel>
-    </DataTemplate>
-  </Window.Resources>
-
-  <materialDesign:DialogHost Identifier="RootDialog">
-    <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
-      <materialDesign:DrawerHost.LeftDrawerContent>
-        <DockPanel>
-          <ToggleButton
-            Margin="16"
-            HorizontalAlignment="Right"
-            DockPanel.Dock="Top"
-            IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
-            Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
-
-          <ListView
-            BorderBrush="{x:Null}"
-            DockPanel.Dock="Bottom"
-            Foreground="Black"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListView.ItemContainerStyle>
-              <Style TargetType="ListViewItem">
-                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                <Setter Property="VerticalContentAlignment" Value="Stretch" />
-              </Style>
-            </ListView.ItemContainerStyle>
-            <Separator />
-            <ListViewItem Height="{StaticResource HeightListViewItemControl}">
-              <StackPanel
-                MinWidth="212"
-                Background="#00000000"
-                Orientation="Horizontal">
+    <Window.Resources>
+        <DataTemplate x:Key="DataTemplateSourcesViewModel" DataType="models:Source">
+            <StackPanel Orientation="Horizontal">
                 <i:Interaction.Triggers>
-                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                    <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
-                  </i:EventTrigger>
-                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                    <i:InvokeCommandAction Command="{Binding OpenAddFeedWindowDelegateCommand}" />
-                  </i:EventTrigger>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:MainWindowViewModel.GetSourceDelegateCommand)}" CommandParameter="{Binding}" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
+                    </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <materialDesign:PackIcon
-                  Width="25"
-                  Height="25"
-                  VerticalAlignment="Center"
-                  Kind="Add" />
+                    Width="25"
+                    Height="25"
+                    VerticalAlignment="Center"
+                    Kind="Label" />
                 <TextBlock
-                  Margin="20,10"
-                  VerticalAlignment="Center"
-                  Text="Add Feedsource" />
-              </StackPanel>
-            </ListViewItem>
-            <ListViewItem Height="{StaticResource HeightListViewItemControl}">
-              <StackPanel
-                MinWidth="212"
-                Background="#00000000"
-                Orientation="Horizontal">
-                <i:Interaction.Triggers>
-                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                    <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
-                  </i:EventTrigger>
-                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                    <i:InvokeCommandAction Command="{Binding OpenEditFeedWindowDelegateCommand}" />
-                  </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <materialDesign:PackIcon
-                  Width="25"
-                  Height="25"
-                  VerticalAlignment="Center"
-                  Kind="Edit" />
-                <TextBlock
-                  Margin="20,10"
-                  VerticalAlignment="Center"
-                  Text="Edit Feedsource" />
-              </StackPanel>
-            </ListViewItem>
-          </ListView>
+                    Margin="20,10"
+                    VerticalAlignment="Center"
+                    Text="{Binding Name}" />
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
 
-          <ListView
-            BorderBrush="{x:Null}"
-            DockPanel.Dock="Top"
-            Foreground="Black"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListView.ItemContainerStyle>
-              <Style TargetType="ListViewItem">
-                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                <Setter Property="VerticalContentAlignment" Value="Stretch" />
-              </Style>
-            </ListView.ItemContainerStyle>
-            <ListViewItem Height="{StaticResource HeightListViewItemControl}">
-              <StackPanel
-                MinWidth="212"
-                Background="#00000000"
-                Orientation="Horizontal">
-                <i:Interaction.Triggers>
-                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                    <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
-                  </i:EventTrigger>
-                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                    <i:InvokeCommandAction Command="{Binding GetAllSourcesDelegateCommand}" />
-                  </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <materialDesign:PackIcon
-                  Width="25"
-                  Height="25"
-                  VerticalAlignment="Center"
-                  Kind="ViewDashboard" />
-                <TextBlock
-                  Margin="20,10"
-                  VerticalAlignment="Center"
-                  Text="All Feeds" />
-              </StackPanel>
-            </ListViewItem>
-            <ListViewItem Height="{StaticResource HeightListViewItemControl}">
-              <StackPanel
-                MinWidth="212"
-                Background="#00000000"
-                Orientation="Horizontal">
-                <i:Interaction.Triggers>
-                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                    <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
-                  </i:EventTrigger>
-                  <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                    <i:InvokeCommandAction Command="{Binding ShowArchiveFeedsDelegateCommand}" />
-                  </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <materialDesign:PackIcon
-                  Width="25"
-                  Height="25"
-                  VerticalAlignment="Center"
-                  Kind="Archive" />
-                <TextBlock
-                  Margin="20,10"
-                  VerticalAlignment="Center"
-                  Text="Archive" />
-              </StackPanel>
-            </ListViewItem>
-            <Separator />
-          </ListView>
-          <ListView
-            Background="#FFDADAE0"
-            BorderBrush="{x:Null}"
-            Foreground="Black"
-            ItemTemplate="{StaticResource DataTemplateSourcesViewModel}"
-            ItemsSource="{Binding AllSources}"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListView.ItemContainerStyle>
-              <Style TargetType="ListViewItem">
-                <Setter Property="Height" Value="{StaticResource HeightListViewItemSource}" />
-                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                <Setter Property="VerticalContentAlignment" Value="Stretch" />
-              </Style>
-            </ListView.ItemContainerStyle>
-          </ListView>
-        </DockPanel>
-      </materialDesign:DrawerHost.LeftDrawerContent>
+    <materialDesign:DialogHost Identifier="RootDialog">
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel>
+                    <ToggleButton
+                        Margin="16"
+                        HorizontalAlignment="Right"
+                        DockPanel.Dock="Top"
+                        IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
+                        Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
 
-      <DockPanel>
-        <materialDesign:ColorZone
-          Padding="5"
-          materialDesign:ShadowAssist.ShadowDepth="Depth2"
-          DockPanel.Dock="Top"
-          Mode="PrimaryMid">
-          <DockPanel>
-            <ToggleButton
-              x:Name="MenuToggleButton"
-              DockPanel.Dock="Left"
-              IsChecked="False"
-              Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
-            <Button
-              x:Name="FetchFeedsButton"
-              materialDesign:ShadowAssist.ShadowDepth="Depth0"
-              BorderBrush="{x:Null}"
-              Command="{Binding UpdateFeedsDelegateCommand}"
-              DockPanel.Dock="Right"
-              ToolTip="Update the feeds">
-              <materialDesign:PackIcon Kind="Update" />
-            </Button>
-            <TextBlock
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              FontSize="15">
-              RSS Reader
-            </TextBlock>
-          </DockPanel>
-        </materialDesign:ColorZone>
+                    <ListView
+                        BorderBrush="{x:Null}"
+                        DockPanel.Dock="Bottom"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <Separator />
+                        <ListViewItem Height="{StaticResource HeightListViewItemControl}">
+                            <StackPanel MinWidth="212" Orientation="Horizontal">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding OpenAddFeedWindowDelegateCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <materialDesign:PackIcon
+                                    Width="25"
+                                    Height="25"
+                                    VerticalAlignment="Center"
+                                    Kind="Add" />
+                                <TextBlock
+                                    Margin="20,10"
+                                    VerticalAlignment="Center"
+                                    Text="Add Feedsource" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem Height="{StaticResource HeightListViewItemControl}">
+                            <StackPanel MinWidth="212" Orientation="Horizontal">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding OpenEditFeedWindowDelegateCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <materialDesign:PackIcon
+                                    Width="25"
+                                    Height="25"
+                                    VerticalAlignment="Center"
+                                    Kind="Edit" />
+                                <TextBlock
+                                    Margin="20,10"
+                                    VerticalAlignment="Center"
+                                    Text="Edit Feedsource" />
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
 
-        <Grid>
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition>
-              <ColumnDefinition.Style>
-                <Style TargetType="ColumnDefinition">
-                  <Style.Triggers>
-                    <DataTrigger Binding="{Binding BrowserFlag}" Value="False">
-                      <Setter Property="Width" Value="0" />
-                    </DataTrigger>
-                    <DataTrigger Binding="{Binding BrowserFlag}" Value="True">
-                      <Setter Property="Width" Value="2*" />
-                    </DataTrigger>
-                  </Style.Triggers>
-                </Style>
-              </ColumnDefinition.Style>
-            </ColumnDefinition>
-          </Grid.ColumnDefinitions>
+                    <ListView
+                        BorderBrush="{x:Null}"
+                        DockPanel.Dock="Top"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListViewItem Height="{StaticResource HeightListViewItemControl}">
+                            <StackPanel MinWidth="212" Orientation="Horizontal">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding GetAllSourcesDelegateCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <materialDesign:PackIcon
+                                    Width="25"
+                                    Height="25"
+                                    VerticalAlignment="Center"
+                                    Kind="ViewDashboard" />
+                                <TextBlock
+                                    Margin="20,10"
+                                    VerticalAlignment="Center"
+                                    Text="All Feeds" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem Height="{StaticResource HeightListViewItemControl}">
+                            <StackPanel MinWidth="212" Orientation="Horizontal">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding ShowArchiveFeedsDelegateCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <materialDesign:PackIcon
+                                    Width="25"
+                                    Height="25"
+                                    VerticalAlignment="Center"
+                                    Kind="Archive" />
+                                <TextBlock
+                                    Margin="20,10"
+                                    VerticalAlignment="Center"
+                                    Text="Archive" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <Separator />
+                    </ListView>
+                    <ListView
+                        BorderBrush="{x:Null}"
+                        ItemTemplate="{StaticResource DataTemplateSourcesViewModel}"
+                        ItemsSource="{Binding AllSources}"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Height" Value="{StaticResource HeightListViewItemSource}" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
 
-          <ContentControl
-            Grid.Column="0"
-            prism:RegionManager.RegionName="{x:Static constants:RegionNames.ContentRegionLeft}"
-            Background="Blue" />
+            <DockPanel>
+                <materialDesign:ColorZone
+                    Padding="5"
+                    materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                    DockPanel.Dock="Top"
+                    Mode="PrimaryMid">
+                    <DockPanel>
+                        <ToggleButton
+                            x:Name="MenuToggleButton"
+                            DockPanel.Dock="Left"
+                            IsChecked="False"
+                            Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                        <Button
+                            x:Name="FetchFeedsButton"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                            BorderBrush="{x:Null}"
+                            Command="{Binding UpdateFeedsDelegateCommand}"
+                            DockPanel.Dock="Right"
+                            ToolTip="Update the feeds">
+                            <materialDesign:PackIcon Kind="Update" />
+                        </Button>
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="15">
+                            RSS Reader
+                        </TextBlock>
+                    </DockPanel>
+                </materialDesign:ColorZone>
 
-          <ContentControl
-            Grid.Column="1"
-            prism:RegionManager.RegionName="{x:Static constants:RegionNames.ContentRegionRight}"
-            Background="Green" />
-        </Grid>
-      </DockPanel>
-    </materialDesign:DrawerHost>
-  </materialDesign:DialogHost>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition>
+                            <ColumnDefinition.Style>
+                                <Style TargetType="ColumnDefinition">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding BrowserFlag}" Value="False">
+                                            <Setter Property="Width" Value="0" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding BrowserFlag}" Value="True">
+                                            <Setter Property="Width" Value="2*" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ColumnDefinition.Style>
+                        </ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <ContentControl Grid.Column="0" prism:RegionManager.RegionName="{x:Static constants:RegionNames.ContentRegionLeft}" />
+
+                    <ContentControl Grid.Column="1" prism:RegionManager.RegionName="{x:Static constants:RegionNames.ContentRegionRight}" />
+                </Grid>
+            </DockPanel>
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
 </Window>

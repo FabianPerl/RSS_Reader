@@ -39,40 +39,37 @@ namespace ModuleEdit.ViewModels
         public DelegateCommand EditSourceCommand { get; }
         public DelegateCommand<Source> PreviewEditSourceCommand { get; }
 
+        private string _name;
         public string NameOfSource
         {
-            get => _sourceToEdit?.Name;
-            set
-            {
-                if (_sourceToEdit == null) return;
-                _sourceToEdit.Name = value;
-            }
+            get => _name;
+            set => SetProperty(ref _name, value);
         }
 
+        private Uri _uri;
         public Uri UriOfSource
         {
-            get => _sourceToEdit?.FeedUri;
-            set
-            {
-                if (_sourceToEdit == null) return;
-                _sourceToEdit.FeedUri = value;
-            }
+            get => _uri;
+            set => SetProperty(ref _uri, value);
         }
 
+        private string _category;
         public string CategoryOfSource
         {
-            get => _sourceToEdit?.Category;
-            set
-            {
-                if (_sourceToEdit == null) return;
-                _sourceToEdit.Category = value;
-            }
+            get => _category;
+            set => SetProperty(ref _category, value);
         }
 
         public Source SourceToEdit
         {
             get => _sourceToEdit;
-            set => SetProperty(ref _sourceToEdit, value);
+            set
+            {
+                SetProperty(ref _sourceToEdit, value);
+                CategoryOfSource = value.Category;
+                UriOfSource = value.FeedUri;
+                NameOfSource = value.Name;
+            }
         }
 
         #region helper
@@ -80,8 +77,10 @@ namespace ModuleEdit.ViewModels
         {
 
         }
+        
         private void PreviewOneSource(Source source)
         {
+            _logger.Log("Preview " + source.Name + " with URI " + source.FeedUri, Category.Info, Priority.Medium);   
             SourceToEdit = source;
         }
 

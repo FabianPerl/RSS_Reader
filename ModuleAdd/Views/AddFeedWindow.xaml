@@ -17,6 +17,7 @@
   BorderThickness="1"
   ResizeMode="NoResize"
   WindowStartupLocation="CenterScreen"
+  Background="{DynamicResource MaterialDesignPaper}"
   WindowStyle="None"
   mc:Ignorable="d">
 

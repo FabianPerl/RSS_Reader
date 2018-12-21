@@ -29,7 +29,7 @@
 
                     <system:Double x:Key="FontSizeFeedPublishedDate">15</system:Double>
                     <system:Double x:Key="FontSizeFeedTitle">15</system:Double>
-                    <system:Double x:Key="FontSizeFeedDescription">15</system:Double>
+                    <system:Double x:Key="FontSizeFeedDescription">12</system:Double>
 
                     <system:Boolean x:Key="FalseValue">False</system:Boolean>
                     <system:Boolean x:Key="TrueValue">True</system:Boolean>

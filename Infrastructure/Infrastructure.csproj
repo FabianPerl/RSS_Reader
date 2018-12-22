@@ -60,6 +60,7 @@
     <Compile Include="Constants\ProjectLogger.cs" />
     <Compile Include="Constants\RegionNames.cs" />
     <Compile Include="Constants\StorePaths.cs" />
+    <Compile Include="Events\EditSourceEvent.cs" />
     <Compile Include="Events\FetchDataEvent.cs" />
     <Compile Include="Events\NewArchiveFeedEvent.cs" />
     <Compile Include="Events\NewSourceEvent.cs" />

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Models;
@@ -68,6 +70,9 @@ namespace RSSReader.ViewModels
 
             eventAggregator.GetEvent<WantUriEvent>().Subscribe(OpenBrowser);
             eventAggregator.GetEvent<WantCloseUriEvent>().Subscribe(CloseBrowser);
+
+
+            eventAggregator.GetEvent<EditSourceEvent>().Subscribe(EditSource);
             eventAggregator.GetEvent<NewSourceEvent>().Subscribe(AddSource);
             eventAggregator.GetEvent<RemoveSourceEvent>().Subscribe(RemoveSource);
 	    }
@@ -149,6 +154,26 @@ namespace RSSReader.ViewModels
             _sourceStore.SafeAllSources(AllSources);
 	    }
 
+	    private void EditSource(Source source)
+	    {
+	        _logger.Log("Safe the edit source " + source.Name + ", ID: " + source.Id, Category.Info, Priority.Medium);
+            RemoveSource(source);
+            AddSource(source);
+	    }
+
+	    private void RemoveSource(Source source)
+	    {
+	        foreach (var oneSource in AllSources)
+	        {
+	            if (source.Id == oneSource.Id)
+	            {
+	                AllSources.Remove(oneSource);
+	                break;
+	            }
+	        }
+           _sourceStore.SafeAllSources(AllSources);
+	    }
+
         /// <summary>
         /// Fetch potential new feeds from the current source
         /// </summary>
@@ -164,11 +189,6 @@ namespace RSSReader.ViewModels
 	        AllSources = _sourceStore.GetAllSources();
 	    }
 
-	    private void RemoveSource(Source source)
-	    {
-           AllSources.Remove(source);
-           _sourceStore.SafeAllSources(AllSources);
-	    }
         #endregion
 
         #region navigation management

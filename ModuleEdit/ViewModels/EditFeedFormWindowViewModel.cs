@@ -26,16 +26,23 @@ namespace ModuleEdit.ViewModels
             _eventAggregator = eventAggregator;
             _rssStore = rssStore;
             AllSources = _rssStore.GetAllSources();
-            RemoveSourceCommand = new DelegateCommand<Source>(RemoveOneSource);
+            RemoveSourceCommand = new DelegateCommand(RemoveOneSource);
             EditSourceCommand = new DelegateCommand(EditOneSource);
             PreviewEditSourceCommand = new DelegateCommand<Source>(PreviewOneSource);
 
             if(AllSources.Count >= 1)
                 SourceToEdit = AllSources.ElementAt(0);
+
+
+            foreach (var value in AllSources)
+            {
+                _logger.Log("INITIALIZE: " + value.Name + " with URI " + value.FeedUri + " and ID: " + value.Id, Category.Info, Priority.Medium);   
+            }
+
         }
 
         public ICollection<Source> AllSources { get; }
-        public DelegateCommand<Source> RemoveSourceCommand { get; }
+        public DelegateCommand RemoveSourceCommand { get; }
         public DelegateCommand EditSourceCommand { get; }
         public DelegateCommand<Source> PreviewEditSourceCommand { get; }
 
@@ -65,6 +72,7 @@ namespace ModuleEdit.ViewModels
             get => _sourceToEdit;
             set
             {
+                _logger.Log("Edit: " + value.Name + " with URI " + value.FeedUri + " and ID: " + value.Id, Category.Info, Priority.Medium);   
                 SetProperty(ref _sourceToEdit, value);
                 CategoryOfSource = value.Category;
                 UriOfSource = value.FeedUri;
@@ -75,18 +83,22 @@ namespace ModuleEdit.ViewModels
         #region helper
         private void EditOneSource()
         {
-
+            _sourceToEdit.FeedUri = UriOfSource;
+            _sourceToEdit.Name = NameOfSource;
+            _sourceToEdit.Category = CategoryOfSource;
+            _eventAggregator.GetEvent<EditSourceEvent>().Publish(_sourceToEdit);
         }
         
         private void PreviewOneSource(Source source)
         {
-            _logger.Log("Preview " + source.Name + " with URI " + source.FeedUri, Category.Info, Priority.Medium);   
+            _logger.Log("Preview " + source.Name + " with URI " + source.FeedUri + " and ID: " + source.Id, Category.Info, Priority.Medium);   
             SourceToEdit = source;
         }
 
-        private void RemoveOneSource(Source source)
+        private void RemoveOneSource()
         {
-            _eventAggregator.GetEvent<RemoveSourceEvent>().Publish(source);
+            _logger.Log("Remove " + _sourceToEdit.Name + " with URI " + _sourceToEdit.FeedUri + " and ID: " + _sourceToEdit.Id, Category.Info, Priority.Medium);   
+            _eventAggregator.GetEvent<RemoveSourceEvent>().Publish(_sourceToEdit);
         }
         #endregion
     }

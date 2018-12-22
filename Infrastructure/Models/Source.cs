@@ -12,7 +12,7 @@ namespace Infrastructure.Models
         private string _category;
 
         [JsonProperty]
-        public string Id { get; } = Guid.NewGuid().ToString();
+        public string Id { get; private set; } = Guid.NewGuid().ToString();
 
         [JsonProperty]
         public Uri FeedUri

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Models;
@@ -20,13 +21,12 @@ namespace ModuleFeeds.ViewModels
     {
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private readonly IEventAggregator _eventAggregator;
-        private Uri _lastFeedUri;
+        private Source _lastSource;
         private readonly IFeedService _feedService = new FeedServiceImpl();
         public DelegateCommand<FeedViewModel> ChangeFeedCommand { get; }
 
         public FeedBoxUserControlViewModel(IEventAggregator eventAggregator)
         {
-            UpdateFeedList(new Uri("https://www.heise.de/newsticker/heise-atom.xml"));
             ChangeFeedCommand = new DelegateCommand<FeedViewModel>(ClickedFeedView);
             _eventAggregator = eventAggregator;
 
@@ -40,10 +40,16 @@ namespace ModuleFeeds.ViewModels
 	    public DelegateCommand<FeedViewModel> AddArchiveFeedDelegateCommand { get; }
 
         #region attributes
+
+        private ICollection<FeedViewModel> _allFeeds = new ObservableCollection<FeedViewModel>();
         /// <summary>
         /// all feeds that will be shown from a source 
         /// </summary>
-        public ICollection<FeedViewModel> AllFeeds { get; } = new ObservableCollection<FeedViewModel>();
+        public ICollection<FeedViewModel> AllFeeds
+        {
+            get => _allFeeds;
+            private set => SetProperty(ref _allFeeds, value);
+        }
         #endregion
 
         #region helper
@@ -61,54 +67,56 @@ namespace ModuleFeeds.ViewModels
         private void ShouldUpdateFeedList(bool flag)
         {
             if(flag)
-                UpdateFeedList(_lastFeedUri);
+                UpdateFeedList(_lastSource);
         }
         
         private void UpdateFeedListWithClear(Source source)
         {
             AllFeeds.Clear();
-            UpdateFeedList(source.FeedUri);
+            UpdateFeedList(source);
         }
 
         private void UpdateFeedListWithClear(ICollection<Source> sources)
         {
             AllFeeds.Clear();
-            foreach (var source in sources)
-            {
-               UpdateFeedList(source.FeedUri); 
-            }
-
-            OrderList();
+            UpdateFeedList(sources);
         }
 
-        private void UpdateFeedList(Uri uri)
+        private void UpdateFeedList(Source source)
         {
-                var awaiter = _feedService.GetTaskAllFeedsFromUrlAsync(uri).GetAwaiter();
-                awaiter.OnCompleted(() =>
-                {
-                    _logger.Log("Update the feeds with the url " + uri.OriginalString, Category.Info, Priority.Medium);
-                    _lastFeedUri = uri;
+            var awaiter = _feedService.GetTaskAllFeedsFromUrlAsync(source.FeedUri).GetAwaiter();
+            awaiter.OnCompleted(() =>
+            {
+                _logger.Log("Update the feeds with the url " + source.FeedUri.OriginalString, Category.Info,
+                    Priority.Medium);
+                _lastSource = source;
 
-                    foreach (var oneFeed in awaiter.GetResult())
-                    {
-                       AllFeeds.Add(oneFeed); 
-                    }
-                });
+                foreach (var oneFeed in awaiter.GetResult())
+                {
+                    AllFeeds.Add(oneFeed);
+                }
+            });
+        }
+
+        private void UpdateFeedList(ICollection<Source> sources)
+        {
+            foreach (var source in sources)
+            {
+                UpdateFeedList(source);
+            }
         }
 
         private void OrderList()
         {
             /*
+            _logger.Log("Size: " + AllFeeds.Count, Category.Info, Priority.Medium);
             var feedsSortedByDate = from feed in AllFeeds
-                                    orderby feed.PublishedDate ascending
+                                    orderby feed.PublishedDate 
                                     select feed;
 
-            AllFeeds.Clear();
+            AllFeeds = feedsSortedByDate.ToList();
 
-            foreach (var feed in feedsSortedByDate)
-            {
-               AllFeeds.Add(feed); 
-            }
+            _logger.Log("Size: " + AllFeeds.Count, Category.Info, Priority.Medium);
             */
         }
         #endregion

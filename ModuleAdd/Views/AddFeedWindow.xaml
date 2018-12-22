@@ -13,11 +13,11 @@
   Width="500"
   Height="450"
   prism:ViewModelLocator.AutoWireViewModel="True"
+  Background="{DynamicResource MaterialDesignPaper}"
   BorderBrush="Gray"
   BorderThickness="1"
   ResizeMode="NoResize"
   WindowStartupLocation="CenterScreen"
-  Background="{DynamicResource MaterialDesignPaper}"
   WindowStyle="None"
   mc:Ignorable="d">
 

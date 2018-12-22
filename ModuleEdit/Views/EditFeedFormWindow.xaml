@@ -14,8 +14,8 @@
   MinHeight="300"
   d:DesignHeight="300"
   d:DesignWidth="300"
-  Background="{DynamicResource MaterialDesignPaper}"
   prism:ViewModelLocator.AutoWireViewModel="True"
+  Background="{DynamicResource MaterialDesignPaper}"
   WindowStartupLocation="CenterScreen"
   mc:Ignorable="d">
 
@@ -96,17 +96,17 @@
         Grid.Row="0"
         Grid.Column="1"
         Margin="10,0,10,10">
-                <TextBox
+        <TextBox
           Margin="0,0,0,10"
           materialDesign:HintAssist.Hint="Title"
           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-          Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.NameOfSource), Mode=TwoWay}"></TextBox>
-                <TextBox
+          Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.NameOfSource), Mode=TwoWay}" />
+        <TextBox
           Margin="0,0,0,10"
           materialDesign:HintAssist.Hint="URL"
           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-          Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.UriOfSource), Mode=TwoWay}"></TextBox>
-                <ComboBox
+          Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.UriOfSource), Mode=TwoWay}" />
+        <ComboBox
           materialDesign:HintAssist.Hint="Category"
           Style="{StaticResource MaterialDesignFloatingHintComboBox}"
           Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.CategoryOfSource), Mode=TwoWay}">

@@ -32,25 +32,6 @@ namespace RSSReader.ViewModels
 
 	    public MainWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRssStore sourceStore)
 	    {
-            /*
-            var newSource = new Source
-            {
-                FeedUri = new Uri("https://www.heise.de/newsticker/heise-atom.xml"),
-                Name = "Heise online",
-                Category = "Technik"
-            };
-
-            var newSource1 = new Source
-            {
-                FeedUri = new Uri("https://www.heise.de/developer/rss/news-atom.xml"),
-                Name = "Heise Developer",
-                Category = "Technik"
-            };
-
-            _sourceList = new ObservableCollection<Source> {newSource, newSource1};
-            _sourceStore.SafeAllSources(AllSources);
-            */
-
 	        _regionManager = regionManager;
 	        _eventAggregator = eventAggregator;
 	        _sourceStore = sourceStore;

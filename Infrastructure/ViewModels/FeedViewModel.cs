@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using Microsoft.SyndicationFeed;
 using Newtonsoft.Json;
@@ -80,7 +81,11 @@ namespace Infrastructure.ViewModels
 	    public string ShortDescription
 	    {
 	        get => _shortDescription;
-	        set => SetProperty(ref _shortDescription, value);
+	        set
+	        {
+	            var filteredValue = Regex.Replace(value, "<.*?>", string.Empty);
+	            SetProperty(ref _shortDescription, filteredValue);
+	        }
 	    }
 
 	    /// <summary>

@@ -41,15 +41,26 @@ namespace ModuleFeeds.ViewModels
 
         #region attributes
 
-        private ICollection<FeedViewModel> _allFeeds = new ObservableCollection<FeedViewModel>();
+        private readonly ICollection<FeedViewModel> _allFeeds = new ObservableCollection<FeedViewModel>();
         /// <summary>
         /// all feeds that will be shown from a source 
         /// </summary>
         public ICollection<FeedViewModel> AllFeeds
         {
-            get => _allFeeds;
-            private set => SetProperty(ref _allFeeds, value);
+            get
+            {
+                var orderedFeedList = _allFeeds.OrderByDescending(x => x.PublishedDate).ToList();
+                _allFeeds.Clear();
+
+                foreach (var feed in orderedFeedList)
+                {
+                   _allFeeds.Add(feed); 
+                }
+
+                return _allFeeds;
+            }
         }
+
         #endregion
 
         #region helper
@@ -63,7 +74,6 @@ namespace ModuleFeeds.ViewModels
             _eventAggregator.GetEvent<WantUriEvent>().Publish(feedViewModel.Link);
         }
 
-        //TODO: Nicht letzte Source updaten sondern auch eventuell alle
         private void ShouldUpdateFeedList(bool flag)
         {
             if(flag)
@@ -104,20 +114,6 @@ namespace ModuleFeeds.ViewModels
             {
                 UpdateFeedList(source);
             }
-        }
-
-        private void OrderList()
-        {
-            /*
-            _logger.Log("Size: " + AllFeeds.Count, Category.Info, Priority.Medium);
-            var feedsSortedByDate = from feed in AllFeeds
-                                    orderby feed.PublishedDate 
-                                    select feed;
-
-            AllFeeds = feedsSortedByDate.ToList();
-
-            _logger.Log("Size: " + AllFeeds.Count, Category.Info, Priority.Medium);
-            */
         }
         #endregion
     }

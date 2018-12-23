@@ -32,13 +32,6 @@ namespace ModuleEdit.ViewModels
 
             if(AllSources.Count >= 1)
                 SourceToEdit = AllSources.ElementAt(0);
-
-
-            foreach (var value in AllSources)
-            {
-                _logger.Log("INITIALIZE: " + value.Name + " with URI " + value.FeedUri + " and ID: " + value.Id, Category.Info, Priority.Medium);   
-            }
-
         }
 
         public ICollection<Source> AllSources { get; }

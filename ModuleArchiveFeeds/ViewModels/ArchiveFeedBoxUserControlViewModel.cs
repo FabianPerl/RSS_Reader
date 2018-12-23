@@ -3,6 +3,8 @@ using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Runtime.InteropServices;
 using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Services;
@@ -38,7 +40,24 @@ namespace ModuleArchiveFeeds.ViewModels
         #endregion
 
         #region attributes
-        public ICollection<FeedViewModel> AllArchivedFeeds { get; }
+
+        private ICollection<FeedViewModel> _allArchivedFeeds;
+        public ICollection<FeedViewModel> AllArchivedFeeds
+        {
+            get
+            {
+                var orderedFeedList = _allArchivedFeeds.OrderByDescending(x => x.PublishedDate).ToList();
+                _allArchivedFeeds.Clear();
+
+                foreach (var feed in orderedFeedList)
+                {
+                    _allArchivedFeeds.Add(feed);
+                }
+
+                return _allArchivedFeeds;
+            }
+            private set => SetProperty(ref _allArchivedFeeds, value);
+        }
         #endregion
 
         #region helper

@@ -31,6 +31,7 @@ namespace ModuleFeeds.ViewModels
             _eventAggregator = eventAggregator;
 
             AddArchiveFeedDelegateCommand = new DelegateCommand<FeedViewModel>(AddArchiveFeed);
+            SearchCommand = new DelegateCommand(SearchWithTerm);
 
             eventAggregator.GetEvent<FetchDataEvent>().Subscribe(ShouldUpdateFeedList);
             eventAggregator.GetEvent<WantFeedEvent>().Subscribe(UpdateFeedListWithClear);
@@ -38,8 +39,17 @@ namespace ModuleFeeds.ViewModels
         }
 
 	    public DelegateCommand<FeedViewModel> AddArchiveFeedDelegateCommand { get; }
+	    public DelegateCommand SearchCommand { get; }
 
         #region attributes
+
+        private string _searchTerm;
+
+        public string SearchTerm
+        {
+            get => _searchTerm;
+            set => SetProperty(ref _searchTerm, value);
+        }
 
         private readonly ICollection<FeedViewModel> _allFeeds = new ObservableCollection<FeedViewModel>();
         /// <summary>
@@ -64,6 +74,27 @@ namespace ModuleFeeds.ViewModels
         #endregion
 
         #region helper
+        private void SearchWithTerm()
+        {
+            if (string.IsNullOrWhiteSpace(SearchTerm))
+                return;
+
+            /*
+            var foundFeeds = from feeds in AllFeeds
+                where feeds.Title.Contains(SearchTerm)
+                select feeds;
+
+            //AllFeeds.Clear();
+
+            foreach (var oneFeed in foundFeeds)
+            {
+               AllFeeds.Add(oneFeed); 
+            }
+
+            _logger.Log("Size: " + AllFeeds.Count, Category.Info, Priority.Medium);
+            */
+        }
+
         private void AddArchiveFeed(FeedViewModel feedViewModel)
         {
             _eventAggregator.GetEvent<NewArchiveFeedEvent>().Publish(feedViewModel);
@@ -77,7 +108,7 @@ namespace ModuleFeeds.ViewModels
         private void ShouldUpdateFeedList(bool flag)
         {
             if(flag)
-                UpdateFeedList(_lastSource);
+                UpdateFeedListWithClear(_lastSource);
         }
         
         private void UpdateFeedListWithClear(Source source)

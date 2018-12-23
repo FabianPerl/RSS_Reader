@@ -74,12 +74,32 @@
       <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
 
-    <Label
-      Grid.Row="0"
-      Margin="{StaticResource MarginBottom12}"
-      Content="Feed"
-      DockPanel.Dock="Top"
-      FontSize="{StaticResource FontSizeExtraLarge}" />
+        <DockPanel Grid.Row="0" Margin="{StaticResource MarginBottom12}" >
+            <Label
+              DockPanel.Dock="Left"
+              Content="Feed"
+              FontSize="{StaticResource FontSizeExtraLarge}" />
+
+               <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                   <TextBox
+                       materialDesign:HintAssist.Hint="Content"
+                       Margin="8 0 0 0"
+                       Text="{Binding SearchTerm}"
+                       VerticalAlignment="Bottom" />
+
+                   <Button
+                       Style="{StaticResource MaterialDesignFlatButton}"
+                       Command="{Binding SearchCommand}"
+                       ToolTip="Search with a specific term">
+                       <materialDesign:PackIcon
+                                Width="25"
+                                Height="25"
+                                VerticalAlignment="Center"
+                                Kind="Search" />
+                   </Button>
+
+            </StackPanel>
+       </DockPanel>
 
     <ListBox
       x:Name="ListBoxFeeds2"

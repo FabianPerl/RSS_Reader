@@ -21,7 +21,7 @@ namespace ModuleFeeds.ViewModels
     {
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private readonly IEventAggregator _eventAggregator;
-        private Source _lastSource;
+        private ICollection<Source> _lastSources = new ObservableCollection<Source>();
         private readonly IFeedService _feedService = new FeedServiceImpl();
         public DelegateCommand<FeedViewModel> ChangeFeedCommand { get; }
 
@@ -74,25 +74,36 @@ namespace ModuleFeeds.ViewModels
         #endregion
 
         #region helper
+        private void Reset()
+        {
+            SearchTerm = string.Empty;
+
+            if (_lastSources != null && _lastSources.Count > 0)
+                UpdateFeedListWithClear(_lastSources);
+        }
+
         private void SearchWithTerm()
         {
-            if (string.IsNullOrWhiteSpace(SearchTerm))
-                return;
 
-            /*
-            var foundFeeds = from feeds in AllFeeds
-                where feeds.Title.Contains(SearchTerm)
+            if (string.IsNullOrWhiteSpace(SearchTerm))
+            {
+                Reset();
+                return;
+            }
+            
+            var foundFeeds = from feeds in _allFeeds
+                where feeds.Title.Contains(SearchTerm)  || feeds.ShortDescription.Contains(SearchTerm)
                 select feeds;
 
-            //AllFeeds.Clear();
+            var list = new ObservableCollection<FeedViewModel>(foundFeeds);
 
-            foreach (var oneFeed in foundFeeds)
+            _allFeeds.Clear();
+
+            foreach (var oneFeed in list)
             {
-               AllFeeds.Add(oneFeed); 
+                _logger.Log("Title: " + oneFeed.Title, Category.Info, Priority.Medium);
+                _allFeeds.Add(oneFeed);
             }
-
-            _logger.Log("Size: " + AllFeeds.Count, Category.Info, Priority.Medium);
-            */
         }
 
         private void AddArchiveFeed(FeedViewModel feedViewModel)
@@ -108,19 +119,24 @@ namespace ModuleFeeds.ViewModels
         private void ShouldUpdateFeedList(bool flag)
         {
             if(flag)
-                UpdateFeedListWithClear(_lastSource);
+                UpdateFeedListWithClear(_lastSources);
         }
         
         private void UpdateFeedListWithClear(Source source)
         {
             AllFeeds.Clear();
             UpdateFeedList(source);
+
+            _lastSources.Clear();
+            _lastSources.Add(source);
         }
 
         private void UpdateFeedListWithClear(ICollection<Source> sources)
         {
             AllFeeds.Clear();
             UpdateFeedList(sources);
+
+            _lastSources = sources;
         }
 
         private void UpdateFeedList(Source source)
@@ -130,7 +146,6 @@ namespace ModuleFeeds.ViewModels
             {
                 _logger.Log("Update the feeds with the url " + source.FeedUri.OriginalString, Category.Info,
                     Priority.Medium);
-                _lastSource = source;
 
                 foreach (var oneFeed in awaiter.GetResult())
                 {
@@ -145,6 +160,8 @@ namespace ModuleFeeds.ViewModels
             {
                 UpdateFeedList(source);
             }
+
+            _lastSources = sources;
         }
         #endregion
     }

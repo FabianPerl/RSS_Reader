@@ -32,6 +32,7 @@ namespace ModuleFeeds.ViewModels
 
             AddArchiveFeedDelegateCommand = new DelegateCommand<FeedViewModel>(AddArchiveFeed);
             SearchCommand = new DelegateCommand(SearchWithTerm);
+            CleanFilterCommand = new DelegateCommand(Reset);
 
             eventAggregator.GetEvent<FetchDataEvent>().Subscribe(ShouldUpdateFeedList);
             eventAggregator.GetEvent<WantFeedEvent>().Subscribe(UpdateFeedListWithClear);
@@ -40,6 +41,7 @@ namespace ModuleFeeds.ViewModels
 
 	    public DelegateCommand<FeedViewModel> AddArchiveFeedDelegateCommand { get; }
 	    public DelegateCommand SearchCommand { get; }
+	    public DelegateCommand CleanFilterCommand { get; }
 
         #region attributes
 

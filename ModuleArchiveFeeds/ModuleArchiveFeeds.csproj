@@ -34,6 +34,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MaterialDesignThemes.Wpf">
+      <HintPath>..\..\..\..\.nuget\packages\materialdesignthemes\2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Prism">
       <HintPath>..\..\..\..\.nuget\packages\prism.core\7.1.0.431\lib\net45\Prism.dll</HintPath>
     </Reference>

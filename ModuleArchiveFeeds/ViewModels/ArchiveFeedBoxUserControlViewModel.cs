@@ -27,6 +27,8 @@ namespace ModuleArchiveFeeds.ViewModels
 
             ChangeFeedCommand = new DelegateCommand<FeedViewModel>(ClickedArchiveFeed);
             RemoveFromArchiveCommand = new DelegateCommand<FeedViewModel>(RemoveFromArchiveFeed);
+            SearchCommand = new DelegateCommand(SearchWithTerm);
+            CleanFilterCommand = new DelegateCommand(Reset);
 
             eventAggregator.GetEvent<NewArchiveFeedEvent>().Subscribe(AddNewArchiveFeed);
             eventAggregator.GetEvent<RemoveArchiveFeedEvent>().Subscribe(RemoveFromArchiveFeed);
@@ -37,11 +39,14 @@ namespace ModuleArchiveFeeds.ViewModels
         #region delegates
         public DelegateCommand<FeedViewModel> ChangeFeedCommand { get; }
         public DelegateCommand<FeedViewModel> RemoveFromArchiveCommand { get; }
+        public DelegateCommand SearchCommand { get; }
+        public DelegateCommand CleanFilterCommand { get; }
         #endregion
 
         #region attributes
 
         private ICollection<FeedViewModel> _allArchivedFeeds;
+        private ICollection<FeedViewModel> _cpAllArchivedFeeds;
         public ICollection<FeedViewModel> AllArchivedFeeds
         {
             get
@@ -58,9 +63,59 @@ namespace ModuleArchiveFeeds.ViewModels
             }
             private set => SetProperty(ref _allArchivedFeeds, value);
         }
+
+        private string _searchTerm;
+
+        public string SearchTerm
+        {
+            get => _searchTerm;
+            set => SetProperty(ref _searchTerm, value);
+        }
         #endregion
 
         #region helper
+        private void Reset()
+        {
+            SearchTerm = string.Empty;
+
+            if (_cpAllArchivedFeeds != null)
+            {
+                _allArchivedFeeds.Clear();
+
+                foreach (var feed in _cpAllArchivedFeeds)
+                {
+                   _allArchivedFeeds.Add(feed); 
+                }
+
+                _cpAllArchivedFeeds = null;
+            }
+        }
+
+        private void SearchWithTerm()
+        {
+
+            if (string.IsNullOrWhiteSpace(SearchTerm))
+            {
+                Reset();
+                return;
+            }
+
+            var foundFeeds = from feeds in _allArchivedFeeds
+                where feeds.Title.Contains(SearchTerm) || feeds.ShortDescription.Contains(SearchTerm)
+                select feeds;
+
+            var list = new ObservableCollection<FeedViewModel>(foundFeeds);
+
+            _cpAllArchivedFeeds = new ObservableCollection<FeedViewModel>(_allArchivedFeeds);
+            _allArchivedFeeds.Clear();
+
+            foreach (var oneFeed in list)
+            {
+                _logger.Log("Title: " + oneFeed.Title, Category.Info, Priority.Medium);
+                _allArchivedFeeds.Add(oneFeed);
+            }
+        }
+
         private void ClickedArchiveFeed(FeedViewModel feedViewModel)
         {
             _eventAggregator.GetEvent<WantUriEvent>().Publish(feedViewModel.Link);

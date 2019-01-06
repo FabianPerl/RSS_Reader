@@ -74,31 +74,50 @@
       <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
 
-    <DockPanel Grid.Row="0" Margin="{StaticResource MarginBottom12}">
+    <DockPanel Grid.Row="0" Margin="{StaticResource MarginBottom12}" LastChildFill="False">
       <Label
         Content="Feed"
         DockPanel.Dock="Left"
         FontSize="{StaticResource FontSizeExtraLarge}" />
 
-      <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
-        <TextBox
-          Margin="8,0,0,0"
-          VerticalAlignment="Bottom"
-          materialDesign:HintAssist.Hint="Content"
-          Text="{Binding SearchTerm}" />
-
-        <Button
-          Command="{Binding SearchCommand}"
-          Style="{StaticResource MaterialDesignFlatButton}"
-          ToolTip="Search with a specific term">
-          <materialDesign:PackIcon
-            Width="25"
-            Height="25"
+      <materialDesign:ColorZone
+        DockPanel.Dock="Right"
+        Margin="16,3,3,0"
+        Padding="8,4,8,4"
+        Panel.ZIndex="1"
+        materialDesign:ShadowAssist.ShadowDepth="Depth1"
+        CornerRadius="2"
+        Mode="Light">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+          <Button
+            Command="{Binding SearchCommand}"
+            Style="{DynamicResource MaterialDesignToolButton}"
+            ToolTip="Search with a specific term">
+            <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+          </Button>
+          <TextBox
+            Grid.Column="1"
+            MinWidth="200"
+            Margin="8,0,0,0"
             VerticalAlignment="Center"
-            Kind="Search" />
-        </Button>
-
-      </StackPanel>
+            materialDesign:HintAssist.Hint="Search for specific Feeds"
+            materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+            BorderThickness="0"
+            Text="{Binding SearchTerm}" />
+          <Button
+            Grid.Column="2"
+            Command="{Binding CleanFilterCommand}"
+            Style="{DynamicResource MaterialDesignToolButton}"
+            ToolTip="Clean filter">
+            <materialDesign:PackIcon Kind="delete" Opacity=".56" />
+          </Button>
+        </Grid>
+      </materialDesign:ColorZone>
     </DockPanel>
 
     <ListBox

@@ -52,14 +52,13 @@
           </StackPanel>
         </Grid>
         <Button
-          Width="100"
           HorizontalAlignment="Right"
           VerticalAlignment="Top"
           Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.(viewModels1:FeedBoxUserControlViewModel.AddArchiveFeedDelegateCommand)}"
           CommandParameter="{Binding}"
           Style="{StaticResource MaterialDesignFlatButton}"
           ToolTip="Add this feed to the archive to read it later!">
-          + Archive
+            <materialDesign:PackIcon Kind="CirclesAdd" />
         </Button>
       </Grid>
     </DataTemplate>

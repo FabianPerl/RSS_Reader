@@ -46,12 +46,12 @@
     <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
       <materialDesign:DrawerHost.LeftDrawerContent>
         <DockPanel>
-          <ToggleButton
+                    <ToggleButton
             Margin="16"
             HorizontalAlignment="Right"
             DockPanel.Dock="Top"
             IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
-            Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+            Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
 
           <ListView
             BorderBrush="{x:Null}"
@@ -59,10 +59,10 @@
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemContainerStyle>
               <Style TargetType="{x:Type ListViewItem}">
-                <Setter Property="Background" Value="Transparent" />
                 <Setter Property="Height" Value="{StaticResource HeightListViewItemSource}" />
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                <Setter Property="Background" Value="Transparent" />
                 <Setter Property="Template">
                   <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListViewItem}">

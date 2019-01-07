@@ -151,23 +151,23 @@
 
         <materialDesign:Snackbar
                 Grid.Row="2"
+                HorizontalAlignment="Stretch"
                 MessageQueue="{Binding AddArchiveMessageQueue}"
                 x:Name="SnackbarAddedArchive">
-            <materialDesign:SnackbarMessage
-                    ActionContent="OK" />
-            </materialDesign:Snackbar>
+        </materialDesign:Snackbar>
  
 
-    <Label
+    <TextBlock
       Grid.Row="1"
       HorizontalAlignment="Center"
       VerticalAlignment="Center"
       FontSize="20"
-      FontWeight="Light"
       Foreground="DarkRed"
       Visibility="{Binding IsEmpty, Converter={StaticResource VisibilityOfBool}, UpdateSourceTrigger=PropertyChanged}">
-      Sourcefeeds empty or you missing the internet connection!
-    </Label>
+      <Bold>Can not</Bold> show feeds for this source.  Here are some potential fixes: <LineBreak></LineBreak>
+        1. Check the source url <LineBreak></LineBreak>
+        2. Check your internet connection
+    </TextBlock>
 
   </Grid>
 </UserControl>

@@ -46,7 +46,7 @@ namespace ModuleFeeds.ViewModels
                 RaisePropertyChanged(nameof(IsNotEmpty));
             };
 
-            var myMessageQueue = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(8000));
+            var myMessageQueue = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(5000));
             AddArchiveMessageQueue = myMessageQueue;
         }
 

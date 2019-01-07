@@ -22,6 +22,7 @@ namespace ModuleArchiveFeeds.ViewModels
 
         public ArchiveFeedBoxUserControlViewModel(IEventAggregator eventAggregator, IRssStore rssStore)
         {
+            AllArchivedFeeds = rssStore.LoadAllArchiveFeeds();
             _eventAggregator = eventAggregator;
             _rssStore = rssStore;
 
@@ -33,7 +34,6 @@ namespace ModuleArchiveFeeds.ViewModels
             eventAggregator.GetEvent<NewArchiveFeedEvent>().Subscribe(AddNewArchiveFeed);
             eventAggregator.GetEvent<RemoveArchiveFeedEvent>().Subscribe(RemoveFromArchiveFeed);
 
-            AllArchivedFeeds = rssStore.LoadAllArchiveFeeds();
         }
 
         #region delegates
@@ -51,7 +51,7 @@ namespace ModuleArchiveFeeds.ViewModels
         {
             get
             {
-                var orderedFeedList = _allArchivedFeeds.OrderByDescending(x => x.PublishedDate).ToList();
+                var orderedFeedList = _allArchivedFeeds?.OrderByDescending(x => x.PublishedDate).ToList();
                 _allArchivedFeeds.Clear();
 
                 foreach (var feed in orderedFeedList)

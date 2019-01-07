@@ -23,8 +23,8 @@
               <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.(viewModels1:FeedBoxUserControlViewModel.ChangeFeedCommand)}" CommandParameter="{Binding}" />
             </i:EventTrigger>
           </i:Interaction.Triggers>
-          <StackPanel Background="#00000000">
-            <Grid Margin="12,12,12,0">
+          <StackPanel Background="{StaticResource BrushTransparent}">
+            <Grid Margin="{StaticResource MarginLeftTopRight12}">
               <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -43,7 +43,7 @@
                 TextWrapping="Wrap" />
               <TextBlock
                 Grid.Row="2"
-                Margin="0,4,0,12"
+                Margin="{StaticResource MarginBottom12}"
                 FontSize="{StaticResource FontSizeFeedDescription}"
                 Text="{Binding ShortDescription}"
                 TextTrimming="CharacterEllipsis"
@@ -57,8 +57,11 @@
           Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.(viewModels1:FeedBoxUserControlViewModel.AddArchiveFeedDelegateCommand)}"
           CommandParameter="{Binding}"
           Style="{StaticResource MaterialDesignFlatButton}"
-          ToolTip="Add this feed to the archive to read it later!">
-          <materialDesign:PackIcon Kind="CirclesAdd" />
+          ToolTip="{StaticResource TextAddToArchive}">
+          <materialDesign:PackIcon 
+              Kind="CirclesAdd" 
+              Height="{StaticResource HeightSmallIcon}" 
+              Width="{StaticResource WidthSmallIcon}"/>
         </Button>
       </Grid>
     </DataTemplate>
@@ -78,11 +81,11 @@
       <Label Content="{Binding Header}" FontSize="{StaticResource FontSizeExtraLarge}" />
 
       <materialDesign:ColorZone
-        Margin="3,3,3,0"
-        Padding="8,4,8,4"
+        Margin="{StaticResource MarginLeft3Top3Right3}"
+        Padding="{StaticResource PaddingLeft8Top4Right8Bottom4}"
         Panel.ZIndex="1"
         materialDesign:ShadowAssist.ShadowDepth="Depth1"
-        CornerRadius="2"
+        CornerRadius="{StaticResource Corner2}"
         Mode="Light">
         <Grid>
           <Grid.ColumnDefinitions>
@@ -93,15 +96,20 @@
           <Button
             Command="{Binding SearchCommand}"
             Style="{DynamicResource MaterialDesignToolButton}"
-            ToolTip="Search with a specific term">
-            <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+            ToolTip="{StaticResource TextSearchHint}">
+            <materialDesign:PackIcon 
+                Kind="Magnify" 
+                Opacity="{StaticResource OpacityIcon}"
+                Height="{StaticResource HeightSmallIcon}"
+                Width="{StaticResource WidthSmallIcon}"
+                />
           </Button>
           <TextBox
             Grid.Column="1"
-            MinWidth="200"
-            Margin="8,0,0,0"
+            MinWidth="{StaticResource MinWidthItem}"
+            Margin="{StaticResource MarginLeft12}"
             VerticalAlignment="Center"
-            materialDesign:HintAssist.Hint="Search for specific Feeds"
+            materialDesign:HintAssist.Hint="{StaticResource TextSearchHint}"
             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
             BorderThickness="0"
             Text="{Binding SearchTerm}" />
@@ -109,8 +117,13 @@
             Grid.Column="2"
             Command="{Binding CleanFilterCommand}"
             Style="{DynamicResource MaterialDesignToolButton}"
-            ToolTip="Clean filter">
-            <materialDesign:PackIcon Kind="delete" Opacity=".56" />
+            ToolTip="{StaticResource TextCleanFilter}">
+            <materialDesign:PackIcon 
+                Kind="delete" 
+                Opacity="{StaticResource OpacityIcon}"
+                Height="{StaticResource HeightSmallIcon}"
+                Width="{StaticResource WidthSmallIcon}"
+                />
           </Button>
         </Grid>
       </materialDesign:ColorZone>
@@ -120,7 +133,6 @@
       x:Name="ListBoxFeeds2"
       Grid.Row="1"
       Margin="{StaticResource MarginBottom12}"
-      BorderThickness="0,0,0,0"
       Focusable="True"
       IsSynchronizedWithCurrentItem="True"
       ItemTemplate="{StaticResource DataTemplateFeedViewModel}"
@@ -130,7 +142,7 @@
         <GroupStyle>
           <GroupStyle.HeaderTemplate>
             <DataTemplate>
-              <Border Margin="4,12,0,4">
+              <Border Margin="{StaticResource MarginLeft4Top12Bottom4}">
                 <TextBlock FontSize="{StaticResource FontSizeExtraLarge}" FontWeight="SemiBold" />
               </Border>
             </DataTemplate>
@@ -156,8 +168,8 @@
       Grid.Row="1"
       HorizontalAlignment="Center"
       VerticalAlignment="Center"
-      FontSize="20"
-      Foreground="DarkRed"
+      FontSize="{StaticResource FontSizeErrorMessage}"
+      Foreground="{StaticResource BrushErrorMessage}"
       Visibility="{Binding IsEmpty, Converter={StaticResource VisibilityOfBool}, UpdateSourceTrigger=PropertyChanged}">
       <Bold>Can not</Bold>
       show feeds for this source.  Here are some potential fixes:

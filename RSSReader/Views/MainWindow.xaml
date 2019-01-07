@@ -35,7 +35,7 @@
           VerticalAlignment="Center"
           Kind="Label" />
         <TextBlock
-          Margin="{StaticResource MarginLeft10Right20}"
+          Margin="{StaticResource MarginLeft20Right10}"
           VerticalAlignment="Center"
           Text="{Binding Name}" />
       </StackPanel>
@@ -262,9 +262,8 @@
             <TextBlock
               HorizontalAlignment="Center"
               VerticalAlignment="Center"
-              Text="{StaticResource TextNameOfProgram}"
-              FontSize="{StaticResource FontSizeHeader}">
-            </TextBlock>
+              FontSize="{StaticResource FontSizeHeader}"
+              Text="{StaticResource TextNameOfProgram}" />
           </DockPanel>
         </materialDesign:ColorZone>
 

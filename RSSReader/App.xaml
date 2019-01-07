@@ -16,13 +16,15 @@
                     <Thickness x:Key="MarginTop12">0,12,0,0</Thickness>
                     <Thickness x:Key="MarginLeft12">12,0,0,0</Thickness>
                     <Thickness x:Key="MarginLeftTopRight12">12,12,12,0</Thickness>
+                    <Thickness x:Key="MarginLeftRightBottom12">12,0,12,12</Thickness>
                     <Thickness x:Key="MarginRight12">0,0,12,0</Thickness>
                     <Thickness x:Key="MarginAllSides12">12</Thickness>
                     <Thickness x:Key="MarginAllSides16">16</Thickness>
                     <Thickness x:Key="MarginAllSides4">4</Thickness>
                     <Thickness x:Key="MarginRight4">0,0,4,0</Thickness>
                     <Thickness x:Key="MarginLeftRight12">12,0</Thickness>
-                    <Thickness x:Key="MarginLeft10Right20">12,0</Thickness>
+                    <Thickness x:Key="MarginLeft10Right20">10,20</Thickness>
+                    <Thickness x:Key="MarginLeft20Right10">20,10</Thickness>
                     <Thickness x:Key="MarginLeft4">4,0,0,0</Thickness>
                     <Thickness x:Key="MarginLeftSources">10,0,0,0</Thickness>
                     <Thickness x:Key="PaddingAllSides5">5</Thickness>
@@ -65,6 +67,13 @@
                     <system:String x:Key="TextAddFeedsource">Add Feedsource</system:String>
                     <system:String x:Key="TextSearchHint">Search for specific Feeds</system:String>
                     <system:String x:Key="TextCleanFilter">Clean Filter</system:String>
+                    <system:String x:Key="TextCloseWindow">Close</system:String>
+                    <system:String x:Key="TooltipCloseWOAdding">Close without adding a new Source</system:String>
+                    <system:String x:Key="DeleteSource">Delete Source</system:String>
+                    <system:String x:Key="TooltipDeleteSource">Delete the selected Source</system:String>
+
+                    <system:String x:Key="ChangeSource">Change Source</system:String>
+                    <system:String x:Key="TooltipChangeSource">Change the selected Source</system:String>
 
                     <system:Boolean x:Key="FalseValue">False</system:Boolean>
                     <system:Boolean x:Key="TrueValue">True</system:Boolean>

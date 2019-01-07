@@ -58,10 +58,10 @@
           CommandParameter="{Binding}"
           Style="{StaticResource MaterialDesignFlatButton}"
           ToolTip="{StaticResource TextAddToArchive}">
-          <materialDesign:PackIcon 
-              Kind="CirclesAdd" 
-              Height="{StaticResource HeightSmallIcon}" 
-              Width="{StaticResource WidthSmallIcon}"/>
+          <materialDesign:PackIcon
+            Width="{StaticResource WidthSmallIcon}"
+            Height="{StaticResource HeightSmallIcon}"
+            Kind="CirclesAdd" />
         </Button>
       </Grid>
     </DataTemplate>
@@ -97,12 +97,11 @@
             Command="{Binding SearchCommand}"
             Style="{DynamicResource MaterialDesignToolButton}"
             ToolTip="{StaticResource TextSearchHint}">
-            <materialDesign:PackIcon 
-                Kind="Magnify" 
-                Opacity="{StaticResource OpacityIcon}"
-                Height="{StaticResource HeightSmallIcon}"
-                Width="{StaticResource WidthSmallIcon}"
-                />
+            <materialDesign:PackIcon
+              Width="{StaticResource WidthSmallIcon}"
+              Height="{StaticResource HeightSmallIcon}"
+              Kind="Magnify"
+              Opacity="{StaticResource OpacityIcon}" />
           </Button>
           <TextBox
             Grid.Column="1"
@@ -118,12 +117,11 @@
             Command="{Binding CleanFilterCommand}"
             Style="{DynamicResource MaterialDesignToolButton}"
             ToolTip="{StaticResource TextCleanFilter}">
-            <materialDesign:PackIcon 
-                Kind="delete" 
-                Opacity="{StaticResource OpacityIcon}"
-                Height="{StaticResource HeightSmallIcon}"
-                Width="{StaticResource WidthSmallIcon}"
-                />
+            <materialDesign:PackIcon
+              Width="{StaticResource WidthSmallIcon}"
+              Height="{StaticResource HeightSmallIcon}"
+              Kind="delete"
+              Opacity="{StaticResource OpacityIcon}" />
           </Button>
         </Grid>
       </materialDesign:ColorZone>

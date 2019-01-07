@@ -21,32 +21,32 @@
 
   <Window.Resources>
     <DataTemplate x:Key="DataTemplateSourcesToEdit" DataType="models:Source">
-      <StackPanel Background="#00000000" Orientation="Horizontal">
+      <StackPanel Background="{StaticResource BrushTransparent}" Orientation="Horizontal">
         <i:Interaction.Triggers>
           <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
             <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.PreviewEditSourceCommand)}" CommandParameter="{Binding}" />
           </i:EventTrigger>
         </i:Interaction.Triggers>
         <materialDesign:PackIcon
-          Width="25"
-          Height="25"
+          Width="{StaticResource WidthIcon}"
+          Height="{StaticResource HeightIcon}"
           VerticalAlignment="Center"
           Kind="Label" />
         <TextBlock
-          Margin="20,10"
+          Margin="{StaticResource MarginLeft10Right20}"
           VerticalAlignment="Center"
           Text="{Binding Name}" />
       </StackPanel>
     </DataTemplate>
   </Window.Resources>
 
-  <DockPanel Margin="10,10,10,10">
+  <DockPanel Margin="{StaticResource MarginAllSides12}">
     <Button
       Click="CloseWindow"
-      Content="Close"
+      Content="{StaticResource TextCloseWindow}"
       DockPanel.Dock="Bottom"
       Style="{StaticResource MaterialDesignRaisedDarkButton}"
-      ToolTip="Close without adding a new Source" />
+      ToolTip="{StaticResource TooltipCloseWOAdding}" />
     <Grid>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="1*" />
@@ -66,7 +66,7 @@
       <StackPanel
         Grid.Row="0"
         Grid.Column="0"
-        Margin="10,0,10,10">
+        Margin="{StaticResource MarginLeftRightBottom12}">
         <ListView
           BorderBrush="{x:Null}"
           Foreground="White"
@@ -96,26 +96,26 @@
           </ListView.ItemContainerStyle>
         </ListView>
         <Button
-          Margin="0,10,0,0"
+          Margin="{StaticResource MarginTop12}"
           Click="CloseWindow"
           Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.RemoveSourceCommand)}"
-          Content="Delete 1 Source(s)"
+          Content="{StaticResource DeleteSource}"
           Style="{StaticResource MaterialDesignRaisedButton}"
-          ToolTip="Delete the clicked Source(s)" />
+          ToolTip="{StaticResource TooltipDeleteSource}" />
       </StackPanel>
 
       <StackPanel
         Grid.Row="0"
         Grid.Column="1"
-        Margin="10,0,10,10">
+        Margin="{StaticResource MarginLeftRightBottom12}">
         <TextBox
-          Margin="0,0,0,10"
+          Margin="{StaticResource MarginBottom12}"
           materialDesign:HintAssist.Hint="Title"
           Foreground="White"
           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
           Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.NameOfSource), Mode=TwoWay}" />
         <TextBox
-          Margin="0,0,0,10"
+          Margin="{StaticResource MarginBottom12}"
           materialDesign:HintAssist.Hint="URL"
           Foreground="White"
           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -131,12 +131,12 @@
           <ComboBoxItem Content="Allgemeines" />
         </ComboBox>
         <Button
-          Margin="0,10,0,0"
+          Margin="{StaticResource MarginTop12}"
           Click="CloseWindow"
           Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.EditSourceCommand), Mode=OneWay}"
-          Content="Change"
+          Content="{StaticResource ChangeSource}"
           Style="{StaticResource MaterialDesignRaisedButton}"
-          ToolTip="Change the given Source" />
+          ToolTip="{StaticResource TooltipChangeSource}" />
       </StackPanel>
     </Grid>
   </DockPanel>

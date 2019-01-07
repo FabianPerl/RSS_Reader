@@ -58,7 +58,7 @@
           CommandParameter="{Binding}"
           Style="{StaticResource MaterialDesignFlatButton}"
           ToolTip="Add this feed to the archive to read it later!">
-                   <materialDesign:PackIcon Kind="CirclesAdd" />
+          <materialDesign:PackIcon Kind="CirclesAdd" />
         </Button>
       </Grid>
     </DataTemplate>
@@ -74,12 +74,8 @@
       <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
 
-        <WrapPanel
-      Grid.Row="0"
-      Margin="{StaticResource MarginBottom12}">
-            <Label
-        Content="{Binding Header}"
-        FontSize="{StaticResource FontSizeExtraLarge}" />
+    <WrapPanel Grid.Row="0" Margin="{StaticResource MarginBottom12}">
+      <Label Content="{Binding Header}" FontSize="{StaticResource FontSizeExtraLarge}" />
 
       <materialDesign:ColorZone
         Margin="3,3,3,0"
@@ -149,13 +145,12 @@
     </ListBox>
 
 
-        <materialDesign:Snackbar
-                Grid.Row="2"
-                HorizontalAlignment="Stretch"
-                MessageQueue="{Binding AddArchiveMessageQueue}"
-                x:Name="SnackbarAddedArchive">
-        </materialDesign:Snackbar>
- 
+    <materialDesign:Snackbar
+      x:Name="SnackbarAddedArchive"
+      Grid.Row="2"
+      HorizontalAlignment="Stretch"
+      MessageQueue="{Binding AddArchiveMessageQueue}" />
+
 
     <TextBlock
       Grid.Row="1"
@@ -164,9 +159,12 @@
       FontSize="20"
       Foreground="DarkRed"
       Visibility="{Binding IsEmpty, Converter={StaticResource VisibilityOfBool}, UpdateSourceTrigger=PropertyChanged}">
-      <Bold>Can not</Bold> show feeds for this source.  Here are some potential fixes: <LineBreak></LineBreak>
-        1. Check the source url <LineBreak></LineBreak>
-        2. Check your internet connection
+      <Bold>Can not</Bold>
+      show feeds for this source.  Here are some potential fixes:
+      <LineBreak />
+      1. Check the source url
+      <LineBreak />
+      2. Check your internet connection
     </TextBlock>
 
   </Grid>

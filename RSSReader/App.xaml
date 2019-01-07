@@ -15,23 +15,41 @@
                     <Thickness x:Key="MarginLeft12">12,0,0,0</Thickness>
                     <Thickness x:Key="MarginRight12">0,0,12,0</Thickness>
                     <Thickness x:Key="MarginAllSides12">12</Thickness>
+                    <Thickness x:Key="MarginAllSides16">16</Thickness>
                     <Thickness x:Key="MarginAllSides4">4</Thickness>
                     <Thickness x:Key="MarginRight4">0,0,4,0</Thickness>
                     <Thickness x:Key="MarginLeftRight12">12,0</Thickness>
+                    <Thickness x:Key="MarginLeft10Right20">12,0</Thickness>
                     <Thickness x:Key="MarginLeft4">4,0,0,0</Thickness>
+                    <Thickness x:Key="MarginLeftSources">10,0,0,0</Thickness>
+                    <Thickness x:Key="PaddingAllSides5">5</Thickness>
+
+                    <Brush x:Key="BrushTransparent">#00000000</Brush>
 
                     <system:Double x:Key="FontSizeLarge">18</system:Double>
                     <system:Double x:Key="FontSizeExtraLarge">24</system:Double>
                     <system:Double x:Key="FontSizeNormal">12</system:Double>
+                    <system:Double x:Key="FontSizeHeader">15</system:Double>
+                    <system:Double x:Key="FontSizeFeedPublishedDate">15</system:Double>
+                    <system:Double x:Key="FontSizeFeedTitle">15</system:Double>
+                    <system:Double x:Key="FontSizeFeedDescription">12</system:Double>
+
 
                     <system:Double x:Key="HeightListViewItemControl">50</system:Double>
                     <system:Double x:Key="HeightListViewItemSource">40</system:Double>
 
+                    <system:Double x:Key="MinWidthItem">212</system:Double>
+                    <system:Double x:Key="HeightIcon">25</system:Double>
+                    <system:Double x:Key="WidthIcon">25</system:Double>
+
                     <BooleanToVisibilityConverter x:Key="VisibilityOfBool" />
 
-                    <system:Double x:Key="FontSizeFeedPublishedDate">15</system:Double>
-                    <system:Double x:Key="FontSizeFeedTitle">15</system:Double>
-                    <system:Double x:Key="FontSizeFeedDescription">12</system:Double>
+                    <system:String x:Key="TextUpdate">Update the feeds</system:String>
+                    <system:String x:Key="TextNameOfProgram">RSS Reader</system:String>
+                    <system:String x:Key="TextArchive">Archive</system:String>
+                    <system:String x:Key="TextAllFeeds">All Feeds</system:String>
+                    <system:String x:Key="TextEditFeedsource">Edit Feedsource</system:String>
+                    <system:String x:Key="TextAddFeedsource">Add Feedsource</system:String>
 
                     <system:Boolean x:Key="FalseValue">False</system:Boolean>
                     <system:Boolean x:Key="TrueValue">True</system:Boolean>

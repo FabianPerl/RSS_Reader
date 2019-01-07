@@ -18,8 +18,8 @@
   <Window.Resources>
     <DataTemplate x:Key="DataTemplateSourcesViewModel" DataType="models:Source">
       <StackPanel
-        Margin="10,0,0,0"
-        Background="#00000000"
+        Margin="{StaticResource MarginLeftSources}"
+        Background="{StaticResource BrushTransparent}"
         Orientation="Horizontal">
         <i:Interaction.Triggers>
           <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
@@ -30,12 +30,12 @@
           </i:EventTrigger>
         </i:Interaction.Triggers>
         <materialDesign:PackIcon
-          Width="25"
-          Height="25"
+          Width="{StaticResource WidthIcon}"
+          Height="{StaticResource HeightIcon}"
           VerticalAlignment="Center"
           Kind="Label" />
         <TextBlock
-          Margin="20,10"
+          Margin="{StaticResource MarginLeft10Right20}"
           VerticalAlignment="Center"
           Text="{Binding Name}" />
       </StackPanel>
@@ -47,7 +47,7 @@
       <materialDesign:DrawerHost.LeftDrawerContent>
         <DockPanel>
           <ToggleButton
-            Margin="16"
+            Margin="{StaticResource MarginAllSides16}"
             HorizontalAlignment="Right"
             DockPanel.Dock="Top"
             IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
@@ -81,9 +81,9 @@
             <Separator />
             <ListViewItem Height="{StaticResource HeightListViewItemControl}">
               <StackPanel
-                MinWidth="212"
-                Margin="10,0,0,0"
-                Background="#00000000"
+                MinWidth="{StaticResource MinWidthItem}"
+                Margin="{StaticResource MarginLeftSources}"
+                Background="{StaticResource BrushTransparent}"
                 Orientation="Horizontal">
                 <i:Interaction.Triggers>
                   <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
@@ -94,21 +94,21 @@
                   </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <materialDesign:PackIcon
-                  Width="25"
-                  Height="25"
+                  Width="{StaticResource WidthIcon}"
+                  Height="{StaticResource HeightIcon}"
                   VerticalAlignment="Center"
                   Kind="Add" />
                 <TextBlock
-                  Margin="20,10"
+                  Margin="{StaticResource MarginLeft10Right20}"
                   VerticalAlignment="Center"
-                  Text="Add Feedsource" />
+                  Text="{StaticResource TextAddFeedsource}" />
               </StackPanel>
             </ListViewItem>
             <ListViewItem Height="{StaticResource HeightListViewItemControl}">
               <StackPanel
-                MinWidth="212"
-                Margin="10,0,0,0"
-                Background="#00000000"
+                MinWidth="{StaticResource MinWidthItem}"
+                Margin="{StaticResource MarginLeftSources}"
+                Background="{StaticResource BrushTransparent}"
                 Orientation="Horizontal">
                 <i:Interaction.Triggers>
                   <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
@@ -119,14 +119,14 @@
                   </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <materialDesign:PackIcon
-                  Width="25"
-                  Height="25"
+                  Width="{StaticResource WidthIcon}"
+                  Height="{StaticResource HeightIcon}"
                   VerticalAlignment="Center"
                   Kind="Edit" />
                 <TextBlock
-                  Margin="20,10"
+                  Margin="{StaticResource MarginLeft10Right20}"
                   VerticalAlignment="Center"
-                  Text="Edit Feedsource" />
+                  Text="{StaticResource TextEditFeedsource}" />
               </StackPanel>
             </ListViewItem>
           </ListView>
@@ -158,9 +158,9 @@
             </ListView.ItemContainerStyle>
             <ListViewItem Height="{StaticResource HeightListViewItemControl}">
               <StackPanel
-                MinWidth="212"
-                Margin="10,0,0,0"
-                Background="#00000000"
+                MinWidth="{StaticResource MinWidthItem}"
+                Margin="{StaticResource MarginLeftSources}"
+                Background="{StaticResource BrushTransparent}"
                 Orientation="Horizontal">
                 <i:Interaction.Triggers>
                   <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
@@ -171,21 +171,21 @@
                   </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <materialDesign:PackIcon
-                  Width="25"
-                  Height="25"
+                  Width="{StaticResource WidthIcon}"
+                  Height="{StaticResource HeightIcon}"
                   VerticalAlignment="Center"
                   Kind="ViewDashboard" />
                 <TextBlock
-                  Margin="20,10"
+                  Margin="{StaticResource MarginLeft10Right20}"
                   VerticalAlignment="Center"
-                  Text="All Feeds" />
+                  Text="{StaticResource TextAllFeeds}" />
               </StackPanel>
             </ListViewItem>
             <ListViewItem Height="{StaticResource HeightListViewItemControl}">
               <StackPanel
-                MinWidth="212"
-                Margin="10,0,0,0"
-                Background="#00000000"
+                MinWidth="{StaticResource MinWidthItem}"
+                Margin="{StaticResource MarginLeftSources}"
+                Background="{StaticResource BrushTransparent}"
                 Orientation="Horizontal">
                 <i:Interaction.Triggers>
                   <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
@@ -196,14 +196,14 @@
                   </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <materialDesign:PackIcon
-                  Width="25"
-                  Height="25"
+                  Width="{StaticResource WidthIcon}"
+                  Height="{StaticResource HeightIcon}"
                   VerticalAlignment="Center"
                   Kind="Archive" />
                 <TextBlock
-                  Margin="20,10"
+                  Margin="{StaticResource MarginLeft10Right20}"
                   VerticalAlignment="Center"
-                  Text="Archive" />
+                  Text="{StaticResource TextArchive}" />
               </StackPanel>
             </ListViewItem>
             <Separator />
@@ -240,7 +240,7 @@
 
       <DockPanel>
         <materialDesign:ColorZone
-          Padding="5"
+          Padding="{StaticResource PaddingAllSides5}"
           materialDesign:ShadowAssist.ShadowDepth="Depth2"
           DockPanel.Dock="Top"
           Mode="PrimaryMid">
@@ -256,14 +256,14 @@
               BorderBrush="{x:Null}"
               Command="{Binding UpdateFeedsDelegateCommand}"
               DockPanel.Dock="Right"
-              ToolTip="Update the feeds">
+              ToolTip="{StaticResource TextUpdate}">
               <materialDesign:PackIcon Kind="Update" />
             </Button>
             <TextBlock
               HorizontalAlignment="Center"
               VerticalAlignment="Center"
-              FontSize="15">
-              RSS Reader
+              Text="{StaticResource TextNameOfProgram}"
+              FontSize="{StaticResource FontSizeHeader}">
             </TextBlock>
           </DockPanel>
         </materialDesign:ColorZone>

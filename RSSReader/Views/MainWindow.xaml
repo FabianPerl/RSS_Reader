@@ -46,12 +46,12 @@
     <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
       <materialDesign:DrawerHost.LeftDrawerContent>
         <DockPanel>
-                    <ToggleButton
+          <ToggleButton
             Margin="16"
             HorizontalAlignment="Right"
             DockPanel.Dock="Top"
             IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"
-            Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
+            Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
 
           <ListView
             BorderBrush="{x:Null}"

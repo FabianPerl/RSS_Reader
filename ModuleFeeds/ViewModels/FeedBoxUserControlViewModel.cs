@@ -37,6 +37,13 @@ namespace ModuleFeeds.ViewModels
             eventAggregator.GetEvent<FetchDataEvent>().Subscribe(ShouldUpdateFeedList);
             eventAggregator.GetEvent<WantFeedEvent>().Subscribe(UpdateFeedListWithClear);
             eventAggregator.GetEvent<WantAllFeedsEvent>().Subscribe(UpdateFeedListWithClear);
+            
+            _allFeeds = new ObservableCollection<FeedViewModel>();
+            _allFeeds.CollectionChanged += (a, e) =>
+            {
+                RaisePropertyChanged(nameof(IsEmpty));
+                RaisePropertyChanged(nameof(IsNotEmpty));
+            };
         }
 
 	    public DelegateCommand<FeedViewModel> AddArchiveFeedDelegateCommand { get; }
@@ -53,7 +60,11 @@ namespace ModuleFeeds.ViewModels
             set => SetProperty(ref _searchTerm, value);
         }
 
-        private readonly ICollection<FeedViewModel> _allFeeds = new ObservableCollection<FeedViewModel>();
+        public bool IsEmpty => _allFeeds.Count == 0;
+        public bool IsNotEmpty => !IsEmpty;
+
+
+        private readonly ObservableCollection<FeedViewModel> _allFeeds;
         /// <summary>
         /// all feeds that will be shown from a source 
         /// </summary>

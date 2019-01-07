@@ -27,6 +27,8 @@
                     <system:Double x:Key="HeightListViewItemControl">50</system:Double>
                     <system:Double x:Key="HeightListViewItemSource">40</system:Double>
 
+                    <BooleanToVisibilityConverter x:Key="VisibilityOfBool" />
+
                     <system:Double x:Key="FontSizeFeedPublishedDate">15</system:Double>
                     <system:Double x:Key="FontSizeFeedTitle">15</system:Double>
                     <system:Double x:Key="FontSizeFeedDescription">12</system:Double>
@@ -39,6 +41,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Lime.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </prism:PrismApplication.Resources>

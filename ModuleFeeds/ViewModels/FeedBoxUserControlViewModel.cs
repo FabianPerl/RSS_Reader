@@ -149,7 +149,11 @@ namespace ModuleFeeds.ViewModels
             AllFeeds.Clear();
             UpdateFeedList(sources);
 
-            _lastSources = sources;
+            _lastSources.Clear();
+            foreach (var source in sources)
+            {
+               _lastSources.Add(source); 
+            }
         }
 
         private void UpdateFeedList(Source source)
@@ -173,8 +177,6 @@ namespace ModuleFeeds.ViewModels
             {
                 UpdateFeedList(source);
             }
-
-            _lastSources = sources;
         }
         #endregion
     }

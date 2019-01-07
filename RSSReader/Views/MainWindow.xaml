@@ -211,7 +211,7 @@
           <ListView
             BorderBrush="{x:Null}"
             ItemTemplate="{StaticResource DataTemplateSourcesViewModel}"
-            ItemsSource="{Binding AllSources}"
+            ItemsSource="{Binding AllSources, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemContainerStyle>
               <Style TargetType="{x:Type ListViewItem}">

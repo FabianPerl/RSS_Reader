@@ -164,7 +164,6 @@ namespace RSSReader.ViewModels
             _eventAggregator.GetEvent<FetchDataEvent>().Publish(true);
 	    }
 
-        //TODO: Auslagern
 	    private void LoadSources()
 	    {
 	        AllSources = _sourceStore.GetAllSources();

@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using Infrastructure.ViewModels;
 using System.ServiceModel.Syndication;
+using System.Text;
+using System.Web;
 using System.Xml;
 using Prism.Logging;
 
@@ -28,19 +32,23 @@ namespace Infrastructure.Services
             return Task.Run(() =>
             {
                 ICollection<FeedViewModel> allFeedsList = new ObservableCollection<FeedViewModel>();
-                using (var xmlReader = XmlReader.Create(feedUri.OriginalString))
+
+                try
                 {
+                    using (var xmlReader = XmlReader.Create(feedUri.OriginalString))
+                    {
                         var readSyndicationFeed = SyndicationFeed.Load(xmlReader);
 
                         foreach (var item in readSyndicationFeed.Items)
                         {
-                            ICollection<string> authors = new List<string>(); 
+                            ICollection<string> authors = new List<string>();
                             foreach (var element in item.Authors)
                             {
-                                authors.Add(element.Name);    
+                                authors.Add(element.Name);
                             }
-                       
-                        var newFeedViewModel = new FeedViewModel
+
+
+                            var newFeedViewModel = new FeedViewModel
                             {
                                 PublishedDate = item.PublishDate,
                                 Link = item.Links.Count > 0 ? item.Links[0]?.Uri : null,
@@ -52,10 +60,16 @@ namespace Infrastructure.Services
 
                             allFeedsList.Add(newFeedViewModel);
                         }
+                    }
+                }
+                catch (Exception e)
+                {
+                    _debugLogger.Log(e.Message, Category.Exception, Priority.High);
                 }
 
-                return allFeedsList;
+                 return allFeedsList;
             });
+
         }
     }
 }

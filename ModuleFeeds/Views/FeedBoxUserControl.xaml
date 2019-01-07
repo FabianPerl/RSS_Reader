@@ -58,7 +58,7 @@
           CommandParameter="{Binding}"
           Style="{StaticResource MaterialDesignFlatButton}"
           ToolTip="Add this feed to the archive to read it later!">
-          <materialDesign:PackIcon Kind="CirclesAdd" />
+                   <materialDesign:PackIcon Kind="CirclesAdd" />
         </Button>
       </Grid>
     </DataTemplate>
@@ -68,27 +68,25 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
 
-    <DockPanel
+        <WrapPanel
       Grid.Row="0"
-      Margin="{StaticResource MarginBottom12}"
-      LastChildFill="False">
-      <Label
-        Content="Feed"
-        DockPanel.Dock="Left"
+      Margin="{StaticResource MarginBottom12}">
+            <Label
+        Content="{Binding Header}"
         FontSize="{StaticResource FontSizeExtraLarge}" />
 
       <materialDesign:ColorZone
-        Margin="16,3,3,0"
+        Margin="3,3,3,0"
         Padding="8,4,8,4"
         Panel.ZIndex="1"
         materialDesign:ShadowAssist.ShadowDepth="Depth1"
         CornerRadius="2"
-        DockPanel.Dock="Right"
         Mode="Light">
         <Grid>
           <Grid.ColumnDefinitions>
@@ -120,7 +118,7 @@
           </Button>
         </Grid>
       </materialDesign:ColorZone>
-    </DockPanel>
+    </WrapPanel>
 
     <ListBox
       x:Name="ListBoxFeeds2"
@@ -149,6 +147,16 @@
         </Style>
       </ListBox.ItemContainerStyle>
     </ListBox>
+
+
+        <materialDesign:Snackbar
+                Grid.Row="2"
+                MessageQueue="{Binding AddArchiveMessageQueue}"
+                x:Name="SnackbarAddedArchive">
+            <materialDesign:SnackbarMessage
+                    ActionContent="OK" />
+            </materialDesign:Snackbar>
+ 
 
     <Label
       Grid.Row="1"

@@ -9,6 +9,7 @@ using Infrastructure.Events;
 using Infrastructure.Models;
 using Infrastructure.Services;
 using Infrastructure.ViewModels;
+using MaterialDesignThemes.Wpf;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Logging;
@@ -21,7 +22,7 @@ namespace ModuleFeeds.ViewModels
     {
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private readonly IEventAggregator _eventAggregator;
-        private ICollection<Source> _lastSources = new ObservableCollection<Source>();
+        private readonly ICollection<Source> _lastSources = new ObservableCollection<Source>();
         private readonly IFeedService _feedService = new FeedServiceImpl();
         public DelegateCommand<FeedViewModel> ChangeFeedCommand { get; }
 
@@ -37,20 +38,31 @@ namespace ModuleFeeds.ViewModels
             eventAggregator.GetEvent<FetchDataEvent>().Subscribe(ShouldUpdateFeedList);
             eventAggregator.GetEvent<WantFeedEvent>().Subscribe(UpdateFeedListWithClear);
             eventAggregator.GetEvent<WantAllFeedsEvent>().Subscribe(UpdateFeedListWithClear);
-            
+
             _allFeeds = new ObservableCollection<FeedViewModel>();
             _allFeeds.CollectionChanged += (a, e) =>
             {
                 RaisePropertyChanged(nameof(IsEmpty));
                 RaisePropertyChanged(nameof(IsNotEmpty));
             };
+
+            var myMessageQueue = new SnackbarMessageQueue(TimeSpan.FromMilliseconds(8000));
+            AddArchiveMessageQueue = myMessageQueue;
         }
 
-	    public DelegateCommand<FeedViewModel> AddArchiveFeedDelegateCommand { get; }
-	    public DelegateCommand SearchCommand { get; }
-	    public DelegateCommand CleanFilterCommand { get; }
+        public DelegateCommand<FeedViewModel> AddArchiveFeedDelegateCommand { get; }
+        public DelegateCommand SearchCommand { get; }
+        public DelegateCommand CleanFilterCommand { get; }
 
         #region attributes
+
+        private string _header;
+
+        public string Header
+        {
+            get => _header;
+            set => SetProperty(ref _header, value);
+        }
 
         private string _searchTerm;
 
@@ -65,6 +77,7 @@ namespace ModuleFeeds.ViewModels
 
 
         private readonly ObservableCollection<FeedViewModel> _allFeeds;
+
         /// <summary>
         /// all feeds that will be shown from a source 
         /// </summary>
@@ -77,7 +90,7 @@ namespace ModuleFeeds.ViewModels
 
                 foreach (var feed in orderedFeedList)
                 {
-                   _allFeeds.Add(feed); 
+                    _allFeeds.Add(feed);
                 }
 
                 return _allFeeds;
@@ -86,7 +99,15 @@ namespace ModuleFeeds.ViewModels
 
         #endregion
 
-        #region helper
+        private SnackbarMessageQueue _addArchiveMessageQueue;
+
+        public SnackbarMessageQueue AddArchiveMessageQueue
+        {
+            get => _addArchiveMessageQueue;
+            set => SetProperty(ref _addArchiveMessageQueue, value);
+        }
+
+    #region helper
         private void Reset()
         {
             SearchTerm = string.Empty;
@@ -121,6 +142,7 @@ namespace ModuleFeeds.ViewModels
 
         private void AddArchiveFeed(FeedViewModel feedViewModel)
         {
+            AddArchiveMessageQueue.Enqueue("Add \"" + feedViewModel.Title + "\" to the archive");
             _eventAggregator.GetEvent<NewArchiveFeedEvent>().Publish(feedViewModel);
         }
 
@@ -138,6 +160,7 @@ namespace ModuleFeeds.ViewModels
         private void UpdateFeedListWithClear(Source source)
         {
             AllFeeds.Clear();
+            Header = "Feeds for " + source.Name;
             UpdateFeedList(source);
 
             _lastSources.Clear();
@@ -147,6 +170,7 @@ namespace ModuleFeeds.ViewModels
         private void UpdateFeedListWithClear(ICollection<Source> sources)
         {
             AllFeeds.Clear();
+            Header = "Feeds for all Sources";
             UpdateFeedList(sources);
 
             _lastSources.Clear();

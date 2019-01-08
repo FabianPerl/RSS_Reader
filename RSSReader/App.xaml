@@ -28,11 +28,14 @@
                     <Thickness x:Key="MarginLeft4">4,0,0,0</Thickness>
                     <Thickness x:Key="MarginLeftSources">10,0,0,0</Thickness>
                     <Thickness x:Key="PaddingAllSides5">5</Thickness>
+                    <Thickness x:Key="BorderThicknessLeft1">1,0,0,0</Thickness>
 
                     <Thickness x:Key="MarginLeft4Top12Bottom4">5</Thickness>
 
                     <Brush x:Key="BrushTransparent">#00000000</Brush>
                     <Brush x:Key="BrushErrorMessage">DarkRed</Brush>
+                    <Brush x:Key="BorderBrushDark">Black</Brush>
+                    <Brush x:Key="BrushLight">White</Brush>
 
                     <system:Double x:Key="FontSizeLarge">18</system:Double>
                     <system:Double x:Key="FontSizeExtraLarge">24</system:Double>
@@ -69,6 +72,9 @@
                     <system:String x:Key="TextCleanFilter">Clean Filter</system:String>
                     <system:String x:Key="TextCloseWindow">Close</system:String>
                     <system:String x:Key="TooltipCloseWOAdding">Close without adding a new Source</system:String>
+                    <system:String x:Key="HintCategory">Category</system:String>
+                    <system:String x:Key="HintUrl">URL</system:String>
+                    <system:String x:Key="HintTitle">Title</system:String>
                     <system:String x:Key="DeleteSource">Delete Source</system:String>
                     <system:String x:Key="TooltipDeleteSource">Delete the selected Source</system:String>
 

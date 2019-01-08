@@ -31,8 +31,11 @@
                     <Thickness x:Key="MarginLeftSources">10,0,0,0</Thickness>
                     <Thickness x:Key="PaddingAllSides5">5</Thickness>
                     <Thickness x:Key="BorderThicknessLeft1">1,0,0,0</Thickness>
+                    <Thickness x:Key="BorderThickness1">1</Thickness>
 
                     <Thickness x:Key="MarginLeft4Top12Bottom4">5</Thickness>
+                    <Thickness x:Key="MarginLeft20Right20Bottom10">20,0,20,10</Thickness>
+                    <Thickness x:Key="MarginLeftRight20TopBottom10">20,10,20,10</Thickness>
 
                     <Brush x:Key="BrushTransparent">#00000000</Brush>
                     <Brush x:Key="BrushErrorMessage">DarkRed</Brush>
@@ -40,6 +43,7 @@
                     <Brush x:Key="BrushAdd">LimeGreen</Brush>
                     <Brush x:Key="BorderBrushDark">Black</Brush>
                     <Brush x:Key="BrushLight">White</Brush>
+                    <Brush x:Key="BrushGray">Gray</Brush>
 
                     <system:Double x:Key="FontSizeLarge">18</system:Double>
                     <system:Double x:Key="FontSizeExtraLarge">24</system:Double>
@@ -67,7 +71,10 @@
 
                     <system:String x:Key="TextUpdate">Update the feeds</system:String>
                     <system:String x:Key="TextAddToArchive">Add this feed to the archive to read it later!</system:String>
+                    <system:String x:Key="TextAddSource">Add Source</system:String>
+                    <system:String x:Key="TooltipAddSource">Add a new Feed Source</system:String>
                     <system:String x:Key="TextNameOfProgram">RSS Reader</system:String>
+                    <system:String x:Key="TextTitleAddSource">Add new Feed Source</system:String>
                     <system:String x:Key="TextArchive">Archive</system:String>
                     <system:String x:Key="TextArchivedFeeds">Archived Feeds</system:String>
                     <system:String x:Key="TextAllFeeds">All Feeds</system:String>

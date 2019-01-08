@@ -9,13 +9,13 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:prism="http://prismlibrary.com/"
   xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
-  Title="Add new Feed Source"
+  Title="TextTitleAddSource"
   Width="500"
   Height="450"
   prism:ViewModelLocator.AutoWireViewModel="True"
   Background="{DynamicResource MaterialDesignPaper}"
-  BorderBrush="Gray"
-  BorderThickness="1"
+  BorderBrush="{StaticResource BrushGray}"
+  BorderThickness="{StaticResource BorderThickness1}"
   ResizeMode="NoResize"
   WindowStartupLocation="CenterScreen"
   WindowStyle="None"
@@ -23,7 +23,7 @@
 
   <DockPanel>
     <wpf:ColorZone
-      Padding="5"
+      Padding="{StaticResource PaddingAllSides5}"
       wpf:ShadowAssist.ShadowDepth="Depth2"
       DockPanel.Dock="Top"
       Mode="PrimaryMid">
@@ -31,35 +31,44 @@
         <TextBlock
           HorizontalAlignment="Center"
           VerticalAlignment="Center"
-          FontSize="15">
-          Add Feed
+          FontSize="{StaticResource FontSizeFeedTitle}"
+          Text="{StaticResource TextAddSource}">
         </TextBlock>
       </DockPanel>
     </wpf:ColorZone>
-    <Button
-      Margin="20,0,20,10"
-      Click="CloseWindow"
-      Content="Close"
-      DockPanel.Dock="Bottom"
-      Style="{StaticResource MaterialDesignRaisedDarkButton}"
-      ToolTip="Close without adding a new Source" />
 
-    <StackPanel Margin="20,10,20,10">
+        <Button
+      Margin="{StaticResource MarginLeft20Right20Bottom10}"
+      Click="CloseWindow"
+      DockPanel.Dock="Bottom"
+      ToolTip="{StaticResource TooltipCloseWOAdding}"
+      Style="{StaticResource MaterialDesignRaisedDarkButton}">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon
+                    Width="{StaticResource WidthSmallIcon}"
+                    Height="{StaticResource HeightSmallIcon}"
+                    Margin="{StaticResource MarginTop2Right4}"
+                    Kind="WindowClose" />
+                <TextBlock Text="{StaticResource TextCloseWindow}" />
+            </StackPanel>
+        </Button>
+
+    <StackPanel Margin="{StaticResource MarginLeftRight20TopBottom10}">
       <TextBox
-        Margin="0,0,0,10"
-        wpf:HintAssist.Hint="Title"
-        Foreground="White"
+        Margin="{StaticResource MarginBottom12}"
+        wpf:HintAssist.Hint="{StaticResource HintTitle}"
+        Foreground="{StaticResource BrushLight}"
         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
         Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
       <TextBox
-        Margin="0,0,0,10"
-        wpf:HintAssist.Hint="URL"
-        Foreground="White"
+        Margin="{StaticResource MarginBottom12}"
+        wpf:HintAssist.Hint="{StaticResource HintUrl}"
+        Foreground="{StaticResource BrushLight}"
         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
         Text="{Binding Uri, UpdateSourceTrigger=PropertyChanged}" />
       <ComboBox
-        wpf:HintAssist.Hint="Category"
-        Foreground="White"
+        wpf:HintAssist.Hint="{StaticResource HintCategory}"
+        Foreground="{StaticResource BrushLight}"
         Style="{StaticResource MaterialDesignFloatingHintComboBox}"
         Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}">
         <ComboBoxItem Content="Sport" />
@@ -67,13 +76,23 @@
         <ComboBoxItem Content="News" />
         <ComboBoxItem Content="Allgemeines" />
       </ComboBox>
-      <Button
-        Margin="0,10,0,0"
-        Click="CloseWindow"
-        Command="{Binding AddCommand}"
-        Content="Add"
-        Style="{StaticResource MaterialDesignRaisedButton}"
-        ToolTip="Add a new Feed source" />
+
+        <Button
+            Margin="{StaticResource MarginTop12}"
+            ToolTip="{StaticResource TooltipAddSource}" 
+            Click="CloseWindow"
+            Command="{Binding AddCommand}"
+            Style="{StaticResource MaterialDesignRaisedButton}" >
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon
+                    Width="{StaticResource WidthSmallIcon}"
+                    Height="{StaticResource HeightSmallIcon}"
+                    Margin="{StaticResource MarginTop2Right4}"
+                    Kind="Add" />
+                <TextBlock Text="{StaticResource TextAddSource}" />
+            </StackPanel>
+        </Button>
+
     </StackPanel>
   </DockPanel>
 </Window>

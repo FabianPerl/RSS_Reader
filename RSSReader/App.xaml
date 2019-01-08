@@ -18,6 +18,7 @@
                     <Thickness x:Key="MarginLeftTopRight12">12,12,12,0</Thickness>
                     <Thickness x:Key="MarginLeftRightBottom12">12,0,12,12</Thickness>
                     <Thickness x:Key="MarginRight12">0,0,12,0</Thickness>
+                    <Thickness x:Key="MarginTop4Bottom12">0,4,0,12</Thickness>
                     <Thickness x:Key="MarginAllSides12">12</Thickness>
                     <Thickness x:Key="MarginAllSides16">16</Thickness>
                     <Thickness x:Key="MarginAllSides4">4</Thickness>
@@ -26,6 +27,7 @@
                     <Thickness x:Key="MarginLeft10Right20">10,20</Thickness>
                     <Thickness x:Key="MarginLeft20Right10">20,10</Thickness>
                     <Thickness x:Key="MarginLeft4">4,0,0,0</Thickness>
+                    <Thickness x:Key="MarginTop2Right4">0,2,4,0</Thickness>
                     <Thickness x:Key="MarginLeftSources">10,0,0,0</Thickness>
                     <Thickness x:Key="PaddingAllSides5">5</Thickness>
                     <Thickness x:Key="BorderThicknessLeft1">1,0,0,0</Thickness>
@@ -34,6 +36,8 @@
 
                     <Brush x:Key="BrushTransparent">#00000000</Brush>
                     <Brush x:Key="BrushErrorMessage">DarkRed</Brush>
+                    <Brush x:Key="BrushDelete">DarkRed</Brush>
+                    <Brush x:Key="BrushAdd">LimeGreen</Brush>
                     <Brush x:Key="BorderBrushDark">Black</Brush>
                     <Brush x:Key="BrushLight">White</Brush>
 
@@ -65,6 +69,7 @@
                     <system:String x:Key="TextAddToArchive">Add this feed to the archive to read it later!</system:String>
                     <system:String x:Key="TextNameOfProgram">RSS Reader</system:String>
                     <system:String x:Key="TextArchive">Archive</system:String>
+                    <system:String x:Key="TextArchivedFeeds">Archived Feeds</system:String>
                     <system:String x:Key="TextAllFeeds">All Feeds</system:String>
                     <system:String x:Key="TextEditFeedsource">Edit Feedsource</system:String>
                     <system:String x:Key="TextAddFeedsource">Add Feedsource</system:String>
@@ -80,6 +85,10 @@
 
                     <system:String x:Key="ChangeSource">Change Source</system:String>
                     <system:String x:Key="TooltipChangeSource">Change the selected Source</system:String>
+                    <system:String x:Key="TooltipSearchTerm">Search with a specific term</system:String>
+                    <system:String x:Key="TooltipRemoveFromArchive">Remove this feed from the Archive!</system:String>
+
+                    <system:String x:Key="BrowserClose">Close</system:String>
 
                     <system:Boolean x:Key="FalseValue">False</system:Boolean>
                     <system:Boolean x:Key="TrueValue">True</system:Boolean>

@@ -61,6 +61,7 @@
           <materialDesign:PackIcon
             Width="{StaticResource WidthSmallIcon}"
             Height="{StaticResource HeightSmallIcon}"
+            Foreground="{StaticResource BrushAdd}"
             Kind="CirclesAdd" />
         </Button>
       </Grid>

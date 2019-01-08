@@ -24,7 +24,7 @@
                 <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.(viewModels1:ArchiveFeedBoxUserControlViewModel.ChangeFeedCommand)}" CommandParameter="{Binding}" />
               </i:EventTrigger>
             </i:Interaction.Triggers>
-            <Grid Margin="12,12,12,0">
+            <Grid Margin="{StaticResource MarginLeftTopRight12}">
               <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -43,7 +43,7 @@
                 TextWrapping="Wrap" />
               <TextBlock
                 Grid.Row="2"
-                Margin="0,4,0,12"
+                Margin="{StaticResource MarginTop4Bottom12}"
                 FontSize="{StaticResource FontSizeFeedDescription}"
                 Text="{Binding ShortDescription}"
                 TextTrimming="CharacterEllipsis"
@@ -62,8 +62,8 @@
           Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.(viewModels1:ArchiveFeedBoxUserControlViewModel.RemoveFromArchiveCommand)}"
           CommandParameter="{Binding}"
           Style="{StaticResource MaterialDesignFlatButton}"
-          ToolTip="Add this feed to the archive to read it later!">
-          <materialDesign:PackIcon Foreground="Red" Kind="MinusCircleOutline" />
+          ToolTip="{StaticResource TooltipRemoveFromArchive}">
+          <materialDesign:PackIcon Foreground="{StaticResource BrushDelete}" Kind="MinusCircleOutline" />
         </Button>
       </Grid>
     </DataTemplate>
@@ -83,13 +83,13 @@
       Margin="{StaticResource MarginBottom12}"
       LastChildFill="False">
       <Label
-        Content="Archived Feeds"
+        Content="{StaticResource TextArchivedFeeds}"
         DockPanel.Dock="Left"
         FontSize="{StaticResource FontSizeExtraLarge}" />
 
       <materialDesign:ColorZone
-        Margin="16,3,3,0"
-        Padding="8,4,8,4"
+        Margin="{StaticResource MarginLeft3Top3Right3}"
+        Padding="{StaticResource PaddingLeft8Top4Right8Bottom4}"
         Panel.ZIndex="1"
         materialDesign:ShadowAssist.ShadowDepth="Depth1"
         CornerRadius="2"
@@ -104,28 +104,24 @@
           <Button
             Command="{Binding SearchCommand}"
             Style="{DynamicResource MaterialDesignToolButton}"
-            ToolTip="Search with a specific term">
-            <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+            ToolTip="{StaticResource TooltipSearchTerm}">
+            <materialDesign:PackIcon Kind="Magnify" Opacity="{StaticResource OpacityIcon}" />
           </Button>
           <TextBox
             Grid.Column="1"
-            MinWidth="200"
-            Margin="8,0,0,0"
+            MinWidth="{StaticResource MinWidthItem}"
+            Margin="{StaticResource MarginLeft12}"
             VerticalAlignment="Center"
-            materialDesign:HintAssist.Hint="Search for specific Feeds"
+            materialDesign:HintAssist.Hint="{StaticResource TextSearchHint}"
             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
             BorderThickness="0"
-            Text="{Binding SearchTerm, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
-            <!--TextBox.InputBindings>
-                <KeyBinding Key="Enter" Command="{Binding SearchCommand}"></KeyBinding>
-            </-->
-          </TextBox>
+            Text="{Binding SearchTerm, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
           <Button
             Grid.Column="2"
             Command="{Binding CleanFilterCommand}"
             Style="{DynamicResource MaterialDesignToolButton}"
-            ToolTip="Clean filter">
-            <materialDesign:PackIcon Kind="delete" Opacity=".56" />
+            ToolTip="{StaticResource TextCleanFilter}">
+            <materialDesign:PackIcon Kind="delete" Opacity="{StaticResource OpacityIcon}" />
           </Button>
         </Grid>
       </materialDesign:ColorZone>
@@ -135,7 +131,6 @@
       x:Name="ListBoxFeeds2"
       Grid.Row="1"
       Margin="{StaticResource MarginBottom12}"
-      BorderThickness="0,0,0,0"
       Focusable="True"
       IsSynchronizedWithCurrentItem="True"
       ItemTemplate="{StaticResource DataTemplateFeedViewModel}"
@@ -144,7 +139,7 @@
         <GroupStyle>
           <GroupStyle.HeaderTemplate>
             <DataTemplate>
-              <Border Margin="4,12,0,4">
+              <Border Margin="{StaticResource MarginLeft4Top12Bottom4}">
                 <TextBlock FontSize="{StaticResource FontSizeExtraLarge}" FontWeight="SemiBold" />
               </Border>
             </DataTemplate>

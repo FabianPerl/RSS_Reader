@@ -43,10 +43,17 @@
   <DockPanel Margin="{StaticResource MarginAllSides12}">
     <Button
       Click="CloseWindow"
-      Content="{StaticResource TextCloseWindow}"
       DockPanel.Dock="Bottom"
-      Style="{StaticResource MaterialDesignRaisedDarkButton}"
-      ToolTip="{StaticResource TooltipCloseWOAdding}" />
+      ToolTip="{StaticResource TooltipCloseWOAdding}">
+      <StackPanel Orientation="Horizontal">
+        <materialDesign:PackIcon
+          Width="{StaticResource WidthSmallIcon}"
+          Height="{StaticResource HeightSmallIcon}"
+          Margin="{StaticResource MarginTop2Right4}"
+          Kind="WindowClose" />
+        <TextBlock Text="{StaticResource TextCloseWindow}" />
+      </StackPanel>
+    </Button>
     <Grid>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="1*" />
@@ -95,13 +102,23 @@
             </Style>
           </ListView.ItemContainerStyle>
         </ListView>
+
         <Button
           Margin="{StaticResource MarginTop12}"
           Click="CloseWindow"
           Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.RemoveSourceCommand)}"
-          Content="{StaticResource DeleteSource}"
           Style="{StaticResource MaterialDesignRaisedButton}"
-          ToolTip="{StaticResource TooltipDeleteSource}" />
+          ToolTip="{StaticResource TooltipDeleteSource}">
+          <StackPanel Orientation="Horizontal">
+            <materialDesign:PackIcon
+              Width="{StaticResource WidthSmallIcon}"
+              Height="{StaticResource HeightSmallIcon}"
+              Margin="{StaticResource MarginTop2Right4}"
+              Kind="Delete" />
+            <TextBlock Text="{StaticResource DeleteSource}" />
+          </StackPanel>
+        </Button>
+
       </StackPanel>
 
       <StackPanel
@@ -130,13 +147,23 @@
           <ComboBoxItem Content="News" />
           <ComboBoxItem Content="Allgemeines" />
         </ComboBox>
+
         <Button
           Margin="{StaticResource MarginTop12}"
           Click="CloseWindow"
           Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.EditSourceCommand), Mode=OneWay}"
-          Content="{StaticResource ChangeSource}"
           Style="{StaticResource MaterialDesignRaisedButton}"
-          ToolTip="{StaticResource TooltipChangeSource}" />
+          ToolTip="{StaticResource TooltipChangeSource}">
+          <StackPanel Orientation="Horizontal">
+            <materialDesign:PackIcon
+              Width="{StaticResource WidthSmallIcon}"
+              Height="{StaticResource HeightSmallIcon}"
+              Margin="{StaticResource MarginTop2Right4}"
+              Kind="Edit" />
+            <TextBlock Text="{StaticResource ChangeSource}" />
+          </StackPanel>
+        </Button>
+
       </StackPanel>
     </Grid>
   </DockPanel>

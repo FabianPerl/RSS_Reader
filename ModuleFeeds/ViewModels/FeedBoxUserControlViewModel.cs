@@ -74,8 +74,7 @@ namespace ModuleFeeds.ViewModels
 
         public bool IsEmpty => _allFeeds.Count == 0;
         public bool IsNotEmpty => !IsEmpty;
-
-
+        
         private readonly ObservableCollection<FeedViewModel> _allFeeds;
 
         /// <summary>

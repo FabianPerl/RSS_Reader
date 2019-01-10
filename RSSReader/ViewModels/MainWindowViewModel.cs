@@ -124,7 +124,7 @@ namespace RSSReader.ViewModels
 	    }
 
         /// <summary>
-        /// Adds a new source to the list. Must be a rss-source like .xml or .atom
+        /// Adds a new source to the list. Must be a rss-source with a .xml or .atom file inside as as response
         /// </summary>
         /// <param name="source"></param>
 	    private void AddSource(Source source)

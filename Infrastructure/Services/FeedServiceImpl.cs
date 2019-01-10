@@ -46,8 +46,7 @@ namespace Infrastructure.Services
                             {
                                 authors.Add(element.Name);
                             }
-
-
+                            
                             var newFeedViewModel = new FeedViewModel
                             {
                                 PublishedDate = item.PublishDate,

@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Net;
 using System.Threading.Tasks;
 using Infrastructure.ViewModels;
 using System.ServiceModel.Syndication;
-using System.Text;
-using System.Web;
 using System.Xml;
 using Prism.Logging;
 

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using Prism.Mvvm;
-using System.Collections.ObjectModel;
-using System.Linq;
 using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Models;
 using Infrastructure.Services;
-using ModuleAdd.ViewModels;
 using ModuleAdd.Views;
 using ModuleArchiveFeeds.Views;
 using ModuleEdit.Views;

@@ -1,13 +1,11 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
-using Infrastructure.Models;
 
 namespace ModuleAdd.Views
 {
     /// <summary>
     /// Interaction logic for AddFeedFormUserControl
     /// </summary>
-    public partial class AddFeedWindow : Window
+    public partial class AddFeedWindow
     {
         public AddFeedWindow()
         {

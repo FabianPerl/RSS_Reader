@@ -1,7 +1,5 @@
 ﻿using System;
-using Infrastructure.Constants;
 using Infrastructure.Events;
-using ModuleBrowser.Views;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -12,14 +10,12 @@ namespace ModuleBrowser.ViewModels
     public class ViewAViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IRegionManager _regionManager;
         private Uri _currentUri;
 
         public DelegateCommand CloseBrowserDelegateCommand { get; set; }
 
-        public ViewAViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
+        public ViewAViewModel(IEventAggregator eventAggregator)
         {
-            _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             CloseBrowserDelegateCommand = new DelegateCommand(CloseBrowser);
             

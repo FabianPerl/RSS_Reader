@@ -7,7 +7,6 @@ using ModuleBrowser;
 using ModuleEdit;
 using ModuleFeeds;
 using Prism.Modularity;
-using Prism.Regions;
 using RSSReader.Views;
 
 namespace RSSReader

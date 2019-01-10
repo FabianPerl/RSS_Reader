@@ -12,7 +12,7 @@ namespace Infrastructure.Models
         private string _category;
 
         [JsonProperty]
-        public string Id { get; private set; } = Guid.NewGuid().ToString();
+        public string Id { get; } = Guid.NewGuid().ToString();
 
         [JsonProperty]
         public Uri FeedUri
@@ -42,12 +42,12 @@ namespace Infrastructure.Models
                 return false;
             }
 
-            return this.Id.Equals(secondSource.Id);
+            return Id.Equals(secondSource.Id);
         }
 
         public override int GetHashCode()
         {
-            return this.Id.GetHashCode();
+            return Id.GetHashCode();
         }
     }
 }

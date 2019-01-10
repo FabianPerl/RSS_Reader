@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Models;
@@ -14,7 +12,6 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Logging;
 using Prism.Mvvm;
-using Prism.Regions;
 
 namespace ModuleFeeds.ViewModels
 {

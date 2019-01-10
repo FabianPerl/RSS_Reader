@@ -1,166 +1,165 @@
 ﻿<Window
-    x:Class="ModuleEdit.Views.EditFeedFormWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-    xmlns:local="clr-namespace:ModuleEdit.Views"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="clr-namespace:Infrastructure.Models;assembly=Infrastructure"
-    xmlns:prism="http://prismlibrary.com/"
-    xmlns:viewModels="clr-namespace:ModuleEdit.ViewModels"
-    MinWidth="700"
-    MinHeight="300"
-    d:DesignHeight="300"
-    d:DesignWidth="300"
-    prism:ViewModelLocator.AutoWireViewModel="True"
-    Background="{DynamicResource MaterialDesignPaper}"
-    WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
+  x:Class="ModuleEdit.Views.EditFeedFormWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:models="clr-namespace:Infrastructure.Models;assembly=Infrastructure"
+  xmlns:prism="http://prismlibrary.com/"
+  xmlns:viewModels="clr-namespace:ModuleEdit.ViewModels"
+  MinWidth="700"
+  MinHeight="300"
+  d:DesignHeight="300"
+  d:DesignWidth="300"
+  prism:ViewModelLocator.AutoWireViewModel="True"
+  Background="{DynamicResource MaterialDesignPaper}"
+  WindowStartupLocation="CenterScreen"
+  mc:Ignorable="d">
 
-    <Window.Resources>
-        <DataTemplate x:Key="DataTemplateSourcesToEdit" DataType="models:Source">
-            <StackPanel Background="{StaticResource BrushTransparent}" Orientation="Horizontal">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                        <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.PreviewEditSourceCommand)}" CommandParameter="{Binding}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <materialDesign:PackIcon
-                    Width="{StaticResource WidthIcon}"
-                    Height="{StaticResource HeightIcon}"
-                    VerticalAlignment="Center"
-                    Kind="Label" />
-                <TextBlock
-                    Margin="{StaticResource MarginLeft20Right10}"
-                    VerticalAlignment="Center"
-                    Text="{Binding Name}" />
-            </StackPanel>
-        </DataTemplate>
-    </Window.Resources>
+  <Window.Resources>
+    <DataTemplate x:Key="DataTemplateSourcesToEdit" DataType="models:Source">
+      <StackPanel Background="{StaticResource BrushTransparent}" Orientation="Horizontal">
+        <i:Interaction.Triggers>
+          <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.PreviewEditSourceCommand)}" CommandParameter="{Binding}" />
+          </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <materialDesign:PackIcon
+          Width="{StaticResource WidthIcon}"
+          Height="{StaticResource HeightIcon}"
+          VerticalAlignment="Center"
+          Kind="Label" />
+        <TextBlock
+          Margin="{StaticResource MarginLeft20Right10}"
+          VerticalAlignment="Center"
+          Text="{Binding Name}" />
+      </StackPanel>
+    </DataTemplate>
+  </Window.Resources>
 
-    <DockPanel Margin="{StaticResource MarginAllSides12}">
+  <DockPanel Margin="{StaticResource MarginAllSides12}">
+    <Button
+      Click="CloseWindow"
+      DockPanel.Dock="Bottom"
+      ToolTip="{StaticResource TooltipCloseWOAdding}">
+      <StackPanel Orientation="Horizontal">
+        <materialDesign:PackIcon
+          Width="{StaticResource WidthSmallIcon}"
+          Height="{StaticResource HeightSmallIcon}"
+          Margin="{StaticResource MarginTop2Right4}"
+          Kind="WindowClose" />
+        <TextBlock Text="{StaticResource TextCloseWindow}" />
+      </StackPanel>
+    </Button>
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="1*" />
+        <ColumnDefinition Width="1*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <Border
+        Grid.RowSpan="4"
+        Grid.Column="1"
+        Background="{x:Null}"
+        BorderBrush="{StaticResource BorderBrushDark}"
+        BorderThickness="{StaticResource BorderThicknessLeft1}" />
+
+      <StackPanel
+        Grid.Row="0"
+        Grid.Column="0"
+        Margin="{StaticResource MarginLeftRightBottom12}">
+        <ListView
+          BorderBrush="{x:Null}"
+          Foreground="{StaticResource BrushLight}"
+          ItemTemplate="{StaticResource DataTemplateSourcesToEdit}"
+          ItemsSource="{Binding AllSources}"
+          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+          <ListView.ItemContainerStyle>
+            <Style TargetType="{x:Type ListViewItem}">
+              <Setter Property="Height" Value="{StaticResource HeightListViewItemSource}" />
+              <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+              <Setter Property="VerticalContentAlignment" Value="Stretch" />
+              <Setter Property="Focusable" Value="false" />
+              <Setter Property="Background" Value="Transparent" />
+              <Setter Property="Template">
+                <Setter.Value>
+                  <ControlTemplate TargetType="{x:Type ListViewItem}">
+                    <ContentPresenter />
+                  </ControlTemplate>
+                </Setter.Value>
+              </Setter>
+              <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                  <Setter Property="Cursor" Value="Hand" />
+                </Trigger>
+              </Style.Triggers>
+            </Style>
+          </ListView.ItemContainerStyle>
+        </ListView>
+
         <Button
-            Click="CloseWindow"
-            DockPanel.Dock="Bottom"
-            ToolTip="{StaticResource TooltipCloseWOAdding}">
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon
-                    Width="{StaticResource WidthSmallIcon}"
-                    Height="{StaticResource HeightSmallIcon}"
-                    Margin="{StaticResource MarginTop2Right4}"
-                    Kind="WindowClose" />
-                <TextBlock Text="{StaticResource TextCloseWindow}" />
-            </StackPanel>
+          Margin="{StaticResource MarginTop12}"
+          Click="CloseWindow"
+          Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.RemoveSourceCommand)}"
+          Style="{StaticResource MaterialDesignRaisedButton}"
+          ToolTip="{StaticResource TooltipDeleteSource}">
+          <StackPanel Orientation="Horizontal">
+            <materialDesign:PackIcon
+              Width="{StaticResource WidthSmallIcon}"
+              Height="{StaticResource HeightSmallIcon}"
+              Margin="{StaticResource MarginTop2Right4}"
+              Kind="Delete" />
+            <TextBlock Text="{StaticResource DeleteSource}" />
+          </StackPanel>
         </Button>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Border
-                Grid.RowSpan="4"
-                Grid.Column="1"
-                Background="{x:Null}"
-                BorderBrush="{StaticResource BorderBrushDark}"
-                BorderThickness="{StaticResource BorderThicknessLeft1}" />
 
-            <StackPanel
-                Grid.Row="0"
-                Grid.Column="0"
-                Margin="{StaticResource MarginLeftRightBottom12}">
-                <ListView
-                    BorderBrush="{x:Null}"
-                    Foreground="{StaticResource BrushLight}"
-                    ItemTemplate="{StaticResource DataTemplateSourcesToEdit}"
-                    ItemsSource="{Binding AllSources}"
-                    ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListViewItem}">
-                            <Setter Property="Height" Value="{StaticResource HeightListViewItemSource}" />
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                            <Setter Property="VerticalContentAlignment" Value="Stretch" />
-                            <Setter Property="Focusable" Value="false" />
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                        <ContentPresenter />
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Cursor" Value="Hand" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
+      </StackPanel>
 
-                <Button
-                    Margin="{StaticResource MarginTop12}"
-                    Click="CloseWindow"
-                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.RemoveSourceCommand)}"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    ToolTip="{StaticResource TooltipDeleteSource}">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon
-                            Width="{StaticResource WidthSmallIcon}"
-                            Height="{StaticResource HeightSmallIcon}"
-                            Margin="{StaticResource MarginTop2Right4}"
-                            Kind="Delete" />
-                        <TextBlock Text="{StaticResource DeleteSource}" />
-                    </StackPanel>
-                </Button>
+      <StackPanel
+        Grid.Row="0"
+        Grid.Column="1"
+        Margin="{StaticResource MarginLeftRightBottom12}">
+        <TextBox
+          Margin="{StaticResource MarginBottom12}"
+          materialDesign:HintAssist.Hint="{StaticResource HintTitle}"
+          Foreground="{StaticResource BrushLight}"
+          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+          Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.NameOfSource), Mode=TwoWay}" />
+        <TextBox
+          Margin="{StaticResource MarginBottom12}"
+          materialDesign:HintAssist.Hint="{StaticResource HintUrl}"
+          Foreground="{StaticResource BrushLight}"
+          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+          Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.UriOfSource), Mode=TwoWay}" />
+        <ComboBox
+          materialDesign:HintAssist.Hint="{StaticResource HintCategory}"
+          Foreground="{StaticResource BrushLight}"
+          ItemsSource="{Binding Categories}"
+          Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+          Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.CategoryOfSource), Mode=TwoWay}" />
 
-            </StackPanel>
+        <Button
+          Margin="{StaticResource MarginTop12}"
+          Click="CloseWindow"
+          Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.EditSourceCommand), Mode=OneWay}"
+          Style="{StaticResource MaterialDesignRaisedButton}"
+          ToolTip="{StaticResource TooltipChangeSource}">
+          <StackPanel Orientation="Horizontal">
+            <materialDesign:PackIcon
+              Width="{StaticResource WidthSmallIcon}"
+              Height="{StaticResource HeightSmallIcon}"
+              Margin="{StaticResource MarginTop2Right4}"
+              Kind="Edit" />
+            <TextBlock Text="{StaticResource ChangeSource}" />
+          </StackPanel>
+        </Button>
 
-            <StackPanel
-                Grid.Row="0"
-                Grid.Column="1"
-                Margin="{StaticResource MarginLeftRightBottom12}">
-                <TextBox
-                    Margin="{StaticResource MarginBottom12}"
-                    materialDesign:HintAssist.Hint="{StaticResource HintTitle}"
-                    Foreground="{StaticResource BrushLight}"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.NameOfSource), Mode=TwoWay}" />
-                <TextBox
-                    Margin="{StaticResource MarginBottom12}"
-                    materialDesign:HintAssist.Hint="{StaticResource HintUrl}"
-                    Foreground="{StaticResource BrushLight}"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.UriOfSource), Mode=TwoWay}" />
-                <ComboBox
-                    materialDesign:HintAssist.Hint="{StaticResource HintCategory}"
-                    Foreground="{StaticResource BrushLight}"
-                    ItemsSource="{Binding Categories}"
-                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                    Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.CategoryOfSource), Mode=TwoWay}" />
-
-                <Button
-                    Margin="{StaticResource MarginTop12}"
-                    Click="CloseWindow"
-                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.EditSourceCommand), Mode=OneWay}"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    ToolTip="{StaticResource TooltipChangeSource}">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon
-                            Width="{StaticResource WidthSmallIcon}"
-                            Height="{StaticResource HeightSmallIcon}"
-                            Margin="{StaticResource MarginTop2Right4}"
-                            Kind="Edit" />
-                        <TextBlock Text="{StaticResource ChangeSource}" />
-                    </StackPanel>
-                </Button>
-
-            </StackPanel>
-        </Grid>
-    </DockPanel>
+      </StackPanel>
+    </Grid>
+  </DockPanel>
 </Window>

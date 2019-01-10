@@ -1,6 +1,4 @@
-﻿using Infrastructure.Constants;
-using ModuleAdd.ViewModels;
-using Prism.Ioc;
+﻿using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 
@@ -8,10 +6,8 @@ namespace ModuleAdd
 {
     public class ModuleAddModule : IModule
     {
-        private readonly IRegionManager _regionManager;
-        public ModuleAddModule(IRegionManager regionManager)
+        public ModuleAddModule()
         {
-            _regionManager = regionManager;
         }
 
         public void OnInitialized(IContainerProvider containerProvider)

@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using Infrastructure.Constants;
 using Infrastructure.Models;
-using Infrastructure.ViewModels;
 using Newtonsoft.Json;
 using Prism.Logging;
 using FeedViewModel = Infrastructure.ViewModels.FeedViewModel;

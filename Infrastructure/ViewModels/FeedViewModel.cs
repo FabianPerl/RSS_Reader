@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using System.Windows.Controls;
-using Microsoft.SyndicationFeed;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Prism.Mvvm;
@@ -18,7 +15,6 @@ namespace Infrastructure.ViewModels
 	    private const string LinkInvalid = "The Link is invalid";
 
 	    private string _errorMessage = string.Empty;
-	    private bool _hasErrors = false;
 
 	    private string _imageUrl;
 	    private ICollection<string> _authors;
@@ -41,12 +37,6 @@ namespace Infrastructure.ViewModels
 	        set => SetProperty(ref _errorMessage, value);
 	    }
 
-        [JsonIgnore]
-	    public bool HasErrors
-	    {
-	        get => _hasErrors;
-	        set => SetProperty(ref _hasErrors, value);
-	    }
         #endregion
 
         #region attributes
@@ -177,12 +167,12 @@ namespace Infrastructure.ViewModels
 	            return false;
 	        }
 
-	        return this.Id.Equals(secondFeedViewModel.Id);
+	        return Id.Equals(secondFeedViewModel.Id);
 	    }
 
 	    public override int GetHashCode()
 	    {
-	        return this.Id.GetHashCode();
+	        return Id.GetHashCode();
 	    }
 
 	    private bool IsValidFeed(Uri url)

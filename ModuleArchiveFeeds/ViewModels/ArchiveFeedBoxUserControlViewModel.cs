@@ -1,10 +1,8 @@
-﻿using System;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Services;
@@ -54,9 +52,12 @@ namespace ModuleArchiveFeeds.ViewModels
                 var orderedFeedList = _allArchivedFeeds?.OrderByDescending(x => x.PublishedDate).ToList();
                 _allArchivedFeeds.Clear();
 
-                foreach (var feed in orderedFeedList)
+                if (orderedFeedList != null)
                 {
-                    _allArchivedFeeds.Add(feed);
+                    foreach (var feed in orderedFeedList)
+                    {
+                        _allArchivedFeeds.Add(feed);
+                    }
                 }
 
                 return _allArchivedFeeds;

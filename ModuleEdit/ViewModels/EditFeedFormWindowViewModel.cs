@@ -3,8 +3,6 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Models;
@@ -18,15 +16,12 @@ namespace ModuleEdit.ViewModels
     {
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private readonly IEventAggregator _eventAggregator;
-        private readonly IRssStore _rssStore;
         private Source _sourceToEdit;
-        private IEnumerable<Categories> _categories = Enum.GetValues(typeof(Categories)).Cast<Categories>();
 
         public EditFeedFormWindowViewModel(IEventAggregator eventAggregator, IRssStore rssStore)
         {
             _eventAggregator = eventAggregator;
-            _rssStore = rssStore;
-            AllSources = _rssStore.GetAllSources();
+            AllSources = rssStore.GetAllSources();
             RemoveSourceCommand = new DelegateCommand(RemoveOneSource);
             EditSourceCommand = new DelegateCommand(EditOneSource);
             PreviewEditSourceCommand = new DelegateCommand<Source>(PreviewOneSource);
@@ -34,6 +29,7 @@ namespace ModuleEdit.ViewModels
             if(AllSources.Count >= 1)
                 SourceToEdit = AllSources.ElementAt(0);
         }
+
         #region delegates
         public DelegateCommand RemoveSourceCommand { get; }
         public DelegateCommand EditSourceCommand { get; }
@@ -41,7 +37,7 @@ namespace ModuleEdit.ViewModels
         #endregion
 
         #region attributes
-        public IEnumerable<Categories> Categories { get => _categories; }
+        public IEnumerable<Categories> Categories { get; } = Enum.GetValues(typeof(Categories)).Cast<Categories>();
 
         public ICollection<Source> AllSources { get; }
 

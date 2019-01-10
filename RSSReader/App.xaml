@@ -83,7 +83,7 @@
                     <system:String x:Key="TextSearchHint">Search for specific Feeds</system:String>
                     <system:String x:Key="TextCleanFilter">Clean Filter</system:String>
                     <system:String x:Key="TextCloseWindow">Close</system:String>
-                    <system:String x:Key="TooltipCloseWOAdding">Close without adding a new Source</system:String>
+                    <system:String x:Key="TooltipCloseWoAdding">Close without adding a new Source</system:String>
                     <system:String x:Key="HintCategory">Category</system:String>
                     <system:String x:Key="HintUrl">URL</system:String>
                     <system:String x:Key="HintTitle">Title</system:String>

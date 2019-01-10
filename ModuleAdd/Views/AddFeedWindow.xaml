@@ -1,50 +1,49 @@
 ﻿<Window
-  x:Class="ModuleAdd.Views.AddFeedWindow"
-  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:cb="clr-namespace:ModuleAdd.Views"
-  xmlns:constants="clr-namespace:Infrastructure.Constants;assembly=Infrastructure"
-  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:prism="http://prismlibrary.com/"
-  xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
-  Title="TextTitleAddSource"
-  Width="500"
-  Height="450"
-  prism:ViewModelLocator.AutoWireViewModel="True"
-  Background="{DynamicResource MaterialDesignPaper}"
-  BorderBrush="{StaticResource BrushGray}"
-  BorderThickness="{StaticResource BorderThickness1}"
-  ResizeMode="NoResize"
-  WindowStartupLocation="CenterScreen"
-  WindowStyle="None"
-  mc:Ignorable="d">
+    x:Class="ModuleAdd.Views.AddFeedWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cb="clr-namespace:ModuleAdd.Views"
+    xmlns:constants="clr-namespace:Infrastructure.Constants;assembly=Infrastructure"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
+    Title="TextTitleAddSource"
+    Width="500"
+    Height="450"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    Background="{DynamicResource MaterialDesignPaper}"
+    BorderBrush="{StaticResource BrushGray}"
+    BorderThickness="{StaticResource BorderThickness1}"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
 
-  <DockPanel>
-    <wpf:ColorZone
-      Padding="{StaticResource PaddingAllSides5}"
-      wpf:ShadowAssist.ShadowDepth="Depth2"
-      DockPanel.Dock="Top"
-      Mode="PrimaryMid">
-      <DockPanel>
-        <TextBlock
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          FontSize="{StaticResource FontSizeFeedTitle}"
-          Text="{StaticResource TextAddSource}">
-        </TextBlock>
-      </DockPanel>
-    </wpf:ColorZone>
+    <DockPanel>
+        <wpf:ColorZone
+            Padding="{StaticResource PaddingAllSides5}"
+            wpf:ShadowAssist.ShadowDepth="Depth2"
+            DockPanel.Dock="Top"
+            Mode="PrimaryMid">
+            <DockPanel>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="{StaticResource FontSizeFeedTitle}"
+                    Text="{StaticResource TextAddSource}" />
+            </DockPanel>
+        </wpf:ColorZone>
 
         <Button
-      Margin="{StaticResource MarginLeft20Right20Bottom10}"
-      Click="CloseWindow"
-      DockPanel.Dock="Bottom"
-      ToolTip="{StaticResource TooltipCloseWOAdding}"
-      Style="{StaticResource MaterialDesignRaisedDarkButton}">
+            Margin="{StaticResource MarginLeft20Right20Bottom10}"
+            Click="CloseWindow"
+            DockPanel.Dock="Bottom"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            ToolTip="{StaticResource TooltipCloseWOAdding}">
             <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon
+                <wpf:PackIcon
                     Width="{StaticResource WidthSmallIcon}"
                     Height="{StaticResource HeightSmallIcon}"
                     Margin="{StaticResource MarginTop2Right4}"
@@ -53,46 +52,42 @@
             </StackPanel>
         </Button>
 
-    <StackPanel Margin="{StaticResource MarginLeftRight20TopBottom10}">
-      <TextBox
-        Margin="{StaticResource MarginBottom12}"
-        wpf:HintAssist.Hint="{StaticResource HintTitle}"
-        Foreground="{StaticResource BrushLight}"
-        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-        Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-      <TextBox
-        Margin="{StaticResource MarginBottom12}"
-        wpf:HintAssist.Hint="{StaticResource HintUrl}"
-        Foreground="{StaticResource BrushLight}"
-        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-        Text="{Binding Uri, UpdateSourceTrigger=PropertyChanged}" />
-      <ComboBox
-        wpf:HintAssist.Hint="{StaticResource HintCategory}"
-        Foreground="{StaticResource BrushLight}"
-        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-        Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}">
-        <ComboBoxItem Content="Sport" />
-        <ComboBoxItem Content="Technik" />
-        <ComboBoxItem Content="News" />
-        <ComboBoxItem Content="Allgemeines" />
-      </ComboBox>
+        <StackPanel Margin="{StaticResource MarginLeftRight20TopBottom10}">
+            <TextBox
+                Margin="{StaticResource MarginBottom12}"
+                wpf:HintAssist.Hint="{StaticResource HintTitle}"
+                Foreground="{StaticResource BrushLight}"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox
+                Margin="{StaticResource MarginBottom12}"
+                wpf:HintAssist.Hint="{StaticResource HintUrl}"
+                Foreground="{StaticResource BrushLight}"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Text="{Binding Uri, UpdateSourceTrigger=PropertyChanged}" />
+            <ComboBox
+                wpf:HintAssist.Hint="{StaticResource HintCategory}"
+                Foreground="{StaticResource BrushLight}"
+                ItemsSource="{Binding Categories}"
+                Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                Text="{Binding Category, UpdateSourceTrigger=PropertyChanged}" />
 
-        <Button
-            Margin="{StaticResource MarginTop12}"
-            ToolTip="{StaticResource TooltipAddSource}" 
-            Click="CloseWindow"
-            Command="{Binding AddCommand}"
-            Style="{StaticResource MaterialDesignRaisedButton}" >
-            <StackPanel Orientation="Horizontal">
-                <materialDesign:PackIcon
-                    Width="{StaticResource WidthSmallIcon}"
-                    Height="{StaticResource HeightSmallIcon}"
-                    Margin="{StaticResource MarginTop2Right4}"
-                    Kind="Add" />
-                <TextBlock Text="{StaticResource TextAddSource}" />
-            </StackPanel>
-        </Button>
+            <Button
+                Margin="{StaticResource MarginTop12}"
+                Click="CloseWindow"
+                Command="{Binding AddCommand}"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                ToolTip="{StaticResource TooltipAddSource}">
+                <StackPanel Orientation="Horizontal">
+                    <wpf:PackIcon
+                        Width="{StaticResource WidthSmallIcon}"
+                        Height="{StaticResource HeightSmallIcon}"
+                        Margin="{StaticResource MarginTop2Right4}"
+                        Kind="Add" />
+                    <TextBlock Text="{StaticResource TextAddSource}" />
+                </StackPanel>
+            </Button>
 
-    </StackPanel>
-  </DockPanel>
+        </StackPanel>
+    </DockPanel>
 </Window>

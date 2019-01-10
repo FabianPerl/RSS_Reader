@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Infrastructure.Constants;
 using Infrastructure.Events;
 using Infrastructure.Models;
@@ -15,6 +17,7 @@ namespace ModuleAdd.ViewModels
         private string _name;
         private Uri _uri;
         private string _category;
+        private IEnumerable<Categories> _categories = Enum.GetValues(typeof(Categories)).Cast<Categories>();
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private readonly IEventAggregator _eventAggregator;
 
@@ -32,6 +35,8 @@ namespace ModuleAdd.ViewModels
         #endregion
 
         #region attributes
+        public IEnumerable<Categories> Categories { get => _categories; }
+        
         public string Name
         {
             get => _name;

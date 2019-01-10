@@ -68,6 +68,7 @@
     <Compile Include="Events\WantCloseUriEvent.cs" />
     <Compile Include="Events\WantFeedEvent.cs" />
     <Compile Include="Events\WantUriEvent.cs" />
+    <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Source.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -20,6 +20,7 @@ namespace ModuleEdit.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly IRssStore _rssStore;
         private Source _sourceToEdit;
+        private IEnumerable<Categories> _categories = Enum.GetValues(typeof(Categories)).Cast<Categories>();
 
         public EditFeedFormWindowViewModel(IEventAggregator eventAggregator, IRssStore rssStore)
         {
@@ -33,11 +34,16 @@ namespace ModuleEdit.ViewModels
             if(AllSources.Count >= 1)
                 SourceToEdit = AllSources.ElementAt(0);
         }
-
-        public ICollection<Source> AllSources { get; }
+        #region delegates
         public DelegateCommand RemoveSourceCommand { get; }
         public DelegateCommand EditSourceCommand { get; }
         public DelegateCommand<Source> PreviewEditSourceCommand { get; }
+        #endregion
+
+        #region attributes
+        public IEnumerable<Categories> Categories { get => _categories; }
+
+        public ICollection<Source> AllSources { get; }
 
         private string _name;
         public string NameOfSource
@@ -72,6 +78,7 @@ namespace ModuleEdit.ViewModels
                 NameOfSource = value.Name;
             }
         }
+        #endregion
 
         #region helper
         private void EditOneSource()

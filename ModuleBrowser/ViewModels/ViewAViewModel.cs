@@ -3,7 +3,6 @@ using Infrastructure.Events;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
-using Prism.Regions;
 
 namespace ModuleBrowser.ViewModels
 {

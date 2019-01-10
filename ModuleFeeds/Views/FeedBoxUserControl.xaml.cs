@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace ModuleFeeds.Views
+﻿namespace ModuleFeeds.Views
 {
     /// <summary>
     /// Interaction logic for FeedBoxUserControl

@@ -34,6 +34,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Prism.Unity.Wpf">
+      <HintPath>..\..\..\..\.nuget\packages\prism.unity\7.1.0.431\lib\net45\Prism.Unity.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />

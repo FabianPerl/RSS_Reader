@@ -18,6 +18,17 @@
   WindowStyle="None"
   mc:Ignorable="d">
 
+    <Window.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="pack://application:,,,/Infrastructure;component/Themes/Generic.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+
+</ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+    </Window.Resources>
+
   <DockPanel>
     <wpf:ColorZone
       Padding="{StaticResource PaddingAllSides5}"

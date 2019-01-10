@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace RSSReader.Views
+﻿namespace RSSReader.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

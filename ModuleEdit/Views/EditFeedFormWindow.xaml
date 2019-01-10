@@ -19,7 +19,14 @@
   mc:Ignorable="d">
 
   <Window.Resources>
-    <DataTemplate x:Key="DataTemplateSourcesToEdit" DataType="models:Source">
+          <ResourceDictionary>
+              <ResourceDictionary.MergedDictionaries>
+                  <ResourceDictionary Source="pack://application:,,,/Infrastructure;component/Themes/Generic.xaml" />
+                  <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+                  <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+
+</ResourceDictionary.MergedDictionaries>
+        <DataTemplate x:Key="DataTemplateSourcesToEdit" DataType="models:Source">
       <StackPanel Background="{StaticResource BrushTransparent}" Orientation="Horizontal">
         <i:Interaction.Triggers>
           <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
@@ -37,13 +44,15 @@
           Text="{Binding Name}" />
       </StackPanel>
     </DataTemplate>
+
+          </ResourceDictionary>
   </Window.Resources>
 
   <DockPanel Margin="{StaticResource MarginAllSides12}">
     <Button
       Click="CloseWindow"
       DockPanel.Dock="Bottom"
-      ToolTip="{StaticResource TooltipCloseWOAdding}">
+      ToolTip="{StaticResource TooltipCloseWoAdding}">
       <StackPanel Orientation="Horizontal">
         <materialDesign:PackIcon
           Width="{StaticResource WidthSmallIcon}"

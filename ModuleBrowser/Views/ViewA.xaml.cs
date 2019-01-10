@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace ModuleBrowser.Views
+﻿namespace ModuleBrowser.Views
 {
     /// <summary>
     /// Interaction logic for ViewA.xaml

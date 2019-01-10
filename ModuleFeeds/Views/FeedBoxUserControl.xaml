@@ -13,9 +13,16 @@
   d:DesignWidth="800"
   mvvm:ViewModelLocator.AutoWireViewModel="True"
   mc:Ignorable="d">
-
+    
   <UserControl.Resources>
-    <DataTemplate x:Key="DataTemplateFeedViewModel" DataType="viewModels:FeedViewModel">
+          <ResourceDictionary>
+              <ResourceDictionary.MergedDictionaries>
+                  <ResourceDictionary Source="pack://application:,,,/Infrastructure;component/Themes/Generic.xaml" />
+                  <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+                  <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+
+</ResourceDictionary.MergedDictionaries>
+        <DataTemplate x:Key="DataTemplateFeedViewModel" DataType="viewModels:FeedViewModel">
       <Grid>
         <Grid>
           <i:Interaction.Triggers>
@@ -66,6 +73,7 @@
         </Button>
       </Grid>
     </DataTemplate>
+          </ResourceDictionary>
   </UserControl.Resources>
 
   <Grid>

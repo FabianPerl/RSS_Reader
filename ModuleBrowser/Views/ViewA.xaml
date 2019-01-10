@@ -11,8 +11,18 @@
   d:DesignWidth="300"
   prism:ViewModelLocator.AutoWireViewModel="True"
   mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Infrastructure;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
 
-  <DockPanel>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <DockPanel>
     <ToolBarTray DockPanel.Dock="Top">
       <ToolBar ClipToBounds="False" Style="{DynamicResource MaterialDesignToolBar}">
         <Button Command="{Binding CloseBrowserDelegateCommand}">

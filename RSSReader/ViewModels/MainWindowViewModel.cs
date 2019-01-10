@@ -26,7 +26,8 @@ namespace RSSReader.ViewModels
 	    private ICollection<Source> _sourceList;
 	    private readonly IEventAggregator _eventAggregator;
 	    private bool _showBrowserFlag;
-	    private readonly IRssStore _sourceStore;
+        private bool _isUpdating;
+        private readonly IRssStore _sourceStore;
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private Source _currentSource;
 
@@ -56,6 +57,7 @@ namespace RSSReader.ViewModels
             eventAggregator.GetEvent<EditSourceEvent>().Subscribe(EditSource);
             eventAggregator.GetEvent<NewSourceEvent>().Subscribe(AddSource);
             eventAggregator.GetEvent<RemoveSourceEvent>().Subscribe(RemoveSource);
+            eventAggregator.GetEvent<FeedsLoadedEvent>().Subscribe(FeedsLoaded);
 	    }
 
         #region delegates
@@ -69,8 +71,13 @@ namespace RSSReader.ViewModels
         #endregion
 
         #region attributes
+        public bool IsUpdating
+        {
+            get => _isUpdating;
+            set => SetProperty(ref _isUpdating, value);
+        }
 
-	    public bool BrowserFlag
+        public bool BrowserFlag
 	    {
 	        get => _showBrowserFlag;
 	        set => SetProperty(ref _showBrowserFlag, value);
@@ -90,6 +97,11 @@ namespace RSSReader.ViewModels
         #endregion
 
         #region helper
+        private void FeedsLoaded (bool flag)
+        {
+            IsUpdating = false;
+        }
+        
         private void OpenBrowser(Uri uri)
         {
             BrowserFlag = true;
@@ -160,6 +172,7 @@ namespace RSSReader.ViewModels
         /// </summary>
 	    private void UpdateFeeds()
 	    {
+            IsUpdating = true;
             _logger.Log("Update feeds", Category.Info, Priority.Medium);
             _eventAggregator.GetEvent<FetchDataEvent>().Publish(true);
 	    }

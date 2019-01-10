@@ -168,12 +168,26 @@ namespace ModuleFeeds.ViewModels
 
         private void UpdateFeedListWithClear(ICollection<Source> sources)
         {
+            ICollection<Source> cpSource = new ObservableCollection<Source>(sources);
             AllFeeds.Clear();
-            Header = "Feeds for all Sources";
-            UpdateFeedList(sources);
+
+            if (cpSource.Count > 1)
+            {
+                Header = "Feeds for all Sources";
+            }
+            else if (cpSource.Count == 1)
+            {
+                Header = "Feeds for " + sources.ElementAt(0).Name;
+            }
+            else
+            {
+                Header = "No Feeds Available";
+            }
+
+            UpdateFeedList(cpSource);
 
             _lastSources.Clear();
-            foreach (var source in sources)
+            foreach (var source in cpSource)
             {
                _lastSources.Add(source); 
             }
@@ -191,6 +205,8 @@ namespace ModuleFeeds.ViewModels
                 {
                     AllFeeds.Add(oneFeed);
                 }
+
+                _eventAggregator.GetEvent<FeedsLoadedEvent>().Publish(true);
             });
         }
 

@@ -10,11 +10,16 @@ using FeedViewModel = Infrastructure.ViewModels.FeedViewModel;
 
 namespace Infrastructure.Services
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// The concrete implementation to save and load the sources and archived feeds
+    /// </summary>
     public class RssStoreImpl : IRssStore
     {
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
 
         #region Sources
+        /// <inheritdoc />
         public ICollection<Source> GetAllSources()
         {
             _logger.Log("Get all sources", Category.Info, Priority.Medium);
@@ -34,12 +39,14 @@ namespace Infrastructure.Services
             }
         }
 
+        /// <inheritdoc />
         public void DeleteAllSources()
         {
             _logger.Log("Delete all sources", Category.Info, Priority.Medium);
             SafeAllSources(new ObservableCollection<Source>());
         }
 
+        /// <inheritdoc />
         public void SafeAllSources(ICollection<Source> allSources)
         {
             _logger.Log("Safe all Sources", Category.Info, Priority.Medium);
@@ -61,6 +68,7 @@ namespace Infrastructure.Services
         #endregion
 
         #region ArchiveFeeds
+        /// <inheritdoc />
         public void SafeAllArchiveFeeds(ICollection<FeedViewModel> allFeedViewModels)
         {
             _logger.Log("Safe all Archive Feeds", Category.Info, Priority.Medium);
@@ -80,6 +88,7 @@ namespace Infrastructure.Services
             }
         }
 
+        /// <inheritdoc />
         public ICollection<FeedViewModel> LoadAllArchiveFeeds()
         {
             _logger.Log("Load all Archive Feeds", Category.Info, Priority.Medium);

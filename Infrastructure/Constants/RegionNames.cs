@@ -1,7 +1,7 @@
 ﻿namespace Infrastructure.Constants
 {
     /// <summary>
-    /// The different regions used for the program
+    /// The different regions used in the program
     /// </summary>
     public static class RegionNames
     {

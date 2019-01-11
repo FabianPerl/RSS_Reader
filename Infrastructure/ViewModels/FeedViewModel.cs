@@ -8,6 +8,10 @@ using Prism.Mvvm;
 
 namespace Infrastructure.ViewModels
 {
+    /// <inheritdoc />
+    /// <summary>
+    /// Represents a feed from a source
+    /// </summary>
     [JsonObject]
 	public class FeedViewModel : BindableBase
 	{
@@ -29,18 +33,22 @@ namespace Infrastructure.ViewModels
 	    private DateTimeOffset _lastUpdatedTime;
 
         #region errors
-
+        /// <summary>
+        /// Gets and Sets the ErrorMessage that should be displayed
+        /// </summary>
         [JsonIgnore]
 	    public string ErrorMessage
 	    {
 	        get => _errorMessage;
 	        set => SetProperty(ref _errorMessage, value);
 	    }
-
         #endregion
 
         #region attributes
 
+        /// <summary>
+        /// Gets the Feed's individually ID
+        /// </summary>
         [JsonProperty]
 	    public string Id { get; } = Guid.NewGuid().ToString();
 
@@ -92,6 +100,9 @@ namespace Infrastructure.ViewModels
 	        }
 	    }
 
+        /// <summary>
+        /// Gets the string representation of the link 
+        /// </summary>
         [JsonIgnore]
 	    public string LinkAsString
 	    {
@@ -120,6 +131,9 @@ namespace Infrastructure.ViewModels
             }
 	    }
 
+        /// <summary>
+        /// Gets and Sets the image/icon of the feed's source
+        /// </summary>
         [JsonProperty]
 	    public string ImageUrl
 	    {
@@ -138,6 +152,9 @@ namespace Infrastructure.ViewModels
 	        set => SetProperty(ref _publishedDate, value);
 	    }
 
+        /// <summary>
+        /// Gets a formatted version of the feeds published Date
+        /// </summary>
         [JsonIgnore]
 	    public string PublishedDateFormatted
 	    {
@@ -149,6 +166,9 @@ namespace Infrastructure.ViewModels
 	        }
 	    }
 
+        /// <summary>
+        /// Gets and Sets the article's Date when the article was fetched
+        /// </summary>
         [JsonProperty]
         [JsonConverter(typeof(JavaScriptDateTimeConverter))]
 	    public DateTimeOffset LastUpdateDate
@@ -159,7 +179,11 @@ namespace Infrastructure.ViewModels
         #endregion
 
         #region helper
-
+        /// <summary>
+        ///  Determines whether the specified Feed is equal to the current Feed
+        /// </summary>
+        /// <param name="feedViewModel">Feed that should be compared to</param>
+        /// <returns>True if and only if the Feed has the same id, false otherwise</returns>
 	    public override bool Equals(object feedViewModel)
 	    {
 	        if (!(feedViewModel is FeedViewModel secondFeedViewModel))
@@ -170,14 +194,22 @@ namespace Infrastructure.ViewModels
 	        return Id.Equals(secondFeedViewModel.Id);
 	    }
 
+        /// <summary>
+        /// Gets the hashcode
+        /// </summary>
+        /// <returns></returns>
 	    public override int GetHashCode()
 	    {
 	        return Id.GetHashCode();
 	    }
 
+        /// <summary>
+        /// Proves if the uri is valid
+        /// </summary>
+        /// <param name="url">The Uri that should be checked</param>
+        /// <returns>True if and only if the uri is valid</returns>
 	    private bool IsValidFeed(Uri url)
 	    {
-
             //TODO: Better logic
             return true;
 	    }

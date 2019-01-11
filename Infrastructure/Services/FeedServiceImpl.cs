@@ -9,10 +9,14 @@ using Prism.Logging;
 
 namespace Infrastructure.Services
 {
+    /// <summary>
+    /// The implementation that handles the fetching of the Source's Feeds
+    /// </summary>
     public class FeedServiceImpl : IFeedService
     {
         private readonly DebugLogger _debugLogger = new DebugLogger();
 
+        /// <inheritdoc />
         public async Task<ICollection<FeedViewModel>> GetTaskAllFeedsFromUrlAsync(Uri feedUri)
         {
             if (feedUri == null)
@@ -23,6 +27,11 @@ namespace Infrastructure.Services
             return await GetTaskAllFeedsFromUrlAsyncInternal(feedUri);
         }
 
+        /// <summary>
+        /// Gets all feeds for a Uri as a task
+        /// </summary>
+        /// <param name="feedUri">The Uri used to get the feeds</param>
+        /// <returns>Returns a Collection of all feeds as a task which handles the fetching</returns>
         private Task<ICollection<FeedViewModel>> GetTaskAllFeedsFromUrlAsyncInternal(Uri feedUri)
         {
             return Task.Run(() =>

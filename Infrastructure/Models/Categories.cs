@@ -1,5 +1,8 @@
 ﻿namespace Infrastructure.Models
 {
+    /// <summary>
+    /// All Categories that are available to save the Source in
+    /// </summary>
     public enum Categories
     {
         News,

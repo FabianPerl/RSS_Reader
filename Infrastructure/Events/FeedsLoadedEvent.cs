@@ -1,6 +1,12 @@
-﻿namespace Infrastructure.Events
+﻿using Prism.Events;
+
+namespace Infrastructure.Events
 {
-    public class FeedsLoadedEvent : Prism.Events.PubSubEvent<bool>
+    /// <inheritdoc />
+    /// <summary>
+    /// Spread out that the feeds are all loaded
+    /// </summary>
+    public class FeedsLoadedEvent : PubSubEvent<bool>
     {
     }
 }

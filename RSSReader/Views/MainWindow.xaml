@@ -16,36 +16,36 @@
   WindowStartupLocation="CenterScreen">
 
   <Window.Resources>
-      <ResourceDictionary>
-          <ResourceDictionary.MergedDictionaries>
-              <ResourceDictionary Source="pack://application:,,,/Infrastructure;component/Themes/Generic.xaml" />
-              <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
-              <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-          </ResourceDictionary.MergedDictionaries>
-            <DataTemplate x:Key="DataTemplateSourcesViewModel" DataType="models:Source">
-      <StackPanel
-        Margin="{StaticResource MarginLeftSources}"
-        Background="{StaticResource BrushTransparent}"
-        Orientation="Horizontal">
-        <i:Interaction.Triggers>
-          <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:MainWindowViewModel.GetSourceDelegateCommand)}" CommandParameter="{Binding}" />
-          </i:EventTrigger>
-          <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-            <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
-          </i:EventTrigger>
-        </i:Interaction.Triggers>
-        <materialDesign:PackIcon
-          Width="{StaticResource WidthIcon}"
-          Height="{StaticResource HeightIcon}"
-          VerticalAlignment="Center"
-          Kind="Label" />
-        <TextBlock
-          Margin="{StaticResource MarginLeft20Right10}"
-          VerticalAlignment="Center"
-          Text="{Binding Name}" />
-      </StackPanel>
-    </DataTemplate>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Infrastructure;component/Themes/Generic.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <DataTemplate x:Key="DataTemplateSourcesViewModel" DataType="models:Source">
+        <StackPanel
+          Margin="{StaticResource MarginLeftSources}"
+          Background="{StaticResource BrushTransparent}"
+          Orientation="Horizontal">
+          <i:Interaction.Triggers>
+            <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+              <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:MainWindowViewModel.GetSourceDelegateCommand)}" CommandParameter="{Binding}" />
+            </i:EventTrigger>
+            <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+              <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
+            </i:EventTrigger>
+          </i:Interaction.Triggers>
+          <materialDesign:PackIcon
+            Width="{StaticResource WidthIcon}"
+            Height="{StaticResource HeightIcon}"
+            VerticalAlignment="Center"
+            Kind="Label" />
+          <TextBlock
+            Margin="{StaticResource MarginLeft20Right10}"
+            VerticalAlignment="Center"
+            Text="{Binding Name}" />
+        </StackPanel>
+      </DataTemplate>
     </ResourceDictionary>
   </Window.Resources>
 

@@ -13,67 +13,67 @@
   d:DesignWidth="800"
   mvvm:ViewModelLocator.AutoWireViewModel="True"
   mc:Ignorable="d">
-    
-  <UserControl.Resources>
-          <ResourceDictionary>
-              <ResourceDictionary.MergedDictionaries>
-                  <ResourceDictionary Source="pack://application:,,,/Infrastructure;component/Themes/Generic.xaml" />
-                  <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
-                  <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
 
-</ResourceDictionary.MergedDictionaries>
-        <DataTemplate x:Key="DataTemplateFeedViewModel" DataType="viewModels:FeedViewModel">
-      <Grid>
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Infrastructure;component/Themes/Generic.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+
+      </ResourceDictionary.MergedDictionaries>
+      <DataTemplate x:Key="DataTemplateFeedViewModel" DataType="viewModels:FeedViewModel">
         <Grid>
-          <i:Interaction.Triggers>
-            <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-              <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.(viewModels1:FeedBoxUserControlViewModel.ChangeFeedCommand)}" CommandParameter="{Binding}" />
-            </i:EventTrigger>
-          </i:Interaction.Triggers>
-          <StackPanel Background="{StaticResource BrushTransparent}">
-            <Grid Margin="{StaticResource MarginLeftTopRight12}">
-              <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-              </Grid.RowDefinitions>
-              <TextBlock
-                Grid.Row="0"
-                Text="{Binding PublishedDateFormatted}"
-                TextWrapping="NoWrap" />
-              <TextBlock
-                Grid.Row="1"
-                Margin="{StaticResource MarginTop12}"
-                FontSize="{StaticResource FontSizeFeedTitle}"
-                Text="{Binding Title}"
-                TextTrimming="WordEllipsis"
-                TextWrapping="Wrap" />
-              <TextBlock
-                Grid.Row="2"
-                Margin="{StaticResource MarginBottom12}"
-                FontSize="{StaticResource FontSizeFeedDescription}"
-                Text="{Binding ShortDescription}"
-                TextTrimming="CharacterEllipsis"
-                TextWrapping="Wrap" />
-            </Grid>
-          </StackPanel>
+          <Grid>
+            <i:Interaction.Triggers>
+              <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.(viewModels1:FeedBoxUserControlViewModel.ChangeFeedCommand)}" CommandParameter="{Binding}" />
+              </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <StackPanel Background="{StaticResource BrushTransparent}">
+              <Grid Margin="{StaticResource MarginLeftTopRight12}">
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="*" />
+                  <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock
+                  Grid.Row="0"
+                  Text="{Binding PublishedDateFormatted}"
+                  TextWrapping="NoWrap" />
+                <TextBlock
+                  Grid.Row="1"
+                  Margin="{StaticResource MarginTop12}"
+                  FontSize="{StaticResource FontSizeFeedTitle}"
+                  Text="{Binding Title}"
+                  TextTrimming="WordEllipsis"
+                  TextWrapping="Wrap" />
+                <TextBlock
+                  Grid.Row="2"
+                  Margin="{StaticResource MarginBottom12}"
+                  FontSize="{StaticResource FontSizeFeedDescription}"
+                  Text="{Binding ShortDescription}"
+                  TextTrimming="CharacterEllipsis"
+                  TextWrapping="Wrap" />
+              </Grid>
+            </StackPanel>
+          </Grid>
+          <Button
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.(viewModels1:FeedBoxUserControlViewModel.AddArchiveFeedDelegateCommand)}"
+            CommandParameter="{Binding}"
+            Style="{StaticResource MaterialDesignFlatButton}"
+            ToolTip="{StaticResource TextAddToArchive}">
+            <materialDesign:PackIcon
+              Width="{StaticResource WidthSmallIcon}"
+              Height="{StaticResource HeightSmallIcon}"
+              Foreground="{StaticResource BrushAdd}"
+              Kind="CirclesAdd" />
+          </Button>
         </Grid>
-        <Button
-          HorizontalAlignment="Right"
-          VerticalAlignment="Top"
-          Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.(viewModels1:FeedBoxUserControlViewModel.AddArchiveFeedDelegateCommand)}"
-          CommandParameter="{Binding}"
-          Style="{StaticResource MaterialDesignFlatButton}"
-          ToolTip="{StaticResource TextAddToArchive}">
-          <materialDesign:PackIcon
-            Width="{StaticResource WidthSmallIcon}"
-            Height="{StaticResource HeightSmallIcon}"
-            Foreground="{StaticResource BrushAdd}"
-            Kind="CirclesAdd" />
-        </Button>
-      </Grid>
-    </DataTemplate>
-          </ResourceDictionary>
+      </DataTemplate>
+    </ResourceDictionary>
   </UserControl.Resources>
 
   <Grid>

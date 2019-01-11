@@ -177,6 +177,7 @@ namespace Infrastructure.ViewModels
 
 	    private bool IsValidFeed(Uri url)
 	    {
+
             //TODO: Better logic
             return true;
 	    }

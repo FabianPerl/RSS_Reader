@@ -11,7 +11,10 @@ using Prism.Mvvm;
 
 namespace ModuleAdd.ViewModels
 {
-    public class AddFeedWindowViewModel : BindableBase
+    /// <summary>
+    /// Viewmodel for adding a new Source
+    /// </summary>
+    public class AddSourceWindowViewModel : BindableBase
     {
         private string _name;
         private Uri _uri;
@@ -19,7 +22,7 @@ namespace ModuleAdd.ViewModels
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private readonly IEventAggregator _eventAggregator;
 
-        public AddFeedWindowViewModel(IEventAggregator eventAggregator)
+        public AddSourceWindowViewModel(IEventAggregator eventAggregator)
         {
             AddCommand = new DelegateCommand(Execute, CanExecute).ObservesProperty(() => Name).
                 ObservesProperty(() => Category).
@@ -29,10 +32,16 @@ namespace ModuleAdd.ViewModels
         }
 
         #region delegates
+        /// <summary>
+        /// Command to check if the source is addable
+        /// </summary>
         public DelegateCommand AddCommand { get; }
         #endregion
 
         #region attributes
+        /// <summary>
+        /// Gets all available categories for the Source
+        /// </summary>
         public IEnumerable<Categories> Categories { get; } = Enum.GetValues(typeof(Categories)).Cast<Categories>();
 
         public string Name
@@ -41,12 +50,18 @@ namespace ModuleAdd.ViewModels
             set => SetProperty(ref _name, value);
         }
 
+        /// <summary>
+        /// Gets and Sets the Category for the Source
+        /// </summary>
         public string Category
         {
             get => _category;
             set => SetProperty(ref _category, value);
         }
 
+        /// <summary>
+        /// Gets and Sets the Uri for the Source
+        /// </summary>
         public Uri Uri
         {
             get => _uri;
@@ -55,7 +70,10 @@ namespace ModuleAdd.ViewModels
         #endregion
 
         #region helper
-
+        /// <summary>
+        /// Checks if the Source can be added or not
+        /// </summary>
+        /// <returns>True if and only if all fields are not null or empty</returns>
         private bool CanExecute()
         {
             return !string.IsNullOrWhiteSpace(Name) &&
@@ -63,6 +81,9 @@ namespace ModuleAdd.ViewModels
                    !string.IsNullOrWhiteSpace(Uri.ToString());
         }
 
+        /// <summary>
+        /// Creates the new Source and publishes it as an event
+        /// </summary>
         private void Execute()
         {
             var newSource = new Source {Name = Name, Category = Category, FeedUri = Uri};

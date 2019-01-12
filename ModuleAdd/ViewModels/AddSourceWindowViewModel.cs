@@ -44,6 +44,9 @@ namespace ModuleAdd.ViewModels
         /// </summary>
         public IEnumerable<Categories> Categories { get; } = Enum.GetValues(typeof(Categories)).Cast<Categories>();
 
+        /// <summary>
+        /// Gets and Sets the Name for te Source
+        /// </summary>
         public string Name
         {
             get => _name;

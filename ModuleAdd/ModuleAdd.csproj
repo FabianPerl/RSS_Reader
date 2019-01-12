@@ -76,7 +76,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ViewModels\AddFeedWindowViewModel.cs" />
+    <Compile Include="ViewModels\AddSourceWindowViewModel.cs" />
     <Compile Include="Views\AddFeedWindow.xaml.cs">
       <DependentUpon>AddFeedWindow.xaml</DependentUpon>
     </Compile>

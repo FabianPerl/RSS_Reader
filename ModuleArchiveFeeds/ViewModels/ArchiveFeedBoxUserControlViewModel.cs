@@ -35,16 +35,34 @@ namespace ModuleArchiveFeeds.ViewModels
         }
 
         #region delegates
+        /// <summary>
+        /// Handles the interaction that the user wants to see the uri from the selected feed
+        /// </summary>
         public DelegateCommand<FeedViewModel> ChangeFeedCommand { get; }
+
+        /// <summary>
+        /// Handles the interaction to remove the selected archived feed from the list
+        /// </summary>
         public DelegateCommand<FeedViewModel> RemoveFromArchiveCommand { get; }
+
+        /// <summary>
+        /// Handles the interaction that the user wants to filter the feeds with the search term
+        /// </summary>
         public DelegateCommand SearchCommand { get; }
+
+        /// <summary>
+        /// Handles the interaction that the user wants to clean the search term
+        /// </summary>
         public DelegateCommand CleanFilterCommand { get; }
         #endregion
 
         #region attributes
-
         private ICollection<FeedViewModel> _allArchivedFeeds;
         private ICollection<FeedViewModel> _cpAllArchivedFeeds;
+
+        /// <summary>
+        /// Gets the archived feeds, sorted after the published date from each Feed
+        /// </summary>
         public ICollection<FeedViewModel> AllArchivedFeeds
         {
             get
@@ -67,6 +85,9 @@ namespace ModuleArchiveFeeds.ViewModels
 
         private string _searchTerm;
 
+        /// <summary>
+        /// Gets and Sets the search term, after which the feeds should be filtered
+        /// </summary>
         public string SearchTerm
         {
             get => _searchTerm;
@@ -75,6 +96,9 @@ namespace ModuleArchiveFeeds.ViewModels
         #endregion
 
         #region helper
+        /// <summary>
+        /// Resets the search term with an empty string and updates the feeds 
+        /// </summary>
         private void Reset()
         {
             SearchTerm = string.Empty;
@@ -92,6 +116,9 @@ namespace ModuleArchiveFeeds.ViewModels
             }
         }
 
+        /// <summary>
+        /// Filters the feeds with the search term and updates the list
+        /// </summary>
         private void SearchWithTerm()
         {
 
@@ -117,11 +144,19 @@ namespace ModuleArchiveFeeds.ViewModels
             }
         }
 
+        /// <summary>
+        /// Publishes an event that the user wants to see the uri from the selected feed
+        /// </summary>
+        /// <param name="feedViewModel">The feed that the user wants to see</param>
         private void ClickedArchiveFeed(FeedViewModel feedViewModel)
         {
             _eventAggregator.GetEvent<WantUriEvent>().Publish(feedViewModel.Link);
         }
 
+        /// <summary>
+        ///  Adds the feed to the archive only if and only if the feed does not exist yet in the list
+        /// </summary>
+        /// <param name="feedViewModel">The feed that should be added</param>
         private void AddNewArchiveFeed(FeedViewModel feedViewModel)
         {
             _logger.Log("Add Feed " + feedViewModel.Title + " to the Archive", Category.Info, Priority.Medium);
@@ -133,6 +168,10 @@ namespace ModuleArchiveFeeds.ViewModels
             }
         }
 
+        /// <summary>
+        /// Removes the feed from the archive
+        /// </summary>
+        /// <param name="feedViewModel">The feed that should be removed</param>
         private void RemoveFromArchiveFeed(FeedViewModel feedViewModel)
         {
             _logger.Log("Remove Feed " + feedViewModel.Title + " from the Archive", Category.Info, Priority.Medium);

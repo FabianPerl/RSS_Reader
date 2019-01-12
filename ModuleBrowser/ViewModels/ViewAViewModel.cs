@@ -6,6 +6,9 @@ using Prism.Mvvm;
 
 namespace ModuleBrowser.ViewModels
 {
+    /// <summary>
+    /// ViewModel for the browser
+    /// </summary>
     public class ViewAViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;

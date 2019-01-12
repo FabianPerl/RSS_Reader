@@ -15,13 +15,15 @@ using Prism.Mvvm;
 
 namespace ModuleFeeds.ViewModels
 {
+    /// <summary>
+    /// Viewmodel for the feeds
+    /// </summary>
     public class FeedBoxUserControlViewModel : BindableBase
     {
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private readonly IEventAggregator _eventAggregator;
         private readonly ICollection<Source> _lastSources = new ObservableCollection<Source>();
         private readonly IFeedService _feedService = new FeedServiceImpl();
-        public DelegateCommand<FeedViewModel> ChangeFeedCommand { get; }
 
         public FeedBoxUserControlViewModel(IEventAggregator eventAggregator)
         {
@@ -47,14 +49,35 @@ namespace ModuleFeeds.ViewModels
             AddArchiveMessageQueue = myMessageQueue;
         }
 
+        #region delegates
+        /// <summary>
+        /// Handles the interaction that the user wants to see the uri from the selected feed
+        /// </summary>
+        public DelegateCommand<FeedViewModel> ChangeFeedCommand { get; }
+
+        /// <summary>
+        /// Handles the interaction that the user wants to add the selected feed to the archive
+        /// </summary>
         public DelegateCommand<FeedViewModel> AddArchiveFeedDelegateCommand { get; }
+
+        /// <summary>
+        /// Handles the interaction that the user wants to filter the feeds with the search term
+        /// </summary>
         public DelegateCommand SearchCommand { get; }
+
+        /// <summary>
+        /// Handles the interaction that the user wants to clean the search term
+        /// </summary>
         public DelegateCommand CleanFilterCommand { get; }
+        #endregion
 
         #region attributes
 
         private string _header;
 
+        /// <summary>
+        /// Gets and Sets the title for the shown feeds
+        /// </summary>
         public string Header
         {
             get => _header;
@@ -63,19 +86,29 @@ namespace ModuleFeeds.ViewModels
 
         private string _searchTerm;
 
+        /// <summary>
+        /// Gets and Sets the search term, after which the feeds should be filtered
+        /// </summary>
         public string SearchTerm
         {
             get => _searchTerm;
             set => SetProperty(ref _searchTerm, value);
         }
 
+        /// <summary>
+        /// Returns true if and only if the feed list is empty
+        /// </summary>
         public bool IsEmpty => _allFeeds.Count == 0;
+
+        /// <summary>
+        /// Returns true if and only if the feed list is not empty
+        /// </summary>
         public bool IsNotEmpty => !IsEmpty;
         
         private readonly ObservableCollection<FeedViewModel> _allFeeds;
 
         /// <summary>
-        /// all feeds that will be shown from a source 
+        /// All feeds that will be shown from a source, ordered by the published date
         /// </summary>
         public ICollection<FeedViewModel> AllFeeds
         {
@@ -97,6 +130,9 @@ namespace ModuleFeeds.ViewModels
 
         private SnackbarMessageQueue _addArchiveMessageQueue;
 
+        /// <summary>
+        /// Gets and Sets the snackbar message queue, that is shown when an feed was added to the Archive 
+        /// </summary>
         public SnackbarMessageQueue AddArchiveMessageQueue
         {
             get => _addArchiveMessageQueue;
@@ -104,6 +140,9 @@ namespace ModuleFeeds.ViewModels
         }
 
     #region helper
+        /// <summary>
+        /// Sets the search term to empty and updates the feed list with the last known source when possible
+        /// </summary>
         private void Reset()
         {
             SearchTerm = string.Empty;
@@ -112,9 +151,11 @@ namespace ModuleFeeds.ViewModels
                 UpdateFeedListWithClear(_lastSources);
         }
 
+        /// <summary>
+        /// Filters the feed list with the search term when possible or uses the last known source and updates the feeds
+        /// </summary>
         private void SearchWithTerm()
         {
-
             if (string.IsNullOrWhiteSpace(SearchTerm))
             {
                 Reset();
@@ -136,23 +177,39 @@ namespace ModuleFeeds.ViewModels
             }
         }
 
+        /// <summary>
+        /// Adds a feed to the archive
+        /// </summary>
+        /// <param name="feedViewModel">The feed that should be added</param>
         private void AddArchiveFeed(FeedViewModel feedViewModel)
         {
             AddArchiveMessageQueue.Enqueue("Add \"" + feedViewModel.Title + "\" to the archive");
             _eventAggregator.GetEvent<NewArchiveFeedEvent>().Publish(feedViewModel);
         }
 
+        /// <summary>
+        /// Publishes an event that the user wants to see the uri for a feed
+        /// </summary>
+        /// <param name="feedViewModel">The feed for which the uri should be shown</param>
         private void ClickedFeedView(FeedViewModel feedViewModel)
         {
             _eventAggregator.GetEvent<WantUriEvent>().Publish(feedViewModel.Link);
         }
 
+        /// <summary>
+        /// Updates the list the last known source
+        /// </summary>
+        /// <param name="flag">Updates the list only if and only if the flag is true</param>
         private void ShouldUpdateFeedList(bool flag)
         {
             if(flag)
                 UpdateFeedListWithClear(_lastSources);
         }
         
+        /// <summary>
+        /// Cleans the feed list and updates the list with the source's feeds
+        /// </summary>
+        /// <param name="source">The source for the feeds</param>
         private void UpdateFeedListWithClear(Source source)
         {
             AllFeeds.Clear();
@@ -163,6 +220,10 @@ namespace ModuleFeeds.ViewModels
             _lastSources.Add(source);
         }
 
+        /// <summary>
+        /// Cleans the feed list and updates the list with the sources feeds
+        /// </summary>
+        /// <param name="sources">The sources for the feeds</param>
         private void UpdateFeedListWithClear(ICollection<Source> sources)
         {
             ICollection<Source> cpSource = new ObservableCollection<Source>(sources);
@@ -190,6 +251,10 @@ namespace ModuleFeeds.ViewModels
             }
         }
 
+        /// <summary>
+        /// Fetches the feeds for the source and publishes an event that the feeds are loaded
+        /// </summary>
+        /// <param name="source"></param>
         private void UpdateFeedList(Source source)
         {
             var awaiter = _feedService.GetTaskAllFeedsFromUrlAsync(source.FeedUri).GetAwaiter();
@@ -207,6 +272,10 @@ namespace ModuleFeeds.ViewModels
             });
         }
 
+        /// <summary>
+        /// Fetches the feeds for the sources
+        /// </summary>
+        /// <param name="sources"></param>
         private void UpdateFeedList(ICollection<Source> sources)
         {
             foreach (var source in sources)

@@ -12,6 +12,9 @@ using Prism.Logging;
 
 namespace ModuleArchiveFeeds.ViewModels
 {
+    /// <summary>
+    /// Viewmodel for the archived feeds
+    /// </summary>
     public class ArchiveFeedBoxUserControlViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;

@@ -11,7 +11,10 @@ namespace ModuleBrowser.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private Uri _currentUri;
 
-        public DelegateCommand CloseBrowserDelegateCommand { get; set; }
+        /// <summary>
+        /// Handles the interaction that the user wants to close the browser
+        /// </summary>
+        public DelegateCommand CloseBrowserDelegateCommand { get; }
 
         public ViewAViewModel(IEventAggregator eventAggregator)
         {
@@ -21,11 +24,18 @@ namespace ModuleBrowser.ViewModels
             _eventAggregator.GetEvent<WantUriEvent>().Subscribe(SetTheUri);
         }
 
+        /// <summary>
+        /// Publishes an event that the uri should be closed
+        /// </summary>
         private void CloseBrowser()
         {
             _eventAggregator.GetEvent<WantCloseUriEvent>().Publish();
         }
 
+        /// <summary>
+        /// Sets the uri for the browser
+        /// </summary>
+        /// <param name="uri">The Uri that should be shown</param>
         private void SetTheUri(Uri uri)
         {
            CurrentUri = uri;

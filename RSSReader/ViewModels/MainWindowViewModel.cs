@@ -43,7 +43,7 @@ namespace RSSReader.ViewModels
 
             UpdateFeedsDelegateCommand = new DelegateCommand(UpdateFeeds);
 
-            OpenAddSourceWindowDelegateCommand = new DelegateCommand(OpenAddFeedWindow);
+            OpenAddSourceWindowDelegateCommand = new DelegateCommand(OpenAddSourceWindow);
             OpenEditFeedWindowDelegateCommand = new DelegateCommand(OpenEditFeedWindow);
 
 	        ShowArchiveFeedsDelegateCommand = new DelegateCommand(ShowArchiveFeeds);
@@ -51,7 +51,6 @@ namespace RSSReader.ViewModels
 
             eventAggregator.GetEvent<WantUriEvent>().Subscribe(OpenBrowser);
             eventAggregator.GetEvent<WantCloseUriEvent>().Subscribe(CloseBrowser);
-
 
             eventAggregator.GetEvent<EditSourceEvent>().Subscribe(EditSource);
             eventAggregator.GetEvent<NewSourceEvent>().Subscribe(AddSource);
@@ -215,7 +214,7 @@ namespace RSSReader.ViewModels
 	    {
 	        foreach (var oneSource in AllSources)
 	        {
-	            if (source.Equals(oneSource))
+	            if (oneSource.Equals(source))
 	            {
 	                AllSources.Remove(oneSource);
 	                break;
@@ -267,9 +266,9 @@ namespace RSSReader.ViewModels
         /// <summary>
         /// Opens a new Window to add new sources
         /// </summary>
-        private void OpenAddFeedWindow()
+        private void OpenAddSourceWindow()
 	    {
-	        new AddFeedWindow().Show();
+	        new AddSourceWindow().Show();
 	    }
 
         /// <summary>

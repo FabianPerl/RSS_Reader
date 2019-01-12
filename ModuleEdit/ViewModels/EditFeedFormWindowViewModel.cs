@@ -25,9 +25,13 @@ namespace ModuleEdit.ViewModels
         {
             _eventAggregator = eventAggregator;
             AllSources = rssStore.GetAllSources();
-            RemoveSourceCommand = new DelegateCommand(RemoveOneSource);
-            EditSourceCommand = new DelegateCommand(EditOneSource);
+
             PreviewEditSourceCommand = new DelegateCommand<Source>(PreviewOneSource);
+            RemoveSourceCommand = new DelegateCommand(RemoveOneSource);
+            EditSourceCommand = new DelegateCommand(EditOneSource, CanExecute).
+                ObservesProperty(() => NameOfSource).
+                ObservesProperty(() => CategoryOfSource).
+                ObservesProperty(() => UriOfSource);
 
             if(AllSources.Count >= 1)
                 SourceToEdit = AllSources.ElementAt(0);
@@ -61,34 +65,59 @@ namespace ModuleEdit.ViewModels
         /// </summary>
         public ICollection<Source> AllSources { get; }
 
+        private string _name;
+
         /// <summary>
         /// Gets and Sets the name of the clicked Source
         /// </summary>
-        private string _name;
         public string NameOfSource
         {
             get => _name;
             set => SetProperty(ref _name, value);
         }
 
+        private Uri _uri;
+
         /// <summary>
         /// Gets and Sets the uri of the clicked Source
         /// </summary>
-        private Uri _uri;
         public Uri UriOfSource
         {
             get => _uri;
             set => SetProperty(ref _uri, value);
         }
 
+        private bool _hasErrors;
+
+        /// <summary>
+        /// Gets and Sets the errors 
+        /// </summary>
+        private bool HasErrors
+        {
+            get => _hasErrors;
+            set => SetProperty(ref _hasErrors, value);
+        }
+
+        private string _category;
+
         /// <summary>
         /// Gets and Sets the category of the clicked Source
         /// </summary>
-        private string _category;
         public string CategoryOfSource
         {
             get => _category;
             set => SetProperty(ref _category, value);
+        }
+
+        private bool _hasValues;
+
+        /// <summary>
+        /// Gets and Sets the state of the edit source
+        /// </summary>
+        public bool HasValues
+        {
+            get => _hasValues;
+            set => SetProperty(ref _hasValues, value);
         }
 
         /// <summary>
@@ -99,8 +128,10 @@ namespace ModuleEdit.ViewModels
             get => _sourceToEdit;
             set
             {
-                _logger.Log("Edit: " + value.Name + " with URI " + value.FeedUri + " and ID: " + value.Id, Category.Info, Priority.Medium);   
+                _logger.Log("Edit: " + value.Name + " with URI " + value.FeedUri + " and ID: " + value.Id, Category.Info, Priority.Medium);
+                HasValues = true;
                 SetProperty(ref _sourceToEdit, value);
+                SourceToEdit.Id = value.Id;
                 CategoryOfSource = value.Category;
                 UriOfSource = value.FeedUri;
                 NameOfSource = value.Name;
@@ -114,6 +145,8 @@ namespace ModuleEdit.ViewModels
         /// </summary>
         private void EditOneSource()
         {
+            if (_sourceToEdit == null) return;
+
             _sourceToEdit.FeedUri = UriOfSource;
             _sourceToEdit.Name = NameOfSource;
             _sourceToEdit.Category = CategoryOfSource;
@@ -135,8 +168,18 @@ namespace ModuleEdit.ViewModels
         /// </summary>
         private void RemoveOneSource()
         {
-            _logger.Log("Remove " + _sourceToEdit.Name + " with URI " + _sourceToEdit.FeedUri + " and ID: " + _sourceToEdit.Id, Category.Info, Priority.Medium);   
+            if (_sourceToEdit == null) return;
+
+            _logger.Log( "Remove " + _sourceToEdit.Name + " with URI " + _sourceToEdit.FeedUri + " and ID: " + _sourceToEdit.Id, Category.Info, Priority.Medium);
             _eventAggregator.GetEvent<RemoveSourceEvent>().Publish(_sourceToEdit);
+        }
+
+        private bool CanExecute()
+        {
+            return !string.IsNullOrWhiteSpace(NameOfSource) &&
+                   !string.IsNullOrWhiteSpace(CategoryOfSource) &&
+                   !string.IsNullOrWhiteSpace(UriOfSource.ToString()) &&
+                   !HasErrors;
         }
         #endregion
     }

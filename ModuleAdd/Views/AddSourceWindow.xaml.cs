@@ -3,11 +3,11 @@
 namespace ModuleAdd.Views
 {
     /// <summary>
-    /// Interaction logic for AddFeedFormUserControl
+    /// Interaction logic for AddSource FormUserControl
     /// </summary>
-    public partial class AddFeedWindow
+    public partial class AddSourceWindow
     {
-        public AddFeedWindow()
+        public AddSourceWindow()
         {
             InitializeComponent();
         }

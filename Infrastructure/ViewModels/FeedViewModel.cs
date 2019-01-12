@@ -15,11 +15,6 @@ namespace Infrastructure.ViewModels
     [JsonObject]
 	public class FeedViewModel : BindableBase
 	{
-	    private const string LinkNoHttpDefined = "Please provide http:// or https://";
-	    private const string LinkInvalid = "The Link is invalid";
-
-	    private string _errorMessage = string.Empty;
-
 	    private string _imageUrl;
 	    private ICollection<string> _authors;
 	    private string _title;
@@ -31,18 +26,6 @@ namespace Infrastructure.ViewModels
 
 	    private DateTimeOffset _publishedDate;
 	    private DateTimeOffset _lastUpdatedTime;
-
-        #region errors
-        /// <summary>
-        /// Gets and Sets the ErrorMessage that should be displayed
-        /// </summary>
-        [JsonIgnore]
-	    public string ErrorMessage
-	    {
-	        get => _errorMessage;
-	        set => SetProperty(ref _errorMessage, value);
-	    }
-        #endregion
 
         #region attributes
 
@@ -93,42 +76,7 @@ namespace Infrastructure.ViewModels
 	    public Uri Link
 	    {
 	        get => _link;
-	        set
-	        {
-	            if (SetProperty(ref _link, value))
-                   RaisePropertyChanged(LinkAsString);
-	        }
-	    }
-
-        /// <summary>
-        /// Gets the string representation of the link 
-        /// </summary>
-        [JsonIgnore]
-	    public string LinkAsString
-	    {
-	        get => Link?.OriginalString ?? string.Empty;
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                    return;
-
-                if (!value.Trim().StartsWith("https://") || !value.Trim().StartsWith("http://"))
-                {
-                    _errorMessage = LinkNoHttpDefined;
-                    return;
-                }
-
-                if (Uri.TryCreate(value, UriKind.Absolute, out var uri))
-                {
-                    if(IsValidFeed(uri))
-                        Link = uri;
-                }
-                else
-                {
-                    _errorMessage = LinkInvalid;
-                }
-
-            }
+	        set => SetProperty(ref _link, value);
 	    }
 
         /// <summary>
@@ -201,17 +149,6 @@ namespace Infrastructure.ViewModels
 	    public override int GetHashCode()
 	    {
 	        return Id.GetHashCode();
-	    }
-
-        /// <summary>
-        /// Proves if the uri is valid
-        /// </summary>
-        /// <param name="url">The Uri that should be checked</param>
-        /// <returns>True if and only if the uri is valid</returns>
-	    private bool IsValidFeed(Uri url)
-	    {
-            //TODO: Better logic
-            return true;
 	    }
 
         /// <summary>

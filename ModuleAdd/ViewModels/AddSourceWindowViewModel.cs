@@ -73,10 +73,11 @@ namespace ModuleAdd.ViewModels
         #endregion
 
         #region helper
+
         /// <summary>
         /// Checks if the Source can be added or not
         /// </summary>
-        /// <returns>True if and only if all fields are not null or empty</returns>
+        /// <returns>True if and only if all fields are not null or empty or has errors</returns>
         private bool CanExecute()
         {
             return !string.IsNullOrWhiteSpace(Name) &&

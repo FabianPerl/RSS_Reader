@@ -60,6 +60,7 @@ namespace ModuleArchiveFeeds.ViewModels
         #endregion
 
         #region attributes
+
         private ICollection<FeedViewModel> _allArchivedFeeds;
         private ICollection<FeedViewModel> _cpAllArchivedFeeds;
 
@@ -71,7 +72,7 @@ namespace ModuleArchiveFeeds.ViewModels
             get
             {
                 var orderedFeedList = _allArchivedFeeds?.OrderByDescending(x => x.PublishedDate).ToList();
-                _allArchivedFeeds.Clear();
+                _allArchivedFeeds?.Clear();
 
                 if (orderedFeedList != null)
                 {

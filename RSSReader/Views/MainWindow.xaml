@@ -97,7 +97,7 @@
                     <i:InvokeCommandAction Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}" />
                   </i:EventTrigger>
                   <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                    <i:InvokeCommandAction Command="{Binding OpenAddFeedWindowDelegateCommand}" />
+                    <i:InvokeCommandAction Command="{Binding OpenAddSourceWindowDelegateCommand}" />
                   </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <materialDesign:PackIcon

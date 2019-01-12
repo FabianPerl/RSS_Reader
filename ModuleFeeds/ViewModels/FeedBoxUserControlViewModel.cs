@@ -72,6 +72,16 @@ namespace ModuleFeeds.ViewModels
         #endregion
 
         #region attributes
+        private SnackbarMessageQueue _addArchiveMessageQueue;
+
+        /// <summary>
+        /// Gets and Sets the snackbar message queue, that is shown when an feed was added to the Archive 
+        /// </summary>
+        public SnackbarMessageQueue AddArchiveMessageQueue
+        {
+            get => _addArchiveMessageQueue;
+            set => SetProperty(ref _addArchiveMessageQueue, value);
+        }
 
         private string _header;
 
@@ -125,21 +135,9 @@ namespace ModuleFeeds.ViewModels
                 return _allFeeds;
             }
         }
-
         #endregion
 
-        private SnackbarMessageQueue _addArchiveMessageQueue;
-
-        /// <summary>
-        /// Gets and Sets the snackbar message queue, that is shown when an feed was added to the Archive 
-        /// </summary>
-        public SnackbarMessageQueue AddArchiveMessageQueue
-        {
-            get => _addArchiveMessageQueue;
-            set => SetProperty(ref _addArchiveMessageQueue, value);
-        }
-
-    #region helper
+        #region helper
         /// <summary>
         /// Sets the search term to empty and updates the feed list with the last known source when possible
         /// </summary>

@@ -150,6 +150,10 @@ namespace ModuleEdit.ViewModels
             _sourceToEdit.FeedUri = UriOfSource;
             _sourceToEdit.Name = NameOfSource;
             _sourceToEdit.Category = CategoryOfSource;
+            _logger.Log("Publish Edit Source Event with Params: " + 
+                        _sourceToEdit.FeedUri + ", " +
+                        _sourceToEdit.Name + ", " +
+                        _sourceToEdit.Category, Category.Debug, Priority.Medium);
             _eventAggregator.GetEvent<EditSourceEvent>().Publish(_sourceToEdit);
         }
         

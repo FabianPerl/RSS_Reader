@@ -161,7 +161,8 @@ namespace ModuleFeeds.ViewModels
             }
             
             var foundFeeds = from feeds in _allFeeds
-                where feeds.Title.Contains(SearchTerm)  || feeds.ShortDescription.Contains(SearchTerm)
+                where feeds.Title.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)  || 
+                      feeds.ShortDescription.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)
                 select feeds;
 
             var list = new ObservableCollection<FeedViewModel>(foundFeeds);
@@ -282,5 +283,17 @@ namespace ModuleFeeds.ViewModels
             }
         }
         #endregion
+    }
+
+    /// <summary>
+    /// This class overrides the String method to filter after a search term with a self defined string comparison
+    /// Source: https://stackoverflow.com/questions/444798/case-insensitive-containsstring
+    /// </summary>
+    public static class StringExtensions
+    {
+        public static bool Contains(this string source, string toCheck, StringComparison comp)
+        {
+            return source?.IndexOf(toCheck, comp) >= 0;
+        }
     }
 }

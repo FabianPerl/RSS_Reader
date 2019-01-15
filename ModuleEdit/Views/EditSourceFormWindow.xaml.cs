@@ -5,9 +5,9 @@ namespace ModuleEdit.Views
     /// <summary>
     /// Interaction logic for ViewA.xaml
     /// </summary>
-    public partial class EditFeedFormWindow 
+    public partial class EditSourceFormWindow 
     {
-        public EditFeedFormWindow()
+        public EditSourceFormWindow()
         {
             InitializeComponent();
         }

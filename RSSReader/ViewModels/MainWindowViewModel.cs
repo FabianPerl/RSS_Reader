@@ -32,6 +32,7 @@ namespace RSSReader.ViewModels
 
 	    public MainWindowViewModel(IRegionManager regionManager, IEventAggregator eventAggregator, IRssStore sourceStore)
 	    {
+            _logger.Log("Initialize the viewmodel for the main window", Category.Info, Priority.Medium);
 	        _regionManager = regionManager;
 	        _eventAggregator = eventAggregator;
 	        _sourceStore = sourceStore;
@@ -44,7 +45,7 @@ namespace RSSReader.ViewModels
             UpdateFeedsDelegateCommand = new DelegateCommand(UpdateFeeds);
 
             OpenAddSourceWindowDelegateCommand = new DelegateCommand(OpenAddSourceWindow);
-            OpenEditFeedWindowDelegateCommand = new DelegateCommand(OpenEditFeedWindow);
+            OpenEditSourceWindowDelegateCommand = new DelegateCommand(OpenEditSourceWindow);
 
 	        ShowArchiveFeedsDelegateCommand = new DelegateCommand(ShowArchiveFeeds);
 	        ShowFeedsDelegateCommand = new DelegateCommand(ShowFeeds);
@@ -77,7 +78,7 @@ namespace RSSReader.ViewModels
         /// <summary>
         /// Handles the interaction that the user wants to edit the sources
         /// </summary>
-	    public DelegateCommand OpenEditFeedWindowDelegateCommand { get; }
+	    public DelegateCommand OpenEditSourceWindowDelegateCommand { get; }
 
         /// <summary>
         /// Handles the interaction that the user wants to see the feeds from all sources
@@ -140,6 +141,7 @@ namespace RSSReader.ViewModels
         /// <param name="flag"></param>
         private void FeedsLoaded (bool flag)
         {
+            _logger.Log("All Feeds are loaded successfully", Category.Info, Priority.Medium);
             IsUpdating = false;
         }
         
@@ -149,6 +151,7 @@ namespace RSSReader.ViewModels
         /// <param name="uri"></param>
         private void OpenBrowser(Uri uri)
         {
+            _logger.Log("Opens the browser with uri " + uri.OriginalString, Category.Info, Priority.Medium);
             BrowserFlag = true;
         }
 
@@ -157,6 +160,7 @@ namespace RSSReader.ViewModels
         /// </summary>
         private void CloseBrowser()
         {
+            _logger.Log("Close the browser", Category.Info, Priority.Medium);
             BrowserFlag = false;
         }
 
@@ -212,6 +216,8 @@ namespace RSSReader.ViewModels
         /// <param name="source">The source which should be removed from the list</param>
 	    private void RemoveSource(Source source)
 	    {
+	        _logger.Log("remove the source " + source.Name, Category.Info, Priority.Medium);
+
 	        foreach (var oneSource in AllSources)
 	        {
 	            if (oneSource.Equals(source))
@@ -238,6 +244,7 @@ namespace RSSReader.ViewModels
         /// </summary>
 	    private void LoadSources()
 	    {
+            _logger.Log("Load all sources for the program", Category.Info, Priority.Medium);
 	        AllSources = _sourceStore.GetAllSources();
 	    }
 
@@ -250,6 +257,7 @@ namespace RSSReader.ViewModels
         /// </summary>
 	    private void ShowFeeds()
 	    {
+            _logger.Log("Show all feeds for the source", Category.Info, Priority.Medium);
 	        BrowserFlag = false;
             _regionManager.RequestNavigate(RegionNames.ContentRegionLeft, nameof(FeedBoxUserControl));
 	    }
@@ -259,6 +267,7 @@ namespace RSSReader.ViewModels
         /// </summary>
 	    private void ShowArchiveFeeds()
 	    {
+            _logger.Log("Show all archived feeds", Category.Info, Priority.Medium);
 	        BrowserFlag = false;
             _regionManager.RequestNavigate(RegionNames.ContentRegionLeft, nameof(ArchiveFeedBoxUserControl));
 	    }
@@ -268,15 +277,17 @@ namespace RSSReader.ViewModels
         /// </summary>
         private void OpenAddSourceWindow()
 	    {
+            _logger.Log("Open the window to add a new Source", Category.Info, Priority.Medium);
 	        new AddSourceWindow().Show();
 	    }
 
         /// <summary>
         /// Opens a new Window to edit the sources
         /// </summary>
-	    private void OpenEditFeedWindow()
+	    private void OpenEditSourceWindow()
 	    {
-	        new EditFeedFormWindow().Show();
+            _logger.Log("Open the window to edit Sources", Category.Info, Priority.Medium);
+	        new EditSourceFormWindow().Show();
 	    }
         #endregion
     }

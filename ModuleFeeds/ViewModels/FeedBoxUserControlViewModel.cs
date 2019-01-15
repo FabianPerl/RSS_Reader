@@ -27,6 +27,7 @@ namespace ModuleFeeds.ViewModels
 
         public FeedBoxUserControlViewModel(IEventAggregator eventAggregator)
         {
+            _logger.Log("Initialize the viewmodel for the feeds", Category.Info, Priority.Medium);
             ChangeFeedCommand = new DelegateCommand<FeedViewModel>(ClickedFeedView);
             _eventAggregator = eventAggregator;
 
@@ -143,6 +144,7 @@ namespace ModuleFeeds.ViewModels
         /// </summary>
         private void Reset()
         {
+            _logger.Log("Reset the search term for feeds", Category.Info, Priority.Medium);
             SearchTerm = string.Empty;
 
             if (_lastSources != null && _lastSources.Count > 0)
@@ -154,6 +156,7 @@ namespace ModuleFeeds.ViewModels
         /// </summary>
         private void SearchWithTerm()
         {
+            _logger.Log("Search with the filter " + SearchTerm + " on the feeds", Category.Info, Priority.Medium);
             if (string.IsNullOrWhiteSpace(SearchTerm))
             {
                 Reset();
@@ -171,9 +174,10 @@ namespace ModuleFeeds.ViewModels
 
             foreach (var oneFeed in list)
             {
-                _logger.Log("Title: " + oneFeed.Title, Category.Info, Priority.Medium);
                 _allFeeds.Add(oneFeed);
             }
+
+            _logger.Log("Found " + list.Count + " with search term " + SearchTerm, Category.Info, Priority.Medium);
         }
 
         /// <summary>
@@ -192,6 +196,7 @@ namespace ModuleFeeds.ViewModels
         /// <param name="feedViewModel">The feed for which the uri should be shown</param>
         private void ClickedFeedView(FeedViewModel feedViewModel)
         {
+            _logger.Log("Publish event that the user wants to see the uri for the feed " + feedViewModel.Title, Category.Info, Priority.Medium);
             _eventAggregator.GetEvent<WantUriEvent>().Publish(feedViewModel.Link);
         }
 
@@ -201,6 +206,7 @@ namespace ModuleFeeds.ViewModels
         /// <param name="flag">Updates the list only if and only if the flag is true</param>
         private void ShouldUpdateFeedList(bool flag)
         {
+            _logger.Log("Received event that the user wants to update the last known source", Category.Info, Priority.Medium);
             if(flag)
                 UpdateFeedListWithClear(_lastSources);
         }
@@ -211,6 +217,7 @@ namespace ModuleFeeds.ViewModels
         /// <param name="source">The source for the feeds</param>
         private void UpdateFeedListWithClear(Source source)
         {
+            _logger.Log("Update the feed list with source " + source.Name, Category.Info, Priority.Medium);
             AllFeeds.Clear();
             Header = "Feeds for " + source.Name;
             UpdateFeedList(source);
@@ -225,6 +232,7 @@ namespace ModuleFeeds.ViewModels
         /// <param name="sources">The sources for the feeds</param>
         private void UpdateFeedListWithClear(ICollection<Source> sources)
         {
+            _logger.Log("Update the feed list with all sources", Category.Info, Priority.Medium);
             ICollection<Source> cpSource = new ObservableCollection<Source>(sources);
             AllFeeds.Clear();
 

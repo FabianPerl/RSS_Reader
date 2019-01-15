@@ -15,14 +15,15 @@ namespace ModuleEdit.ViewModels
     /// <summary>
     /// Viewmodel for the window edit feed
     /// </summary>
-    public class EditFeedFormWindowViewModel : BindableBase
+    public class EditSourceFormWindowViewModel : BindableBase
     {
         private readonly ILoggerFacade _logger = ProjectLogger.GetLogger;
         private readonly IEventAggregator _eventAggregator;
         private Source _sourceToEdit;
 
-        public EditFeedFormWindowViewModel(IEventAggregator eventAggregator, IRssStore rssStore)
+        public EditSourceFormWindowViewModel(IEventAggregator eventAggregator, IRssStore rssStore)
         {
+            _logger.Log("Initialize the viewmodel for edit the sources", Category.Info, Priority.Medium);
             _eventAggregator = eventAggregator;
             AllSources = rssStore.GetAllSources();
 

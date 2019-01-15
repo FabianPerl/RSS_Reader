@@ -24,6 +24,7 @@ namespace ModuleAdd.ViewModels
 
         public AddSourceWindowViewModel(IEventAggregator eventAggregator)
         {
+            _logger.Log("Initialize the viewmodel for add source", Prism.Logging.Category.Info, Priority.Medium);
             AddCommand = new DelegateCommand(Execute, CanExecute).ObservesProperty(() => Name).
                 ObservesProperty(() => Category).
                 ObservesProperty(() => Uri);

@@ -24,6 +24,7 @@ namespace ModuleArchiveFeeds.ViewModels
 
         public ArchiveFeedBoxUserControlViewModel(IEventAggregator eventAggregator, IRssStore rssStore)
         {
+            _logger.Log("Initialize the viewmodel for the archive", Category.Info, Priority.Medium);
             AllArchivedFeeds = rssStore.LoadAllArchiveFeeds();
             _eventAggregator = eventAggregator;
             _rssStore = rssStore;
@@ -72,6 +73,7 @@ namespace ModuleArchiveFeeds.ViewModels
         {
             get
             {
+                _logger.Log("Get all archived feeds ordered by published date", Category.Info, Priority.Medium);
                 var orderedFeedList = _allArchivedFeeds?.OrderByDescending(x => x.PublishedDate).ToList();
                 _allArchivedFeeds?.Clear();
 
@@ -106,6 +108,7 @@ namespace ModuleArchiveFeeds.ViewModels
         /// </summary>
         private void Reset()
         {
+            _logger.Log("Reset the Search term in Archive", Category.Info, Priority.Medium);
             SearchTerm = string.Empty;
 
             if (_cpAllArchivedFeeds != null)
@@ -126,6 +129,7 @@ namespace ModuleArchiveFeeds.ViewModels
         /// </summary>
         private void SearchWithTerm()
         {
+            _logger.Log("Search with term: " + SearchTerm, Category.Info, Priority.Medium);
 
             if (string.IsNullOrWhiteSpace(SearchTerm))
             {
@@ -145,9 +149,9 @@ namespace ModuleArchiveFeeds.ViewModels
 
             foreach (var oneFeed in list)
             {
-                _logger.Log("Title: " + oneFeed.Title, Category.Info, Priority.Medium);
                 _allArchivedFeeds.Add(oneFeed);
             }
+            _logger.Log("Found " +  list.Count + " with Search term " + SearchTerm, Category.Info, Priority.Medium);
         }
 
         /// <summary>
@@ -156,6 +160,7 @@ namespace ModuleArchiveFeeds.ViewModels
         /// <param name="feedViewModel">The feed that the user wants to see</param>
         private void ClickedArchiveFeed(FeedViewModel feedViewModel)
         {
+            _logger.Log("Publish UriEvent with Link: " + feedViewModel.Link + " from the Archive", Category.Info, Priority.Medium);
             _eventAggregator.GetEvent<WantUriEvent>().Publish(feedViewModel.Link);
         }
 

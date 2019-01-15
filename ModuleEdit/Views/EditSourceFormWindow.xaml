@@ -1,5 +1,5 @@
 ﻿<Window
-  x:Class="ModuleEdit.Views.EditFeedFormWindow"
+  x:Class="ModuleEdit.Views.EditSourceFormWindow"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -30,7 +30,7 @@
         <StackPanel Background="{StaticResource BrushTransparent}" Orientation="Horizontal">
           <i:Interaction.Triggers>
             <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-              <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.PreviewEditSourceCommand)}" CommandParameter="{Binding}" />
+              <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditSourceFormWindowViewModel.PreviewEditSourceCommand)}" CommandParameter="{Binding}" />
             </i:EventTrigger>
           </i:Interaction.Triggers>
           <materialDesign:PackIcon
@@ -114,7 +114,7 @@
         <Button
           Margin="{StaticResource MarginTop12}"
           Click="CloseWindow"
-          Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.RemoveSourceCommand)}"
+          Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditSourceFormWindowViewModel.RemoveSourceCommand)}"
           IsEnabled="{Binding HasValues}"
           Style="{StaticResource MaterialDesignRaisedButton}"
           ToolTip="{StaticResource TooltipDeleteSource}">
@@ -140,26 +140,26 @@
           Foreground="{StaticResource BrushLight}"
           IsEnabled="{Binding HasValues}"
           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-          Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.NameOfSource), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditSourceFormWindowViewModel.NameOfSource), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox
           Margin="{StaticResource MarginBottom12}"
           materialDesign:HintAssist.Hint="{StaticResource HintUrl}"
           Foreground="{StaticResource BrushLight}"
           IsEnabled="{Binding HasValues}"
           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-          Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.UriOfSource), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditSourceFormWindowViewModel.UriOfSource), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <ComboBox
           materialDesign:HintAssist.Hint="{StaticResource HintCategory}"
           Foreground="{StaticResource BrushLight}"
           IsEnabled="{Binding HasValues}"
           ItemsSource="{Binding Categories}"
           Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-          Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.CategoryOfSource), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+          Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditSourceFormWindowViewModel.CategoryOfSource), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <Button
           Margin="{StaticResource MarginTop12}"
           Click="CloseWindow"
-          Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditFeedFormWindowViewModel.EditSourceCommand), Mode=OneWay}"
+          Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditSourceFormWindowViewModel.EditSourceCommand), Mode=OneWay}"
           Style="{StaticResource MaterialDesignRaisedButton}"
           ToolTip="{StaticResource TooltipChangeSource}">
           <StackPanel Orientation="Horizontal">

@@ -2,6 +2,7 @@
 using Infrastructure.Events;
 using Prism.Commands;
 using Prism.Events;
+using Prism.Logging;
 using Prism.Mvvm;
 
 namespace ModuleBrowser.ViewModels
@@ -12,6 +13,7 @@ namespace ModuleBrowser.ViewModels
     public class ViewAViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
+        private readonly ILoggerFacade _logger;
         private Uri _currentUri;
 
         /// <summary>
@@ -19,8 +21,10 @@ namespace ModuleBrowser.ViewModels
         /// </summary>
         public DelegateCommand CloseBrowserDelegateCommand { get; }
 
-        public ViewAViewModel(IEventAggregator eventAggregator)
+        public ViewAViewModel(IEventAggregator eventAggregator, ILoggerFacade logger)
         {
+            _logger = logger;
+            _logger.Log("Initialize the viewmodel for browser", Category.Info, Priority.Medium);
             _eventAggregator = eventAggregator;
             CloseBrowserDelegateCommand = new DelegateCommand(CloseBrowser);
             
@@ -32,6 +36,7 @@ namespace ModuleBrowser.ViewModels
         /// </summary>
         private void CloseBrowser()
         {
+            _logger.Log("Publish event to close the browser", Category.Info, Priority.Medium);
             _eventAggregator.GetEvent<WantCloseUriEvent>().Publish();
         }
 
@@ -41,6 +46,7 @@ namespace ModuleBrowser.ViewModels
         /// <param name="uri">The Uri that should be shown</param>
         private void SetTheUri(Uri uri)
         {
+           _logger.Log("Set the uri to " + uri.OriginalString, Category.Info, Priority.Medium);
            CurrentUri = uri;
         }
 

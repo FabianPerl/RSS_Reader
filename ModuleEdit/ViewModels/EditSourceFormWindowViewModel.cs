@@ -88,17 +88,6 @@ namespace ModuleEdit.ViewModels
             set => SetProperty(ref _uri, value);
         }
 
-        private bool _hasErrors;
-
-        /// <summary>
-        /// Gets and Sets the errors 
-        /// </summary>
-        private bool HasErrors
-        {
-            get => _hasErrors;
-            set => SetProperty(ref _hasErrors, value);
-        }
-
         private string _category;
 
         /// <summary>
@@ -132,7 +121,6 @@ namespace ModuleEdit.ViewModels
                 _logger.Log("Edit: " + value.Name + " with URI " + value.FeedUri + " and ID: " + value.Id, Category.Info, Priority.Medium);
                 HasValues = true;
                 SetProperty(ref _sourceToEdit, value);
-                SourceToEdit.Id = value.Id;
                 CategoryOfSource = value.Category;
                 UriOfSource = value.FeedUri;
                 NameOfSource = value.Name;
@@ -183,8 +171,7 @@ namespace ModuleEdit.ViewModels
         {
             return !string.IsNullOrWhiteSpace(NameOfSource) &&
                    !string.IsNullOrWhiteSpace(CategoryOfSource) &&
-                   !string.IsNullOrWhiteSpace(UriOfSource.ToString()) &&
-                   !HasErrors;
+                   !string.IsNullOrWhiteSpace(UriOfSource.ToString());
         }
         #endregion
     }

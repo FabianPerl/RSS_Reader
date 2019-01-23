@@ -86,7 +86,7 @@
     <system:String x:Key="DeleteSource">Delete Source</system:String>
     <system:String x:Key="TooltipDeleteSource">Delete the selected Source</system:String>
 
-    <system:String x:Key="ChangeSource">Change Source</system:String>
+    <system:String x:Key="ChangeSource">Submit Edit</system:String>
     <system:String x:Key="TooltipChangeSource">Change the selected Source</system:String>
     <system:String x:Key="TooltipSearchTerm">Search with a specific term</system:String>
     <system:String x:Key="TooltipRemoveFromArchive">Remove this feed from the Archive!</system:String>

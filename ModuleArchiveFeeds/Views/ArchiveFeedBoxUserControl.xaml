@@ -70,11 +70,11 @@
             CommandParameter="{Binding}"
             Style="{StaticResource MaterialDesignFlatButton}"
             ToolTip="{StaticResource TooltipRemoveFromArchive}">
-            <materialDesign:PackIcon 
-                Foreground="{StaticResource BrushDelete}" 
-                Width="{StaticResource WidthAddDelIcon}"
-                Height="{StaticResource HeightAddDelIcon}"
-                Kind="MinusCircleOutline" />
+            <materialDesign:PackIcon
+              Width="{StaticResource WidthAddDelIcon}"
+              Height="{StaticResource HeightAddDelIcon}"
+              Foreground="{StaticResource BrushDelete}"
+              Kind="MinusCircleOutline" />
           </Button>
         </Grid>
       </DataTemplate>

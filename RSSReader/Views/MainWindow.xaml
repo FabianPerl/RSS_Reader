@@ -10,10 +10,10 @@
   xmlns:viewModels="clr-namespace:RSSReader.ViewModels"
   Title="RSS Reader"
   MinWidth="800"
-  Icon="rss_icon.ico"
   MinHeight="600"
   prism:ViewModelLocator.AutoWireViewModel="True"
   Background="{DynamicResource MaterialDesignPaper}"
+  Icon="rss_icon.ico"
   WindowStartupLocation="CenterScreen">
 
   <Window.Resources>

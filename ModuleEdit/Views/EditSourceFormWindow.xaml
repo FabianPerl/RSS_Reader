@@ -9,17 +9,17 @@
   xmlns:models="clr-namespace:Infrastructure.Models;assembly=Infrastructure"
   xmlns:prism="http://prismlibrary.com/"
   xmlns:viewModels="clr-namespace:ModuleEdit.ViewModels"
+  Title="{StaticResource TextEditFeedsource}"
   MinWidth="700"
   MinHeight="500"
   MaxWidth="700"
   MaxHeight="500"
-  ResizeMode="NoResize"
   d:DesignHeight="300"
   d:DesignWidth="300"
-  Title="{StaticResource TextEditFeedsource}"
-  Icon="rss_icon.ico"
   prism:ViewModelLocator.AutoWireViewModel="True"
   Background="{DynamicResource MaterialDesignPaper}"
+  Icon="rss_icon.ico"
+  ResizeMode="NoResize"
   WindowStartupLocation="CenterScreen"
   mc:Ignorable="d">
 
@@ -54,10 +54,10 @@
   </Window.Resources>
   <DockPanel>
 
-    <Button 
+    <Button
+      Margin="{StaticResource MarginAllSides12}"
       Click="CloseWindow"
       DockPanel.Dock="Bottom"
-      Margin="{StaticResource MarginAllSides12}"
       ToolTip="{StaticResource TooltipCloseWoAdding}">
       <StackPanel Orientation="Horizontal">
         <materialDesign:PackIcon
@@ -68,21 +68,21 @@
         <TextBlock Text="{StaticResource TextCloseWindow}" />
       </StackPanel>
     </Button>
-  <Grid>
+    <Grid>
       <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="1*"></ColumnDefinition>
-          <ColumnDefinition Width="1*"></ColumnDefinition>
+        <ColumnDefinition Width="1*" />
+        <ColumnDefinition Width="1*" />
       </Grid.ColumnDefinitions>
 
 
-<Grid DockPanel.Dock="Left" Grid.Column="0">
-    <Grid.RowDefinitions>
-        <RowDefinition Height="2*"></RowDefinition>
-        <RowDefinition Height="Auto"></RowDefinition>
-    </Grid.RowDefinitions>
+      <Grid Grid.Column="0" DockPanel.Dock="Left">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="2*" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
         <ListView
-        Grid.Row="0"            
+          Grid.Row="0"
           BorderBrush="{x:Null}"
           Foreground="{StaticResource BrushLight}"
           ItemTemplate="{StaticResource DataTemplateSourcesToEdit}"
@@ -103,7 +103,7 @@
         </ListView>
 
         <Button
-        Grid.Row="1"
+          Grid.Row="1"
           Margin="{StaticResource MarginLeft3Top3Right3}"
           Click="CloseWindow"
           Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.(viewModels:EditSourceFormWindowViewModel.RemoveSourceCommand)}"
@@ -119,10 +119,8 @@
             <TextBlock Text="{StaticResource DeleteSource}" />
           </StackPanel>
         </Button>
-</Grid>
-      <StackPanel
-      Grid.Column="1"
-        Margin="{StaticResource MarginLeftRightBottom12}">
+      </Grid>
+      <StackPanel Grid.Column="1" Margin="{StaticResource MarginLeftRightBottom12}">
         <TextBox
           Margin="{StaticResource MarginBottom12}"
           materialDesign:HintAssist.Hint="{StaticResource HintTitle}"
@@ -162,6 +160,6 @@
         </Button>
       </StackPanel>
 
-  </Grid>
+    </Grid>
   </DockPanel>
 </Window>

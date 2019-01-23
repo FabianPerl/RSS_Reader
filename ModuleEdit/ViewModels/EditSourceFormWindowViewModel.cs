@@ -167,6 +167,10 @@ namespace ModuleEdit.ViewModels
             _eventAggregator.GetEvent<RemoveSourceEvent>().Publish(_sourceToEdit);
         }
 
+        /// <summary>
+        /// Proves if the method can to edit the source can be executed
+        /// </summary>
+        /// <returns>True if and only if none of the fields is null or whitespace</returns>
         private bool CanExecute()
         {
             return !string.IsNullOrWhiteSpace(NameOfSource) &&

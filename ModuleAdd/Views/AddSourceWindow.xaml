@@ -6,7 +6,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:prism="http://prismlibrary.com/"
   xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
-  Title="TextTitleAddSource"
+  Title="{StaticResource TextTitleAddSource}"
   Width="500"
   Height="450"
   Icon="rss_icon.ico"

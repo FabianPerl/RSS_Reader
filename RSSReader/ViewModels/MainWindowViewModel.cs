@@ -273,7 +273,7 @@ namespace RSSReader.ViewModels
 	    }
 
         /// <summary>
-        /// Opens a new Window to add new sources
+        /// Opens a new Window to add new sources. Necessary because the view invokes more as one method.
         /// </summary>
         private void OpenAddSourceWindow()
 	    {
@@ -282,7 +282,7 @@ namespace RSSReader.ViewModels
 	    }
 
         /// <summary>
-        /// Opens a new Window to edit the sources
+        /// Opens a new Window to edit the sources. Necessary because the view invokes more as one method.
         /// </summary>
 	    private void OpenEditSourceWindow()
 	    {

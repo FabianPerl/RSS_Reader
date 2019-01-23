@@ -19,7 +19,7 @@ namespace Infrastructure.Models
         /// Gets the Source's individually ID
         /// </summary>
         [JsonProperty]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; } = Guid.NewGuid().ToString();
 
         /// <summary>
         /// Gets and Sets the Source's URL 

@@ -5,6 +5,9 @@ using Infrastructure.ViewModels;
 
 namespace Infrastructure.Services
 {
+    /// <summary>
+    /// Service to get all the feeds from a uri
+    /// </summary>
     public interface IFeedService
     {
         /// <summary>

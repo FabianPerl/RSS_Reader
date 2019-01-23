@@ -52,6 +52,9 @@
     <system:Double x:Key="HeightListViewItemControl">50</system:Double>
     <system:Double x:Key="HeightListViewItemSource">40</system:Double>
 
+    <system:Double x:Key="HeightAddDelIcon">20</system:Double>
+    <system:Double x:Key="WidthAddDelIcon">20</system:Double>
+
     <system:Double x:Key="MinWidthItem">212</system:Double>
     <system:Double x:Key="HeightIcon">25</system:Double>
     <system:Double x:Key="WidthIcon">25</system:Double>

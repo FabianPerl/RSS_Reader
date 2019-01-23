@@ -13,6 +13,7 @@
   MinHeight="300"
   d:DesignHeight="300"
   d:DesignWidth="300"
+  Icon="rss_icon.ico"
   prism:ViewModelLocator.AutoWireViewModel="True"
   Background="{DynamicResource MaterialDesignPaper}"
   WindowStartupLocation="CenterScreen"
@@ -120,8 +121,8 @@
           ToolTip="{StaticResource TooltipDeleteSource}">
           <StackPanel Orientation="Horizontal">
             <materialDesign:PackIcon
-              Width="{StaticResource WidthSmallIcon}"
-              Height="{StaticResource HeightSmallIcon}"
+              Width="{StaticResource WidthAddDelIcon}"
+              Height="{StaticResource HeightAddDelIcon}"
               Margin="{StaticResource MarginTop2Right4}"
               Kind="Delete" />
             <TextBlock Text="{StaticResource DeleteSource}" />

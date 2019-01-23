@@ -5,6 +5,7 @@
     /// </summary>
     public enum Categories
     {
+        #pragma warning disable 1591
         News,
         Entertainment,
         Sports,

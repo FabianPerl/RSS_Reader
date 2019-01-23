@@ -66,8 +66,8 @@
             Style="{StaticResource MaterialDesignFlatButton}"
             ToolTip="{StaticResource TextAddToArchive}">
             <materialDesign:PackIcon
-              Width="{StaticResource WidthSmallIcon}"
-              Height="{StaticResource HeightSmallIcon}"
+              Width="{StaticResource WidthAddDelIcon}"
+              Height="{StaticResource HeightAddDelIcon}"
               Foreground="{StaticResource BrushAdd}"
               Kind="CirclesAdd" />
           </Button>

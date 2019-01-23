@@ -13,6 +13,7 @@
   MinHeight="300"
   d:DesignHeight="300"
   d:DesignWidth="300"
+  Title="{StaticResource TextEditFeedsource}"
   Icon="rss_icon.ico"
   prism:ViewModelLocator.AutoWireViewModel="True"
   Background="{DynamicResource MaterialDesignPaper}"

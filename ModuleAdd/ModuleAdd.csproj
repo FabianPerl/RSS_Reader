@@ -90,7 +90,9 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Views\rss_icon.ico" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes">
       <Version>2.5.0.1205</Version>
